@@ -1,0 +1,52 @@
+in package test
+
+test/suite boolean:/
+    void tc_true()
+    void tc_false()
+    void tc_int_zero()
+    void tc_int_nonzero()
+    void tc_string()
+    void tc_reference()
+    void tc_reference_value_type()
+    void tc_null()
+    void tc_constant()
+
+test/suite character:/
+    void tc_alpha()
+    void tc_digit()
+    void tc_newline()
+    void tc_null()
+    void tc_number()
+
+test/suite number:/
+    void tc_unsigned_int()
+    void tc_signed_int()
+    void tc_unsigned_int()
+    void tc_floating_point()
+    void tc_hexadecimal()
+    void tc_negative_floating_point()
+    void tc_floating_point_scientific()
+    void tc_upper_limit_signed_8bit()
+    void tc_upper_limit_signed_16bit()
+    void tc_upper_limit_signed_32bit()
+    void tc_upper_limit_signed_64bit()
+    void tc_lower_limit_signed_8bit()
+    void tc_lower_limit_signed_16bit()
+    void tc_lower_limit_signed_32bit()
+    void tc_lower_limit_signed_64bit()
+    void tc_upper_limit_unsigned_8bit()
+    void tc_upper_limit_unsigned_16bit()
+    void tc_upper_limit_unsigned_32bit()
+    void tc_upper_limit_unsigned_64bit()
+    void tc_lower_limit_unsigned_8bit()
+    void tc_lower_limit_unsigned_16bit()
+    void tc_lower_limit_unsigned_32bit()
+    void tc_lower_limit_unsigned_64bit()
+
+test/suite string:/
+    void tc_string()
+    void tc_null()
+    void tc_signed_int()
+    void tc_unsigned_int()
+    void tc_floating_point()
+    void tc_constant()

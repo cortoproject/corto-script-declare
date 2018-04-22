@@ -1,0 +1,19 @@
+<corto xmlns:corto="http://corto.io/packages/driver/fmt/xml">
+    <corto:package name="corto/script/ast/declare">
+        <function name="object_from_storage(object from,ast/Storage storage)" returnType="object"/>
+        <class name="Visitor" base="corto/script/ast/Visitor">
+            <corto:scope>
+                <member name="from" type="object"/>
+                <member name="scope_stack" type="list{object}" modifiers="readonly|not_null"/>
+                <method name="construct()" returnType="int16"/>
+                <method name="push_scope(object scope)"/>
+                <method name="pop_scope()"/>
+                <method name="get_scope()" returnType="object"/>
+                <override name="visitStatement(Statement node)" returnType="int16"/>
+                <override name="visitDeclaration(Declaration node)" returnType="int16"/>
+                <override name="visitExpression(Expression node)" returnType="int16"/>
+                <override name="visitStorage(script/ast/Storage node)" returnType="int16"/>
+            </corto:scope>
+        </class>
+    </corto:package>
+</corto>
