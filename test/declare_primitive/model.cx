@@ -18,8 +18,9 @@ test/suite character:/
     void tc_alpha()
     void tc_digit()
     void tc_newline()
-    void tc_null()
+    void tc_null_character()
     void tc_number()
+    void tc_zero()
 
 test/suite number:/
     void tc_unsigned_int()
