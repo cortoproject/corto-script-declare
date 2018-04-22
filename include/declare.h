@@ -8,7 +8,6 @@
 
 #include <corto/corto.h>
 #include <corto/script/ast/declare/_project.h>
-/* Public dependencies */
 #include <corto/script/ast/c/c.h>
 #include <corto/c/c.h>
 #include <corto/script/ast/ast.h>
