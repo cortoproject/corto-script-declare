@@ -275,11 +275,10 @@ void test_unsigned_int_tc_upper_limit_32bit(
     test_assert(corto_delete(obj) == 0);
 }
 
-
 void test_unsigned_int_tc_upper_limit_64bit(
     test_unsigned_int this)
 {
-    const char *input = "uint64 obj: 9223372036854775807";
+    const char *input = "uint64 obj: 18446744073709551615";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
 
@@ -291,13 +290,12 @@ void test_unsigned_int_tc_upper_limit_64bit(
     test_assert(corto_typeof(obj) == (corto_type)corto_uint64_o);
     test_assert(corto_check_state(obj, CORTO_VALID));
     test_assert(corto_countof(obj) == 2);
-    test_assertint(*obj, 9223372036854775807);
+    test_assertint(*obj, 18446744073709551615u);
 
     test_assert(corto_delete(ast) == 0);
     test_assert(corto_release(obj) == 1);
     test_assert(corto_delete(obj) == 0);
 }
-
 
 void test_unsigned_int_tc_upper_limit_8bit(
     test_unsigned_int this)
