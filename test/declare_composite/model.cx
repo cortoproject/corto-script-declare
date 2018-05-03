@@ -1,0 +1,132 @@
+in package test
+
+// Enumeration for testing
+enum Color:/ Black, Red
+
+// Bitmask for testing
+bitmask Recipe:/ HasSugar, HasSalt, HasPepper
+
+struct s_bool:/
+    m: bool
+    n: bool
+
+struct s_char:/
+    m: char
+    n: char
+
+struct s_uint8:/
+    m: uint8
+    n: uint8
+
+struct s_uint16:/
+    m: uint16
+    n: uint16
+
+struct s_uint32:/
+    m: uint32
+    n: uint32
+
+struct s_uint64:/
+    m: uint64
+    n: uint64
+
+struct s_int8:/
+    m: int8
+    n: int8
+
+struct s_int16:/
+    m: int16
+    n: int16
+
+struct s_int32:/
+    m: int32
+    n: int32
+
+struct s_int64:/
+    m: int64
+    n: int64
+
+struct s_float32:/
+    m: float32
+    n: float32
+
+struct s_float64:/
+    m: float64
+    n: float64
+
+struct s_string:/
+    m: string
+    n: string
+
+struct s_octet:/
+    m: int64
+    n: int64
+
+struct s_word:/
+    m: float32
+    n: float32
+
+struct s_enum:/
+    m: test/Color
+    n: test/Color
+
+struct s_bitmask:/
+    m: test/Recipe
+    n: test/Recipe
+
+test/suite primitive:/
+    void tc_bool()
+    void tc_char()
+    void tc_uint8()
+    void tc_uint16()
+    void tc_uint32()
+    void tc_uint64()
+    void tc_int8()
+    void tc_int16()
+    void tc_int32()
+    void tc_int64()
+    void tc_float32()
+    void tc_float64()
+    void tc_string()
+    void tc_octet()
+    void tc_word()
+    void tc_enum()
+    void tc_bitmask()
+
+test/suite primitive_two_values:/
+    void tc_bool()
+    void tc_char()
+    void tc_uint8()
+    void tc_uint16()
+    void tc_uint32()
+    void tc_uint64()
+    void tc_int8()
+    void tc_int16()
+    void tc_int32()
+    void tc_int64()
+    void tc_float32()
+    void tc_float64()
+    void tc_string()
+    void tc_octet()
+    void tc_word()
+    void tc_enum()
+    void tc_bitmask()
+
+test/suite primitive_member_two_values:/
+    void tc_bool()
+    void tc_char()
+    void tc_uint8()
+    void tc_uint16()
+    void tc_uint32()
+    void tc_uint64()
+    void tc_int8()
+    void tc_int16()
+    void tc_int32()
+    void tc_int64()
+    void tc_float32()
+    void tc_float64()
+    void tc_string()
+    void tc_octet()
+    void tc_word()
+    void tc_enum()
+    void tc_bitmask()
