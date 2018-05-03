@@ -43,6 +43,7 @@ int16_t declare_Visitor_visitDeclaration(
     if (ast_Visitor_visit(this, node->type)) {
         goto error;
     }
+
     type = ast_Storage_get_object(node->type);
     if (!type) {
         goto error;
@@ -52,6 +53,17 @@ int16_t declare_Visitor_visitDeclaration(
         corto_throw("object '%s' is not a type",
             corto_fullpath(NULL, type));
         goto error;
+    }
+
+    /* If declaration has an initializer, set type of initializer to the type
+     * of the declaration. This will allow the visitor to do precompute the
+     * types for the value nodes in the initializer, which is required for doing
+     * lookups for enumeration constants in the scope of the enumeration type */
+    if (node->initializer) {
+        ast_Expression_setType(node->initializer, type);
+        if (ast_Visitor_visit(this, node->initializer)) {
+            goto error;
+        }
     }
 
     corto_iter it = corto_ll_iter(node->id->ids);
@@ -104,23 +116,24 @@ int16_t declare_Visitor_visitDeclaration(
                 goto error;
             }
 
-            /* If storage is identifier + initializer, apply initializer to new
-             * object after global declaration initializer is applied */
-            if (object_initializer) {
-                if (ast_Visitor_visit(this, object_initializer)) {
-                    goto error;
-                }
-                if (ast_Initializer_apply(object_initializer, helper)) {
+            /* If declaration has initializer, apply */
+            if (node->initializer) {
+                if (ast_Initializer_apply(node->initializer, helper)) {
                     goto error;
                 }
             }
 
-            /* If declaration has initializer, apply */
-            if (node->initializer) {
-                if (ast_Visitor_visit(this, node->initializer)) {
+            /* If storage is identifier + initializer, apply initializer to new
+             * object after global declaration initializer is applied */
+            if (object_initializer) {
+                /* Set type of object initializer- see above */
+                ast_Expression_setType(object_initializer, type);
+
+                if (ast_Visitor_visit(this, object_initializer)) {
                     goto error;
                 }
-                if (ast_Initializer_apply(node->initializer, helper)) {
+
+                if (ast_Initializer_apply(object_initializer, helper)) {
                     goto error;
                 }
             }

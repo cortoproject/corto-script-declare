@@ -61,3 +61,7 @@ test/suite string:/
     void tc_unsigned_int()
     void tc_floating_point()
     void tc_constant()
+
+test/suite constant:/
+    void tc_constant_zero()
+    void tc_constant_nonzero()

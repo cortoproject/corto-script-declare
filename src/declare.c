@@ -10,11 +10,22 @@ corto_object declare_object_from_storage(
 
     if (corto_instanceof(ast_Identifier_o, storage)) {
         ast_Identifier identifier = ast_Identifier(storage);
+        corto_type type = ast_Expression(storage)->type;
 
-        result = corto_resolve(from, identifier->id);
+        /* First, try to lookup the object from the scope of the type. This is
+         * typically used for looking up enumeration constants, so a script can
+         * specify 'Red' instaed 'Color/Red' */
+        if (type && corto_check_attr(type, CORTO_ATTR_NAMED)) {
+            result = corto_lookup(type, identifier->id);
+        }
+
+        /* If object hasn't been found yet, look it up in the provided scope */
         if (!result) {
-            corto_throw("unresolved identifier '%s'", identifier->id);
-            goto error;
+            result = corto_resolve(from, identifier->id);
+            if (!result) {
+                corto_throw("unresolved identifier '%s'", identifier->id);
+                goto error;
+            }
         }
     }
 
