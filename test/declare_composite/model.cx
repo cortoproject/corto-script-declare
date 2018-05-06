@@ -74,6 +74,12 @@ struct s_bitmask:/
     m: test/Recipe
     n: test/Recipe
 
+struct s_point:/
+    x, y: int32
+
+struct s_line:/
+    start, stop: s_point
+
 test/suite primitive:/
     void tc_bool()
     void tc_char()
@@ -130,3 +136,14 @@ test/suite primitive_member_two_values:/
     void tc_word()
     void tc_enum()
     void tc_bitmask()
+
+test/suite nested_composite_primitive:/
+    void tc_full_init()
+    void tc_partial_init()
+    void tc_empty_init()
+    void tc_member_full_init()
+    void tc_member_partial_init()
+    void tc_member_empty_init()
+    void tc_mixed_full_init()
+    void tc_mixed_partial_init()
+    void tc_mixed_empty_init()
