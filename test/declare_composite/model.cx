@@ -165,9 +165,11 @@ test/suite nested_composite_primitive:/
     void tc_member_full_init()
     void tc_member_partial_init()
     void tc_member_empty_init()
+    void tc_member_nested_init()
     void tc_mixed_full_init()
     void tc_mixed_partial_init()
     void tc_mixed_empty_init()
+    void tc_mixed_nested_init()
 
     void tc_init_enum()
     void tc_member_init_enum()

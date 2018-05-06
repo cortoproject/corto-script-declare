@@ -8,6 +8,7 @@
 
 #include <corto/corto.h>
 #include <include/_project.h>
+#include <corto/script/ast/declare/c/c.h>
 #include <corto/script/ast/c/c.h>
 #include <corto/test/c/c.h>
 #include <corto/c/c.h>
