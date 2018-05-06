@@ -1,7 +1,7 @@
 in package test
 
 // Enumeration for testing
-enum Color:/ Black, Red
+enum Color:/ Black, Red, White, Blue
 
 // Bitmask for testing
 bitmask Recipe:/ HasSugar, HasSalt, HasPepper
@@ -80,6 +80,27 @@ struct s_point:/
 struct s_line:/
     start, stop: s_point
 
+struct s_nested_enum:/
+    a, b: s_enum
+
+struct s_array:/
+    a, b: array{int32, 3}
+
+struct s_sequence:/
+    a, b: sequence{int32}
+
+struct s_list:/
+    a, b: list{int32}
+
+struct s_array_enum:/
+    a, b: array{Color, 3}
+
+struct s_sequence_enum:/
+    a, b: sequence{Color}
+
+struct s_list_enum:/
+    a, b: list{Color}
+
 test/suite primitive:/
     void tc_bool()
     void tc_char()
@@ -147,3 +168,29 @@ test/suite nested_composite_primitive:/
     void tc_mixed_full_init()
     void tc_mixed_partial_init()
     void tc_mixed_empty_init()
+
+    void tc_init_enum()
+    void tc_member_init_enum()
+    void tc_mixed_init_enum()
+
+    void tc_init_bitmask()
+    void tc_member_init_bitmask()
+    void tc_mixed_init_bitmask()
+
+test/suite nested_collection_primitive:/
+    void tc_array_empty_init()
+    void tc_array_partial_init()
+    void tc_array_full_init()
+    void tc_array_init_enum()
+    void tc_array_init_bitmask()
+    void tc_sequence_empty_init()
+    void tc_sequence_1_init()
+    void tc_sequence_3_init()
+    void tc_sequence_init_enum()
+    void tc_sequence_init_bitmask()
+    void tc_list_null_init()
+    void tc_list_empty_init()
+    void tc_list_1_init()
+    void tc_list_3_init()
+    void tc_list_init_enum()
+    void tc_list_init_bitmask()
