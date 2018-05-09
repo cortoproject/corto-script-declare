@@ -65,3 +65,6 @@ test/suite string:/
 test/suite constant:/
     void tc_constant_zero()
     void tc_constant_nonzero()
+
+test/suite expr:/
+    void tc_bool()

@@ -8,6 +8,8 @@ void test_string_tc_constant(
     const char *input = "string obj: test/Color/Red";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -30,6 +32,8 @@ void test_string_tc_floating_point(
     const char *input = "string obj: 10.5";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -52,6 +56,8 @@ void test_string_tc_null(
     const char *input = "string obj: null";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -74,6 +80,8 @@ void test_string_tc_signed_int(
     const char *input = "string obj: -10";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -97,6 +105,8 @@ void test_string_tc_string(
     const char *input = "string obj: 'Hello World'";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -119,6 +129,8 @@ void test_string_tc_unsigned_int(
     const char *input = "string obj: 10";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);

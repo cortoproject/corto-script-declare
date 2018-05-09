@@ -14,6 +14,8 @@ void test_primitive_two_values_tc_bool(
     const char *input = "test/s_bool obj: false, true";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -38,6 +40,8 @@ void test_primitive_two_values_tc_char(
     const char *input = "test/s_char obj: 'a', 'b'";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -62,6 +66,8 @@ void test_primitive_two_values_tc_enum(
     const char *input = "test/s_enum obj: Black, Red";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -86,6 +92,8 @@ void test_primitive_two_values_tc_float32(
     const char *input = "test/s_float32 obj: 10.5, 20.5";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -110,6 +118,8 @@ void test_primitive_two_values_tc_float64(
     const char *input = "test/s_float64 obj: 10.5, 20.5";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -134,6 +144,8 @@ void test_primitive_two_values_tc_int16(
     const char *input = "test/s_int16 obj: 10, 20";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -158,6 +170,8 @@ void test_primitive_two_values_tc_int32(
     const char *input = "test/s_int32 obj: 10, 20";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -182,6 +196,8 @@ void test_primitive_two_values_tc_int64(
     const char *input = "test/s_int64 obj: 10, 20";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -206,6 +222,8 @@ void test_primitive_two_values_tc_int8(
     const char *input = "test/s_int8 obj: 10, 20";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -230,6 +248,8 @@ void test_primitive_two_values_tc_octet(
     const char *input = "test/s_octet obj: 0x10, 0x20";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -254,6 +274,8 @@ void test_primitive_two_values_tc_string(
     const char *input = "test/s_string obj: 'Hello World', 'Foo Bar'";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -278,6 +300,8 @@ void test_primitive_two_values_tc_uint16(
     const char *input = "test/s_uint16 obj: 10, 20";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -302,6 +326,8 @@ void test_primitive_two_values_tc_uint32(
     const char *input = "test/s_uint32 obj: 10, 20";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -326,6 +352,8 @@ void test_primitive_two_values_tc_uint64(
     const char *input = "test/s_uint64 obj: 10, 20";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -350,6 +378,8 @@ void test_primitive_two_values_tc_uint8(
     const char *input = "test/s_uint8 obj: 10, 20";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -374,6 +404,8 @@ void test_primitive_two_values_tc_word(
     const char *input = "test/s_word obj: 10, 20";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);

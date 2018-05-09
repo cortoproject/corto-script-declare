@@ -8,6 +8,8 @@ void test_unsigned_int_tc_floating_point(
     const char *input = "uint32 obj: 10.5";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -30,6 +32,8 @@ void test_unsigned_int_tc_floating_point_scientific(
     const char *input = "uint32 obj: 1.5e+2";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -52,6 +56,8 @@ void test_unsigned_int_tc_hexadecimal(
     const char *input = "uint32 obj: 0x100";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -75,6 +81,8 @@ void test_unsigned_int_tc_lower_limit_16bit(
     const char *input = "uint16 obj: 0";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -98,6 +106,8 @@ void test_unsigned_int_tc_lower_limit_32bit(
     const char *input = "uint32 obj: 0";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -121,6 +131,8 @@ void test_unsigned_int_tc_lower_limit_64bit(
     const char *input = "uint64 obj: 0";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -144,6 +156,8 @@ void test_unsigned_int_tc_lower_limit_8bit(
     const char *input = "uint8 obj: 0";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -167,6 +181,8 @@ void test_unsigned_int_tc_negative_floating_point(
     const char *input = "uint32 obj: -1.5";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -190,6 +206,8 @@ void test_unsigned_int_tc_signed(
     const char *input = "uint32 obj: -1";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -213,6 +231,8 @@ void test_unsigned_int_tc_unsigned(
     const char *input = "uint32 obj: 10";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -236,6 +256,8 @@ void test_unsigned_int_tc_upper_limit_16bit(
     const char *input = "uint16 obj: 65535";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -259,6 +281,8 @@ void test_unsigned_int_tc_upper_limit_32bit(
     const char *input = "uint32 obj: 4294967295";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -281,6 +305,8 @@ void test_unsigned_int_tc_upper_limit_64bit(
     const char *input = "uint64 obj: 18446744073709551615";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
@@ -303,6 +329,8 @@ void test_unsigned_int_tc_upper_limit_8bit(
     const char *input = "uint8 obj: 255";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);

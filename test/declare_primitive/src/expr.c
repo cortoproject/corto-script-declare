@@ -2,9 +2,8 @@
 
 #include <include/test.h>
 
-int cortomain(int argc, char *argv[]) {
-
+void test_expr_tc_bool(
+    test_expr this)
+{
     /* Insert implementation */
-
-    return 0;
 }
