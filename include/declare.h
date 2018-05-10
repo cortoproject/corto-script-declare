@@ -32,6 +32,12 @@ int16_t cortoscript_ast_declare(
     corto_object from,
     ast_Node ast);
 
+CORTO_SCRIPT_AST_DECLARE_EXPORT
+int16_t cortoscript_parse_expr(
+    corto_object from,
+    const char *input,
+    corto_value *out);
+
 #ifdef __cplusplus
 }
 #endif

@@ -15,5 +15,12 @@
                 <override name="visitStorage(script/ast/Storage node)" returnType="int16"/>
             </corto:scope>
         </class>
+
+        <class name="FoldingVisitor" base="corto/script/ast/Visitor">
+            <corto:scope>
+                <override name="visitScope(Scope node)" returnType="int16"/>
+                <override name="visitDeclaration(Declaration node)" returnType="int16"/>
+            </corto:scope>
+        </class>
     </corto:package>
 </corto>

@@ -48,6 +48,51 @@ error:
     return -1;
 }
 
+int16_t cortoscript_parse_expr(
+    corto_object from,
+    const char *input,
+    corto_value *out)
+{
+    /* Parse script */
+    ast_Node ast = cortoscript_ast_parse(input);
+    if (!ast) {
+        corto_throw("failed to parse script");
+        goto error;
+    }
+
+    /* Fold expressions */
+    declare_FoldingVisitor visitor = declare_FoldingVisitor__create(NULL, NULL);
+    if (!visitor) {
+        corto_throw("failed to declare visitor for expression folding");
+        goto error;
+    }
+
+    if (ast_Visitor_visit(visitor, ast)) {
+        corto_throw("failed to fold expressions in script");
+    }
+
+    /* Convert expression to value */
+    if (cortoscript_ast_to_value(ast, out)) {
+        corto_throw("failed to convert expression to corto_value");
+        goto error;
+    }
+
+    if (corto_delete(visitor)) {
+        corto_throw("failed to delete visitor");
+        goto error;
+    }
+
+    if (corto_delete(ast)) {
+        corto_throw("failed to cleanup AST");
+        goto error;
+    }
+
+    return 0;
+error:
+    return -1;
+}
+
+
 int cortomain(int argc, char *argv[]) {
 
     /* Insert implementation */
