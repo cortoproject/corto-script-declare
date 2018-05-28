@@ -27,6 +27,10 @@ corto_object declare_object_from_storage(
                 goto error;
             }
         }
+    } else {
+        corto_throw("cannot declare object from %s expression",
+            corto_idof(corto_typeof(storage)));
+        goto error;
     }
 
     return result;

@@ -5,10 +5,12 @@
             <corto:scope>
                 <member name="from" type="object"/>
                 <member name="scope_stack" type="list{object}" modifiers="readonly|not_null"/>
+                <member name="default_type" type="lang/type" modifiers="readonly"/>
                 <method name="construct()" returnType="int16"/>
                 <method name="push_scope(object scope)"/>
                 <method name="pop_scope()"/>
                 <method name="get_scope()" returnType="object"/>
+                <override name="visitScope(Scope node)" returnType="int16"/>
                 <override name="visitStatement(Statement node)" returnType="int16"/>
                 <override name="visitDeclaration(Declaration node)" returnType="int16"/>
                 <override name="visitExpression(Expression node)" returnType="int16"/>

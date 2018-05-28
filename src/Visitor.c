@@ -33,6 +33,25 @@ void declare_Visitor_push_scope(
     corto_ll_append(this->scope_stack, scope);
 }
 
+int16_t declare_Visitor_prepareInitializer(
+    declare_Visitor this,
+    ast_Initializer initializer,
+    corto_type type)
+{
+    /* First propagate types to all expressions in initializer */
+    corto_try (ast_Initializer_propagateType(initializer, type), NULL);
+
+    /* Now visit expressions to resolve identifiers */
+    corto_try (ast_Visitor_visit(this, initializer), NULL);
+
+    /* Now fold expressions */
+    corto_try (!ast_Initializer_fold(initializer), NULL);
+
+    return 0;
+error:
+    return -1;
+}
+
 int16_t declare_Visitor_visitDeclaration(
     declare_Visitor this,
     corto_script_ast_Declaration node)
@@ -40,12 +59,19 @@ int16_t declare_Visitor_visitDeclaration(
     corto_object scope = declare_Visitor_get_scope(this);
     corto_object type = NULL;
 
-    if (ast_Visitor_visit(this, node->type)) {
-        goto error;
+    if (node->type) {
+        corto_try (ast_Visitor_visit(this, node->type), NULL);
+        type = ast_Storage_get_object(node->type);
+    } else
+    if (this->default_type) {
+        type = this->default_type;
+    } else {
+        type = corto_typeof(scope)->options.defaultType;
     }
 
-    type = ast_Storage_get_object(node->type);
     if (!type) {
+        corto_throw("cannot derive type for declaration in scope '%s'",
+            corto_fullpath(NULL, scope));
         goto error;
     }
 
@@ -60,10 +86,9 @@ int16_t declare_Visitor_visitDeclaration(
      * types for the value nodes in the initializer, which is required for doing
      * lookups for enumeration constants in the scope of the enumeration type */
     if (node->initializer) {
-        ast_Expression_setType(node->initializer, type);
-        if (ast_Visitor_visit(this, node->initializer)) {
-            goto error;
-        }
+        corto_try(
+            declare_Visitor_prepareInitializer(
+                this, node->initializer, type), NULL);
     }
 
     corto_iter it = corto_ll_iter(node->id->ids);
@@ -71,6 +96,7 @@ int16_t declare_Visitor_visitDeclaration(
         ast_Storage storage = corto_iter_next(&it);
         ast_Initializer object_initializer = NULL;
         const char *id = NULL;
+        bool should_define = false;
 
         /* Regular identifier */
         if (corto_instanceof(ast_Identifier_o, storage)) {
@@ -109,40 +135,49 @@ int16_t declare_Visitor_visitDeclaration(
 
         ast_Storage_set_object(storage, object);
 
+        ast_StaticInitializerHelper helper =
+            ast_StaticInitializerHelper__create(NULL, NULL, storage);
+        if (!helper) {
+            goto error;
+        }
+
         if (object_initializer || node->initializer) {
-            ast_StaticInitializerHelper helper =
-                ast_StaticInitializerHelper__create(NULL, NULL, storage);
-            if (!helper) {
-                goto error;
-            }
+            should_define = true;
 
             /* If declaration has initializer, apply */
             if (node->initializer) {
-                if (ast_Initializer_apply(node->initializer, helper)) {
-                    goto error;
-                }
+                corto_try (
+                    ast_Initializer_apply(node->initializer, helper), NULL);
             }
 
             /* If storage is identifier + initializer, apply initializer to new
              * object after global declaration initializer is applied */
             if (object_initializer) {
-                /* Set type of object initializer- see above */
-                ast_Expression_setType(object_initializer, type);
-
-                if (ast_Visitor_visit(this, object_initializer)) {
-                    goto error;
-                }
+                corto_try(
+                    declare_Visitor_prepareInitializer(
+                        this, object_initializer, type), NULL);
 
                 if (ast_Initializer_apply(object_initializer, helper)) {
                     goto error;
                 }
             }
-
-            /* Define object */
-            if (ast_StaticInitializerHelper_define_object(helper)) {
-                goto error;
-            }
         }
+
+        /* If initializer has scope, visit scope before defining object */
+        if (node->scope) {
+            should_define = true;
+            declare_Visitor_push_scope(this, object);
+            corto_try (ast_Visitor_visit(this, node->scope), NULL);
+            declare_Visitor_pop_scope(this);
+        }
+
+        /* Define object */
+        if (should_define) {
+            corto_try (
+                ast_StaticInitializerHelper_define_object(helper), NULL);
+        }
+
+        corto_delete(helper);
     }
 
     return 0;
@@ -150,11 +185,33 @@ error:
     return -1;
 }
 
-int16_t declare_Visitor_visitExpression(
+int16_t declare_Visitor_visitScope(
     declare_Visitor this,
-    corto_script_ast_Expression node)
+    corto_script_ast_Scope node)
 {
+    corto_type prev_default_type = this->default_type;
+
+    if (node->default_type) {
+        corto_try (ast_Visitor_visit(this, node->default_type), NULL);
+
+        corto_type type = ast_Storage_get_object(node->default_type);
+        if (!type) {
+            corto_throw(NULL);
+            goto error;
+        }
+
+        corto_set_ref(&this->default_type, type);
+    }
+
+    if (ast_Visitor_visitScope_v(this, node)) {
+        goto error;
+    }
+
+    corto_set_ref(&this->default_type, prev_default_type);
+
     return 0;
+error:
+    return -1;
 }
 
 int16_t declare_Visitor_visitStatement(
@@ -164,17 +221,73 @@ int16_t declare_Visitor_visitStatement(
     return 0;
 }
 
+int16_t declare_Visitor_visitExpression(
+    declare_Visitor this,
+    corto_script_ast_Expression node)
+{
+    return 0;
+}
+
 int16_t declare_Visitor_visitStorage(
     declare_Visitor this,
     corto_script_ast_Storage node)
 {
     corto_object scope = declare_Visitor_get_scope(this);
-    corto_object obj = declare_object_from_storage(scope, node);
-    if (!obj) {
-        goto error;
-    }
+    corto_object obj;
 
-    ast_Storage_set_object(node, obj);
+    if (corto_instanceof(ast_Identifier_o, node)) {
+
+        /* Named object */
+        obj = declare_object_from_storage(scope, node);
+        if (!obj) {
+            corto_throw("failed to resolve storage");
+            goto error;
+        }
+
+        ast_Storage_set_object(node, obj);
+    } else
+    if (corto_instanceof(ast_StorageInitializer_o, node)) {
+        /* Anonymous object */
+        ast_StorageInitializer anonymous_storage =
+            ast_StorageInitializer(node);
+
+        corto_object scope = declare_Visitor_get_scope(this);
+
+        corto_object type =
+            declare_object_from_storage(scope, anonymous_storage->expr);
+        if (!type) {
+            corto_throw("failed to resolve type of anonymous object");
+            goto error;
+        }
+
+        /* Create object with type */
+        obj = corto_declare(NULL, NULL, type);
+
+        ast_Storage_set_object(node, obj);
+
+        /* Create initializer helper */
+        ast_StaticInitializerHelper helper =
+            ast_StaticInitializerHelper__create(NULL, NULL, node);
+        if (!helper) {
+            goto error;
+        }
+
+        /* Fold expressions in initializer */
+        corto_try (declare_Visitor_prepareInitializer(
+            this, anonymous_storage->initializer, type), NULL);
+
+        /* Apply initializer to object */
+        corto_try (
+            ast_Initializer_apply(
+                anonymous_storage->initializer, helper), NULL);
+
+        /* Define object */
+        corto_try (
+            ast_StaticInitializerHelper_define_object(helper), NULL);
+
+        /* Cleanup */
+        corto_delete(helper);
+    }
 
     return 0;
 error:
