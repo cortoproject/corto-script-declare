@@ -1,0 +1,13 @@
+language: c
+
+sudo: false
+
+install:
+  - curl https://corto.io/ci-dev | sh
+  - git clone https://github.com/cortoproject/antlr4-cpp
+  - git clone https://github.com/cortoproject/script-parser
+  - git clone https://github.com/cortoproject/script-ast-print
+  - bake
+
+script:
+  - corto test
