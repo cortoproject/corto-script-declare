@@ -6,7 +6,7 @@ install:
   - curl https://corto.io/ci-dev | sh
   - git clone https://github.com/cortoproject/antlr4-cpp
   - git clone https://github.com/cortoproject/script-parser
-  - git clone https://github.com/cortoproject/script-ast-print
+  - git clone https://github.com/cortoproject/script-print
   - bake
 
 script:
