@@ -14,6 +14,7 @@ install:
   - curl https://corto.io/ci-dev | sh
   - git clone https://github.com/cortoproject/antlr4-cpp
   - git clone https://github.com/cortoproject/script-parser
+  - git clone https://github.com/cortoproject/script-ast
   - git clone https://github.com/cortoproject/script-print
   - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-6 /usr/bin/gcc
   - sudo unlink /usr/bin/g++ && sudo ln -s /usr/bin/g++-6 /usr/bin/g++
