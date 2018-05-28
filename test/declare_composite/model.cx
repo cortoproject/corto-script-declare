@@ -4,7 +4,7 @@ in package test
 enum Color:/ Black, Red, White, Blue
 
 // Bitmask for testing
-bitmask Recipe:/ HasSugar, HasSalt, HasPepper
+bitmask Recipe:/ HasSugar, HasSalt, HasPepper, HasVinegar
 
 struct s_bool:/
     m: bool
@@ -83,6 +83,9 @@ struct s_line:/
 struct s_nested_enum:/
     a, b: s_enum
 
+struct s_nested_bitmask:/
+    a, b: s_bitmask
+
 struct s_array:/
     a, b: array{int32, 3}
 
@@ -100,6 +103,15 @@ struct s_sequence_enum:/
 
 struct s_list_enum:/
     a, b: list{Color}
+
+struct s_array_bitmask:/
+    a, b: array{Recipe, 3}
+
+struct s_sequence_bitmask:/
+    a, b: sequence{Recipe}
+
+struct s_list_bitmask:/
+    a, b: list{Recipe}
 
 test/suite primitive:/
     void tc_bool()

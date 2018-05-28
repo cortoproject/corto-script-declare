@@ -66,7 +66,36 @@ void test_nested_collection_primitive_tc_array_full_init(
 void test_nested_collection_primitive_tc_array_init_bitmask(
     test_nested_collection_primitive this)
 {
-    /* Insert implementation */
+    const char *input =
+        "test/s_array_bitmask obj ("
+            "[HasSalt|HasPepper, HasSalt|HasSugar, HasSalt|HasVinegar], "
+            "[HasPepper|HasSugar, HasPepper|HasVinegar, HasSugar|HasVinegar]"
+        ")"
+        ;
+
+    ast_Node ast = cortoscript_ast_parse(input);
+    test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+
+    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    test_assert(ret == 0);
+
+    test_s_array_bitmask *obj = corto_lookup(data_o, "obj");
+    test_assert(obj != NULL);
+    test_assert(corto_typeof(obj) == (corto_type)test_s_array_bitmask_o);
+    test_assert(corto_check_state(obj, CORTO_VALID));
+    test_assert(corto_countof(obj) == 2);
+    test_assertint(obj->a[0], Test_HasSalt | Test_HasPepper);
+    test_assertint(obj->a[1], Test_HasSalt | Test_HasSugar);
+    test_assertint(obj->a[2], Test_HasSalt | Test_HasVinegar);
+    test_assertint(obj->b[0], Test_HasPepper | Test_HasSugar);
+    test_assertint(obj->b[1], Test_HasPepper | Test_HasVinegar);
+    test_assertint(obj->b[2], Test_HasSugar | Test_HasVinegar);
+
+    test_assert(corto_delete(ast) == 0);
+    test_assert(corto_release(obj) == 1);
+    test_assert(corto_delete(obj) == 0);
 }
 
 
@@ -225,7 +254,38 @@ void test_nested_collection_primitive_tc_list_empty_init(
 void test_nested_collection_primitive_tc_list_init_bitmask(
     test_nested_collection_primitive this)
 {
-    /* Insert implementation */
+    const char *input =
+        "test/s_list_bitmask obj ("
+            "[HasSalt|HasPepper, HasSalt|HasSugar, HasSalt|HasVinegar], "
+            "[HasPepper|HasSugar, HasPepper|HasVinegar, HasSugar|HasVinegar]"
+        ")"
+        ;
+
+    ast_Node ast = cortoscript_ast_parse(input);
+    test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+
+    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    test_assert(ret == 0);
+
+    test_s_list_enum *obj = corto_lookup(data_o, "obj");
+    test_assert(obj != NULL);
+    test_assert(corto_typeof(obj) == (corto_type)test_s_list_bitmask_o);
+    test_assert(corto_check_state(obj, CORTO_VALID));
+    test_assert(corto_countof(obj) == 2);
+    test_assertint(corto_ll_count(obj->a), 3);
+    test_assertint(corto_ll_count(obj->b), 3);
+    test_assertint(test_RecipeList__get(obj->a, 0), Test_HasSalt | Test_HasPepper);
+    test_assertint(test_RecipeList__get(obj->a, 1), Test_HasSalt | Test_HasSugar);
+    test_assertint(test_RecipeList__get(obj->a, 2), Test_HasSalt | Test_HasVinegar);
+    test_assertint(test_RecipeList__get(obj->b, 0), Test_HasPepper | Test_HasSugar);
+    test_assertint(test_RecipeList__get(obj->b, 1), Test_HasPepper | Test_HasVinegar);
+    test_assertint(test_RecipeList__get(obj->b, 2), Test_HasSugar | Test_HasVinegar);
+
+    test_assert(corto_delete(ast) == 0);
+    test_assert(corto_release(obj) == 1);
+    test_assert(corto_delete(obj) == 0);
 }
 
 
@@ -378,7 +438,38 @@ void test_nested_collection_primitive_tc_sequence_empty_init(
 void test_nested_collection_primitive_tc_sequence_init_bitmask(
     test_nested_collection_primitive this)
 {
-    /* Insert implementation */
+    const char *input =
+        "test/s_sequence_bitmask obj ("
+            "[HasSalt|HasPepper, HasSalt|HasSugar, HasSalt|HasVinegar], "
+            "[HasPepper|HasSugar, HasPepper|HasVinegar, HasSugar|HasVinegar]"
+        ")"
+        ;
+
+    ast_Node ast = cortoscript_ast_parse(input);
+    test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+
+    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    test_assert(ret == 0);
+
+    test_s_sequence_bitmask *obj = corto_lookup(data_o, "obj");
+    test_assert(obj != NULL);
+    test_assert(corto_typeof(obj) == (corto_type)test_s_sequence_bitmask_o);
+    test_assert(corto_check_state(obj, CORTO_VALID));
+    test_assert(corto_countof(obj) == 2);
+    test_assertint(obj->a.length, 3);
+    test_assertint(obj->b.length, 3);
+    test_assertint(obj->a.buffer[0], Test_HasSalt | Test_HasPepper);
+    test_assertint(obj->a.buffer[1], Test_HasSalt | Test_HasSugar);
+    test_assertint(obj->a.buffer[2], Test_HasSalt | Test_HasVinegar);
+    test_assertint(obj->b.buffer[0], Test_HasPepper | Test_HasSugar);
+    test_assertint(obj->b.buffer[1], Test_HasPepper | Test_HasVinegar);
+    test_assertint(obj->b.buffer[2], Test_HasSugar | Test_HasVinegar);
+
+    test_assert(corto_delete(ast) == 0);
+    test_assert(corto_release(obj) == 1);
+    test_assert(corto_delete(obj) == 0);
 }
 
 

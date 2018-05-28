@@ -1,0 +1,54 @@
+in package test
+
+enum Color:/ Black, Red
+
+test/suite scope:/
+    void tc_id_1stmt()
+    void tc_nested_id_1stmt()
+    void tc_full_id_1stmt()
+    void tc_full_nested_id_1stmt()
+    void tc_id_2stmt()
+    void tc_nested_id_2stmt()
+    void tc_full_id_2stmt()
+    void tc_full_nested_id_2stmt()
+    void tc_value_1stmt()
+    void tc_value_2stmt()
+
+test/suite scope_empty:/
+    void tc_id()
+    void tc_nested_id()
+    void tc_full_id()
+    void tc_full_nested_id()
+
+test/suite scope_default_type:/
+    void tc_id_1stmt()
+    void tc_nested_id_1stmt()
+    void tc_full_id_1stmt()
+    void tc_full_nested_id_1stmt()
+    void tc_id_2stmt()
+    void tc_nested_id_2stmt()
+    void tc_full_id_2stmt()
+    void tc_full_nested_id_2stmt()
+    void tc_type_relative_to_scope()
+    void tc_anonymous_type()
+    void tc_override_default_type()
+
+test/suite scope_default_parent_type:/
+    void tc_id_1stmt()
+    void tc_nested_id_1stmt()
+    void tc_full_id_1stmt()
+    void tc_full_nested_id_1stmt()
+    void tc_id_2stmt()
+    void tc_nested_id_2stmt()
+    void tc_full_id_2stmt()
+    void tc_full_nested_id_2stmt()
+
+test/suite scope_default_type:/
+    void tc_id_1stmt()
+    void tc_nested_id_1stmt()
+    void tc_full_id_1stmt()
+    void tc_full_nested_id_1stmt()
+    void tc_id_2stmt()
+    void tc_nested_id_2stmt()
+    void tc_full_id_2stmt()
+    void tc_full_nested_id_2stmt()

@@ -1,6 +1,7 @@
 in package test
 
 enum Color:/ Black, Red
+bitmask Recipe:/ HasSugar, HasSalt, HasPepper, HasVinegar
 
 test/suite boolean:/
     void tc_true()
@@ -65,6 +66,19 @@ test/suite string:/
 test/suite constant:/
     void tc_constant_zero()
     void tc_constant_nonzero()
+    void tc_bitmask_zero()
+    void tc_enum_zero()
+    void tc_enum_number()
+
+test/suite reference:/
+    void tc_ref_id()
+    void tc_ref_full_id()
+    void tc_ref_null()
+    void tc_ref_anonymous()
+    void tc_ref_type_equal()
+    void tc_ref_type_inherit()
 
 test/suite expr:/
-    void tc_bool()
+    void tc_bitmask_1()
+    void tc_bitmask_2()
+    void tc_bitmask_3()

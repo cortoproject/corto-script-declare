@@ -2,10 +2,11 @@
 
 #include <include/test.h>
 
-void test_constant_tc_constant_nonzero(
-    test_constant this)
+
+void test_reference_tc_ref_anonymous(
+    test_reference this)
 {
-    const char *input = "test/Color obj: Red";
+    const char *input = "object obj: int32(10)";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -14,12 +15,16 @@ void test_constant_tc_constant_nonzero(
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
 
-    test_Color *obj = corto_lookup(data_o, "obj");
+    corto_object *obj = corto_lookup(data_o, "obj");
     test_assert(obj != NULL);
-    test_assert(corto_typeof(obj) == (corto_type)test_Color_o);
+    test_assert(corto_typeof(obj) == (corto_type)corto_object_o);
     test_assert(corto_check_state(obj, CORTO_VALID));
     test_assert(corto_countof(obj) == 2);
-    test_assert(*obj == Test_Red);
+    corto_object o = *obj;
+    test_assert(corto_typeof(o) == (corto_type)corto_int32_o);
+    test_assert(corto_check_state(o, CORTO_VALID));
+    test_assert(!corto_check_attr(o, CORTO_ATTR_NAMED));
+    test_assertint(*(int32_t*)o, 10);
 
     test_assert(corto_delete(ast) == 0);
     test_assert(corto_release(obj) == 1);
@@ -27,10 +32,10 @@ void test_constant_tc_constant_nonzero(
 }
 
 
-void test_constant_tc_constant_zero(
-    test_constant this)
+void test_reference_tc_ref_full_id(
+    test_reference this)
 {
-    const char *input = "test/Color obj: Black";
+    const char *input = "object obj: /corto/lang";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -39,46 +44,51 @@ void test_constant_tc_constant_zero(
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
 
-    test_Color *obj = corto_lookup(data_o, "obj");
+    corto_object *obj = corto_lookup(data_o, "obj");
     test_assert(obj != NULL);
-    test_assert(corto_typeof(obj) == (corto_type)test_Color_o);
+    test_assert(corto_typeof(obj) == (corto_type)corto_object_o);
     test_assert(corto_check_state(obj, CORTO_VALID));
     test_assert(corto_countof(obj) == 2);
-    test_assert(*obj == Test_Black);
+    test_assert(*obj == corto_lang_o);
 
     test_assert(corto_delete(ast) == 0);
     test_assert(corto_release(obj) == 1);
     test_assert(corto_delete(obj) == 0);
 }
 
-void test_constant_tc_bitmask_zero(
-    test_constant this)
+
+void test_reference_tc_ref_id(
+    test_reference this)
 {
-    const char *input = "test/Recipe obj: 0";
+    const char *input = "object obj: foo";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
+    corto_object foo = corto_create(data_o, "foo", corto_void_o);
+    test_assert(foo != NULL);
+
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
 
-    test_Recipe *obj = corto_lookup(data_o, "obj");
+    corto_object *obj = corto_lookup(data_o, "obj");
     test_assert(obj != NULL);
-    test_assert(corto_typeof(obj) == (corto_type)test_Recipe_o);
+    test_assert(corto_typeof(obj) == (corto_type)corto_object_o);
     test_assert(corto_check_state(obj, CORTO_VALID));
     test_assert(corto_countof(obj) == 2);
-    test_assert(*obj == 0);
+    test_assert(*obj == foo);
 
     test_assert(corto_delete(ast) == 0);
     test_assert(corto_release(obj) == 1);
     test_assert(corto_delete(obj) == 0);
 }
 
-void test_constant_tc_enum_number(
-    test_constant this)
+
+void test_reference_tc_ref_null(
+    test_reference this)
 {
-    const char *input = "test/Color obj: 1";
+    const char *input = "object obj: null";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -87,38 +97,28 @@ void test_constant_tc_enum_number(
     int16_t ret = cortoscript_ast_declare(data_o, ast);
     test_assert(ret == 0);
 
-    test_Color *obj = corto_lookup(data_o, "obj");
+    corto_object *obj = corto_lookup(data_o, "obj");
     test_assert(obj != NULL);
-    test_assert(corto_typeof(obj) == (corto_type)test_Color_o);
+    test_assert(corto_typeof(obj) == (corto_type)corto_object_o);
     test_assert(corto_check_state(obj, CORTO_VALID));
     test_assert(corto_countof(obj) == 2);
-    test_assert(*obj == Test_Red);
+    test_assert(*obj == NULL);
 
     test_assert(corto_delete(ast) == 0);
     test_assert(corto_release(obj) == 1);
     test_assert(corto_delete(obj) == 0);
 }
 
-void test_constant_tc_enum_zero(
-    test_constant this)
+
+void test_reference_tc_ref_type_equal(
+    test_reference this)
 {
-    const char *input = "test/Color obj: 0";
-    ast_Node ast = cortoscript_ast_parse(input);
-    test_assert(ast != NULL);
-    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    /* Insert implementation */
+}
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
-    test_assert(ret == 0);
 
-    test_Color *obj = corto_lookup(data_o, "obj");
-    test_assert(obj != NULL);
-    test_assert(corto_typeof(obj) == (corto_type)test_Color_o);
-    test_assert(corto_check_state(obj, CORTO_VALID));
-    test_assert(corto_countof(obj) == 2);
-    test_assert(*obj == Test_Black);
-
-    test_assert(corto_delete(ast) == 0);
-    test_assert(corto_release(obj) == 1);
-    test_assert(corto_delete(obj) == 0);
+void test_reference_tc_ref_type_inherit(
+    test_reference this)
+{
+    /* Insert implementation */
 }

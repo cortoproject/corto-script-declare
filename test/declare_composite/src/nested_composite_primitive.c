@@ -87,7 +87,7 @@ void test_nested_composite_primitive_tc_partial_init(
 void test_nested_composite_primitive_tc_member_empty_init(
     test_nested_composite_primitive this)
 {
-    const char *input = "test/s_line obj (start(), stop())";
+    const char *input = "test/s_line obj (start:(), stop:())";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -115,7 +115,7 @@ void test_nested_composite_primitive_tc_member_empty_init(
 void test_nested_composite_primitive_tc_member_full_init(
     test_nested_composite_primitive this)
 {
-    const char *input = "test/s_line obj (start(x:10, y:20), stop(x:30, y:40))";
+    const char *input = "test/s_line obj (start:(x:10, y:20), stop:(x:30, y:40))";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -143,7 +143,7 @@ void test_nested_composite_primitive_tc_member_full_init(
 void test_nested_composite_primitive_tc_member_partial_init(
     test_nested_composite_primitive this)
 {
-    const char *input = "test/s_line obj (start(y:20), stop(y:40))";
+    const char *input = "test/s_line obj (start:(y:20), stop:(y:40))";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -197,7 +197,7 @@ void test_nested_composite_primitive_tc_member_nested_init(
 void test_nested_composite_primitive_tc_mixed_empty_init(
     test_nested_composite_primitive this)
 {
-    const char *input = "test/s_line obj (start(), ())";
+    const char *input = "test/s_line obj (start:(), ())";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -225,7 +225,7 @@ void test_nested_composite_primitive_tc_mixed_empty_init(
 void test_nested_composite_primitive_tc_mixed_full_init(
     test_nested_composite_primitive this)
 {
-    const char *input = "test/s_line obj (start(10, y:20), (30, y:40))";
+    const char *input = "test/s_line obj (start:(10, y:20), (30, y:40))";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -253,7 +253,7 @@ void test_nested_composite_primitive_tc_mixed_full_init(
 void test_nested_composite_primitive_tc_mixed_partial_init(
     test_nested_composite_primitive this)
 {
-    const char *input = "test/s_line obj (start(y:20), (40))";
+    const char *input = "test/s_line obj (start:(y:20), (40))";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -280,7 +280,7 @@ void test_nested_composite_primitive_tc_mixed_partial_init(
 void test_nested_composite_primitive_tc_mixed_nested_init(
     test_nested_composite_primitive this)
 {
-    const char *input = "test/s_line obj (start.x:10, start(y:20), stop(x:30), stop.y:40)";
+    const char *input = "test/s_line obj (start.x:10, start:(y:20), stop:(x:30), stop.y:40)";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -334,7 +334,7 @@ void test_nested_composite_primitive_tc_init_enum(
 void test_nested_composite_primitive_tc_member_init_enum(
     test_nested_composite_primitive this)
 {
-    const char *input = "test/s_nested_enum obj (a(m:Red, n:Black), b(m:White, n:Blue))";
+    const char *input = "test/s_nested_enum obj (a:(m:Red, n:Black), b:(m:White, n:Blue))";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -361,7 +361,7 @@ void test_nested_composite_primitive_tc_member_init_enum(
 void test_nested_composite_primitive_tc_mixed_init_enum(
     test_nested_composite_primitive this)
 {
-    const char *input = "test/s_nested_enum obj (a(m:Red, Black), (m:White, Blue))";
+    const char *input = "test/s_nested_enum obj (a:(m:Red, Black), (m:White, Blue))";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -388,17 +388,80 @@ void test_nested_composite_primitive_tc_mixed_init_enum(
 void test_nested_composite_primitive_tc_init_bitmask(
     test_nested_composite_primitive this)
 {
-    /* Insert implementation */
+    const char *input = "test/s_nested_bitmask obj ((HasSalt|HasPepper, HasSugar|HasVinegar), (HasSalt|HasVinegar, HasSugar|HasPepper))";
+    ast_Node ast = cortoscript_ast_parse(input);
+    test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+
+    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    test_assert(ret == 0);
+
+    test_s_nested_bitmask *obj = corto_lookup(data_o, "obj");
+    test_assert(obj != NULL);
+    test_assert(corto_typeof(obj) == (corto_type)test_s_nested_bitmask_o);
+    test_assert(corto_check_state(obj, CORTO_VALID));
+    test_assert(corto_countof(obj) == 2);
+    test_assertint(obj->a.m, Test_HasSalt | Test_HasPepper);
+    test_assertint(obj->a.n, Test_HasSugar | Test_HasVinegar);
+    test_assertint(obj->b.m, Test_HasSalt | Test_HasVinegar);
+    test_assertint(obj->b.n, Test_HasSugar | Test_HasPepper);
+
+    test_assert(corto_delete(ast) == 0);
+    test_assert(corto_release(obj) == 1);
+    test_assert(corto_delete(obj) == 0);
 }
 
 void test_nested_composite_primitive_tc_member_init_bitmask(
     test_nested_composite_primitive this)
 {
-    /* Insert implementation */
+    const char *input = "test/s_nested_bitmask obj (a:(m:HasSalt|HasPepper, n:HasSugar|HasVinegar), b:(m:HasSalt|HasVinegar, n:HasSugar|HasPepper))";
+    ast_Node ast = cortoscript_ast_parse(input);
+    test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+
+    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    test_assert(ret == 0);
+
+    test_s_nested_bitmask *obj = corto_lookup(data_o, "obj");
+    test_assert(obj != NULL);
+    test_assert(corto_typeof(obj) == (corto_type)test_s_nested_bitmask_o);
+    test_assert(corto_check_state(obj, CORTO_VALID));
+    test_assert(corto_countof(obj) == 2);
+    test_assertint(obj->a.m, Test_HasSalt | Test_HasPepper);
+    test_assertint(obj->a.n, Test_HasSugar | Test_HasVinegar);
+    test_assertint(obj->b.m, Test_HasSalt | Test_HasVinegar);
+    test_assertint(obj->b.n, Test_HasSugar | Test_HasPepper);
+
+    test_assert(corto_delete(ast) == 0);
+    test_assert(corto_release(obj) == 1);
+    test_assert(corto_delete(obj) == 0);
 }
 
 void test_nested_composite_primitive_tc_mixed_init_bitmask(
     test_nested_composite_primitive this)
 {
-    /* Insert implementation */
+    const char *input = "test/s_nested_bitmask obj (a:(m:HasSalt|HasPepper, HasSugar|HasVinegar), (m:HasSalt|HasVinegar, HasSugar|HasPepper))";
+    ast_Node ast = cortoscript_ast_parse(input);
+    test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+
+    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    test_assert(ret == 0);
+
+    test_s_nested_bitmask *obj = corto_lookup(data_o, "obj");
+    test_assert(obj != NULL);
+    test_assert(corto_typeof(obj) == (corto_type)test_s_nested_bitmask_o);
+    test_assert(corto_check_state(obj, CORTO_VALID));
+    test_assert(corto_countof(obj) == 2);
+    test_assertint(obj->a.m, Test_HasSalt | Test_HasPepper);
+    test_assertint(obj->a.n, Test_HasSugar | Test_HasVinegar);
+    test_assertint(obj->b.m, Test_HasSalt | Test_HasVinegar);
+    test_assertint(obj->b.n, Test_HasSugar | Test_HasPepper);
+
+    test_assert(corto_delete(ast) == 0);
+    test_assert(corto_release(obj) == 1);
+    test_assert(corto_delete(obj) == 0);
 }
