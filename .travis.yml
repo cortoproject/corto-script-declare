@@ -2,12 +2,23 @@ language: c
 
 sudo: true
 
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-6
+    - g++-6
+
 install:
   - curl https://corto.io/ci-dev | sh
   - git clone https://github.com/cortoproject/antlr4-cpp
   - git clone https://github.com/cortoproject/script-parser
   - git clone https://github.com/cortoproject/script-print
-  - bake
+  - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-6 /usr/bin/gcc
+  - sudo unlink /usr/bin/g++ && sudo ln -s /usr/bin/g++-6 /usr/bin/g++
+  - gcc --version
 
 script:
+  - bake
   - corto test
