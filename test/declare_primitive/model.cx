@@ -3,6 +3,25 @@ in package test
 enum Color:/ Black, Red
 bitmask Recipe:/ HasSugar, HasSalt, HasPepper, HasVinegar
 
+interface interface_class:/
+    void can_do()
+
+class base_of_base:/
+    l: float32
+
+class base_class: base_of_base, implements={interface_class}:/
+    m: int32
+    void can_do()
+
+class sub_class: base_class:/
+    n: int32
+
+struct struct_w_ref:/
+    m: base_class
+
+struct struct_w_interface_ref:/
+    m: interface_class
+
 test/suite boolean:/
     void tc_true()
     void tc_false()
@@ -11,6 +30,7 @@ test/suite boolean:/
     void tc_string()
     void tc_reference()
     void tc_reference_value_type()
+    void tc_reference_value_type_true()
     void tc_null()
     void tc_constant_zero()
     void tc_constant_nonzero()
@@ -77,6 +97,10 @@ test/suite reference:/
     void tc_ref_anonymous()
     void tc_ref_type_equal()
     void tc_ref_type_inherit()
+    void tc_ref_implements()
+    void tc_ref_implements_sub()
+    void tc_ref_base_not_sub()
+    void tc_ref_nomatch()
 
 test/suite expr:/
     void tc_bitmask_1()
