@@ -1,0 +1,15 @@
+in package test
+
+test/suite function_id:/
+    void tc_id_no_args()
+    void tc_id_one_arg()
+    void tc_id_two_args()
+    void tc_nested_id_no_args()
+    void tc_nested_id_one_arg()
+    void tc_nested_id_two_args()
+    void tc_full_id_no_args()
+    void tc_full_id_one_arg()
+    void tc_full_id_two_args()
+    void tc_full_nested_id_no_args()
+    void tc_full_nested_id_one_arg()
+    void tc_full_nested_id_two_args()

@@ -52,12 +52,63 @@ error:
     return -1;
 }
 
+static
+char* declare_visitor_arglist_to_string(
+    ast_FunctionArgumentList args)
+{
+    corto_buffer buff = CORTO_BUFFER_INIT;
+
+    corto_buffer_appendstr(&buff, "(");
+    uint32_t count = 0;
+
+    corto_iter it = corto_ll_iter(args);
+    while (corto_iter_hasNext(&it)) {
+        ast_FunctionArgument arg = corto_iter_next(&it);
+
+        if (count) {
+            corto_buffer_appendstr(&buff, ",");
+        }
+
+        if (arg->inout == CORTO_OUT) {
+            corto_buffer_appendstr(&buff, "out:");
+        } else if (arg->inout == CORTO_INOUT) {
+            corto_buffer_appendstr(&buff, "inout:");
+        }
+
+        corto_type type = ast_Storage_get_object(arg->type);
+        if (!type) {
+            corto_throw(
+                "missing type for argument '%s' in function declaration",
+                arg->name);
+            goto error;
+        }
+
+        corto_buffer_appendstr(&buff, corto_fullpath(NULL, type));
+        corto_buffer_appendstr(&buff, " ");
+
+        if (arg->is_reference) {
+            corto_buffer_appendstr(&buff, "& ");
+        }
+
+        corto_buffer_appendstr(&buff, arg->name);
+
+        count ++;
+    }
+
+    corto_buffer_appendstr(&buff, ")");
+
+    return corto_buffer_str(&buff);
+error:
+    return NULL;
+}
+
 int16_t declare_Visitor_visitDeclaration(
     declare_Visitor this,
     corto_script_ast_Declaration node)
 {
     corto_object scope = declare_Visitor_get_scope(this);
     corto_object type = NULL;
+    char *arg_list = NULL;
 
     if (node->type) {
         corto_try (ast_Visitor_visit(this, node->type), NULL);
@@ -66,7 +117,27 @@ int16_t declare_Visitor_visitDeclaration(
     if (this->default_type) {
         type = this->default_type;
     } else {
-        type = corto_typeof(scope)->options.defaultType;
+        /* Check if declaration is procedure */
+        if (node->id->arguments) {
+            type = corto_typeof(scope)->options.defaultProcedureType;
+            if (!type) {
+                /* If no default procedure type is available, use 'function' as
+                 * default type */
+                type = corto_function_o;
+            }
+        } else {
+            type = corto_typeof(scope)->options.defaultType;
+        }
+    }
+
+    if (node->id->arguments) {
+        corto_try (ast_Visitor_visitFunctionArguments(this, node->id->arguments), NULL);
+
+        arg_list = declare_visitor_arglist_to_string(node->id->arguments);
+        if (!arg_list) {
+            corto_throw(NULL);
+            goto error;
+        }
     }
 
     if (!type) {
@@ -123,6 +194,10 @@ int16_t declare_Visitor_visitDeclaration(
         }
 
         /* Declare object */
+        if (arg_list) {
+            id = corto_asprintf("%s%s", id, arg_list);
+        }
+
         corto_object object = corto_declare(scope, id, type);
         if (!object) {
             corto_throw(
@@ -131,6 +206,11 @@ int16_t declare_Visitor_visitDeclaration(
                 corto_fullpath(NULL, type),
                 corto_fullpath(NULL, scope));
             goto error;
+        }
+
+        if (arg_list) {
+            /* Value is only freed when non-const value is assigned */
+            free((char*)id);
         }
 
         ast_Storage_set_object(storage, object);
@@ -180,8 +260,10 @@ int16_t declare_Visitor_visitDeclaration(
         corto_delete(helper);
     }
 
+    free (arg_list);
     return 0;
 error:
+    free (arg_list);
     return -1;
 }
 
