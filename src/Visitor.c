@@ -84,11 +84,12 @@ char* declare_visitor_arglist_to_string(
         }
 
         corto_buffer_appendstr(&buff, corto_fullpath(NULL, type));
-        corto_buffer_appendstr(&buff, " ");
 
         if (arg->is_reference) {
-            corto_buffer_appendstr(&buff, "& ");
+            corto_buffer_appendstr(&buff, "&");
         }
+
+        corto_buffer_appendstr(&buff, " ");
 
         corto_buffer_appendstr(&buff, arg->name);
 
