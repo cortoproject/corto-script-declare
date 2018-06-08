@@ -108,7 +108,7 @@ int16_t declare_Visitor_visitDeclaration(
     corto_script_ast_Declaration node)
 {
     corto_object scope = declare_Visitor_get_scope(this);
-    corto_object type = NULL;
+    corto_type type = NULL;
     char *arg_list = NULL;
 
     if (node->type) {
@@ -124,7 +124,7 @@ int16_t declare_Visitor_visitDeclaration(
             if (!type) {
                 /* If no default procedure type is available, use 'function' as
                  * default type */
-                type = corto_function_o;
+                type = (corto_type)corto_function_o;
             }
         } else {
             type = corto_typeof(scope)->options.defaultType;
@@ -216,10 +216,11 @@ int16_t declare_Visitor_visitDeclaration(
 
         ast_Storage_set_object(storage, object);
 
-        ast_StaticInitializerHelper helper =
-            ast_StaticInitializerHelper__create(NULL, NULL, storage);
-        if (!helper) {
-            goto error;
+        corto_rw rw = corto_rw_init(type, object);
+
+        /* If initializer is collection or composite, do initial push */
+        if (type->kind == CORTO_COMPOSITE || type->kind == CORTO_COLLECTION) {
+            corto_try(corto_rw_push(&rw, FALSE), NULL);
         }
 
         if (object_initializer || node->initializer) {
@@ -228,7 +229,8 @@ int16_t declare_Visitor_visitDeclaration(
             /* If declaration has initializer, apply */
             if (node->initializer) {
                 corto_try (
-                    ast_Initializer_apply(node->initializer, helper), NULL);
+                    ast_Initializer_apply(
+                      node->initializer, (uintptr_t)&rw), NULL);
             }
 
             /* If storage is identifier + initializer, apply initializer to new
@@ -238,7 +240,7 @@ int16_t declare_Visitor_visitDeclaration(
                     declare_Visitor_prepareInitializer(
                         this, object_initializer, type), NULL);
 
-                if (ast_Initializer_apply(object_initializer, helper)) {
+                if (ast_Initializer_apply(object_initializer, (uintptr_t)&rw)) {
                     goto error;
                 }
             }
@@ -254,11 +256,10 @@ int16_t declare_Visitor_visitDeclaration(
 
         /* Define object */
         if (should_define) {
-            corto_try (
-                ast_StaticInitializerHelper_define_object(helper), NULL);
+            corto_try (corto_define(object), NULL);
         }
 
-        corto_delete(helper);
+        corto_rw_deinit(&rw);
     }
 
     free (arg_list);
@@ -336,7 +337,7 @@ int16_t declare_Visitor_visitStorage(
 
         corto_object scope = declare_Visitor_get_scope(this);
 
-        corto_object type =
+        corto_type type =
             declare_object_from_storage(scope, anonymous_storage->expr);
         if (!type) {
             corto_throw("failed to resolve type of anonymous object");
@@ -349,10 +350,11 @@ int16_t declare_Visitor_visitStorage(
         ast_Storage_set_object(node, obj);
 
         /* Create initializer helper */
-        ast_StaticInitializerHelper helper =
-            ast_StaticInitializerHelper__create(NULL, NULL, node);
-        if (!helper) {
-            goto error;
+        corto_rw rw = corto_rw_init(type, obj);
+
+        /* If initializer is collection or composite, do initial push */
+        if (type->kind == CORTO_COMPOSITE || type->kind == CORTO_COLLECTION) {
+            corto_try(corto_rw_push(&rw, FALSE), NULL);
         }
 
         /* Fold expressions in initializer */
@@ -362,14 +364,13 @@ int16_t declare_Visitor_visitStorage(
         /* Apply initializer to object */
         corto_try (
             ast_Initializer_apply(
-                anonymous_storage->initializer, helper), NULL);
+                anonymous_storage->initializer, (uintptr_t)&rw), NULL);
 
         /* Define object */
-        corto_try (
-            ast_StaticInitializerHelper_define_object(helper), NULL);
+        corto_try( corto_define(obj), NULL);
 
         /* Cleanup */
-        corto_delete(helper);
+        corto_rw_deinit(&rw);
     }
 
     return 0;

@@ -113,6 +113,30 @@ struct s_sequence_bitmask:/
 struct s_list_bitmask:/
     a, b: list{Recipe}
 
+struct s_base:/
+    a, b, c: int32
+
+struct s_sub: s_base:/
+    a, d: int32
+
+struct s_sub_hidden: s_base, hidden:/
+    a: int32
+    alias b: s_base/b
+    d: int32, hidden
+    e: int32
+
+class c_base:/
+    a, b, c: int32
+
+class c_sub: c_base:/
+    a, d: int32
+
+class c_sub_hidden: c_base, hidden:/
+    a: int32
+    alias b: c_base/b
+    d: int32, hidden
+    e: int32
+
 test/suite primitive:/
     void tc_bool()
     void tc_char()
@@ -208,3 +232,28 @@ test/suite nested_collection_primitive:/
     void tc_list_3_init()
     void tc_list_init_enum()
     void tc_list_init_bitmask()
+
+test/suite inheritance_struct:/
+    void tc_full_init()
+    void tc_partial_init()
+    void tc_empty_init()
+
+    void tc_member_full_init()
+    void tc_member_partial_init()
+    void tc_member_same_init()
+
+    void tc_super_full_init()
+    void tc_super_full_init_reverse_order()
+    void tc_super_partial_init()
+    void tc_super_empty_init()
+    void tc_super_nested_full_init()
+    void tc_super_nested_partial_init()
+    void tc_super_nested_member_full_init()
+    void tc_super_nested_member_partial_init()
+    void tc_super_nested_member_mixed_init()
+    void tc_super_mixed_full_init()
+    void tc_super_mixed_partial_init()
+
+    void tc_mixed_full_init()
+    void tc_mixed_partial_init()
+    void tc_mixed_partial_init_mixed_same_name()
