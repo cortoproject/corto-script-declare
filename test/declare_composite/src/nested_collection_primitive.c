@@ -5,7 +5,7 @@
 void test_nested_collection_primitive_tc_array_empty_init(
     test_nested_collection_primitive this)
 {
-    const char *input = "test/s_array obj ([], [])";
+    const char *input = "test/s_array obj = {[], []}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(ast != NULL);
@@ -36,7 +36,7 @@ void test_nested_collection_primitive_tc_array_empty_init(
 void test_nested_collection_primitive_tc_array_full_init(
     test_nested_collection_primitive this)
 {
-    const char *input = "test/s_array obj ([10, 20, 30], [40, 50, 60])";
+    const char *input = "test/s_array obj = {[10, 20, 30], [40, 50, 60]}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -67,10 +67,10 @@ void test_nested_collection_primitive_tc_array_init_bitmask(
     test_nested_collection_primitive this)
 {
     const char *input =
-        "test/s_array_bitmask obj ("
+        "test/s_array_bitmask obj = {"
             "[HasSalt|HasPepper, HasSalt|HasSugar, HasSalt|HasVinegar], "
             "[HasPepper|HasSugar, HasPepper|HasVinegar, HasSugar|HasVinegar]"
-        ")"
+        "}"
         ;
 
     ast_Node ast = cortoscript_ast_parse(input);
@@ -102,7 +102,7 @@ void test_nested_collection_primitive_tc_array_init_bitmask(
 void test_nested_collection_primitive_tc_array_init_enum(
     test_nested_collection_primitive this)
 {
-    const char *input = "test/s_array_enum obj ([Red, Black, White], [Blue, Red, Black])";
+    const char *input = "test/s_array_enum obj = {[Red, Black, White], [Blue, Red, Black]}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -132,7 +132,7 @@ void test_nested_collection_primitive_tc_array_init_enum(
 void test_nested_collection_primitive_tc_array_partial_init(
     test_nested_collection_primitive this)
 {
-    const char *input = "test/s_array obj ([10, 20], [40, 50])";
+    const char *input = "test/s_array obj = {[10, 20], [40, 50]}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -162,7 +162,7 @@ void test_nested_collection_primitive_tc_array_partial_init(
 void test_nested_collection_primitive_tc_list_1_init(
     test_nested_collection_primitive this)
 {
-    const char *input = "test/s_list obj ([10], [20])";
+    const char *input = "test/s_list obj = {[10], [20]}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -192,7 +192,7 @@ void test_nested_collection_primitive_tc_list_1_init(
 void test_nested_collection_primitive_tc_list_3_init(
     test_nested_collection_primitive this)
 {
-    const char *input = "test/s_list obj ([10, 20, 30], [40, 50, 60])";
+    const char *input = "test/s_list obj = {[10, 20, 30], [40, 50, 60]}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -226,7 +226,7 @@ void test_nested_collection_primitive_tc_list_3_init(
 void test_nested_collection_primitive_tc_list_empty_init(
     test_nested_collection_primitive this)
 {
-    const char *input = "test/s_list obj ([], [])";
+    const char *input = "test/s_list obj = {[], []}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -255,10 +255,10 @@ void test_nested_collection_primitive_tc_list_init_bitmask(
     test_nested_collection_primitive this)
 {
     const char *input =
-        "test/s_list_bitmask obj ("
+        "test/s_list_bitmask obj = {"
             "[HasSalt|HasPepper, HasSalt|HasSugar, HasSalt|HasVinegar], "
             "[HasPepper|HasSugar, HasPepper|HasVinegar, HasSugar|HasVinegar]"
-        ")"
+        "}"
         ;
 
     ast_Node ast = cortoscript_ast_parse(input);
@@ -292,7 +292,7 @@ void test_nested_collection_primitive_tc_list_init_bitmask(
 void test_nested_collection_primitive_tc_list_init_enum(
     test_nested_collection_primitive this)
 {
-    const char *input = "test/s_list_enum obj ([Red, Black, White], [Blue, Red, Black])";
+    const char *input = "test/s_list_enum obj = {[Red, Black, White], [Blue, Red, Black]}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -324,7 +324,7 @@ void test_nested_collection_primitive_tc_list_init_enum(
 void test_nested_collection_primitive_tc_list_null_init(
     test_nested_collection_primitive this)
 {
-    const char *input = "test/s_list obj (null, null)";
+    const char *input = "test/s_list obj = {null, null}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -350,7 +350,7 @@ void test_nested_collection_primitive_tc_list_null_init(
 void test_nested_collection_primitive_tc_sequence_1_init(
     test_nested_collection_primitive this)
 {
-    const char *input = "test/s_sequence obj ([10], [40])";
+    const char *input = "test/s_sequence obj = {[10], [40]}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -378,7 +378,7 @@ void test_nested_collection_primitive_tc_sequence_1_init(
 void test_nested_collection_primitive_tc_sequence_3_init(
     test_nested_collection_primitive this)
 {
-    const char *input = "test/s_sequence obj ([10, 20, 30], [40, 50, 60])";
+    const char *input = "test/s_sequence obj = {[10, 20, 30], [40, 50, 60]}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -410,7 +410,7 @@ void test_nested_collection_primitive_tc_sequence_3_init(
 void test_nested_collection_primitive_tc_sequence_empty_init(
     test_nested_collection_primitive this)
 {
-    const char *input = "test/s_sequence obj ([], [])";
+    const char *input = "test/s_sequence obj = {[], []}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -439,10 +439,10 @@ void test_nested_collection_primitive_tc_sequence_init_bitmask(
     test_nested_collection_primitive this)
 {
     const char *input =
-        "test/s_sequence_bitmask obj ("
+        "test/s_sequence_bitmask obj = {"
             "[HasSalt|HasPepper, HasSalt|HasSugar, HasSalt|HasVinegar], "
             "[HasPepper|HasSugar, HasPepper|HasVinegar, HasSugar|HasVinegar]"
-        ")"
+        "}"
         ;
 
     ast_Node ast = cortoscript_ast_parse(input);
@@ -476,7 +476,7 @@ void test_nested_collection_primitive_tc_sequence_init_bitmask(
 void test_nested_collection_primitive_tc_sequence_init_enum(
     test_nested_collection_primitive this)
 {
-    const char *input = "test/s_sequence_enum obj ([Red, Black, White], [Blue, Red, Black])";
+    const char *input = "test/s_sequence_enum obj = {[Red, Black, White], [Blue, Red, Black]}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);

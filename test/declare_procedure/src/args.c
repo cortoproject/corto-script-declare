@@ -9,7 +9,7 @@ void test_args_tc_full_id(
     corto_object my_int = corto_create(root_o, "my_int", corto_int_o);
     test_assert(my_int != NULL);
 
-    const char *input = "func(/my_int arg): int32";
+    const char *input = "func(/my_int arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -44,7 +44,7 @@ void test_args_tc_full_id(
 void test_args_tc_full_id_nested(
     test_args this)
 {
-    const char *input = "func(/corto/vstore/time arg): int32";
+    const char *input = "func(/corto/vstore/time arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -82,7 +82,7 @@ void test_args_tc_id(
     corto_object my_int = corto_create(data_o, "my_int", corto_int_o);
     test_assert(my_int != NULL);
 
-    const char *input = "func(my_int arg): int32";
+    const char *input = "func(my_int arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -120,7 +120,7 @@ void test_args_tc_id_nested(
     corto_object my_int = corto_create(data_o, "nested/my_int", corto_int_o);
     test_assert(my_int != NULL);
 
-    const char *input = "func(nested/my_int arg): int32";
+    const char *input = "func(nested/my_int arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -155,7 +155,7 @@ void test_args_tc_id_nested(
 void test_args_tc_in(
     test_args this)
 {
-    const char *input = "func(in float32 arg): int32";
+    const char *input = "func(in float32 arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -190,7 +190,7 @@ void test_args_tc_in(
 void test_args_tc_in_anonymous(
     test_args this)
 {
-    const char *input = "func(in list(float32) arg): int32";
+    const char *input = "func(in list[float32] arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -228,7 +228,7 @@ void test_args_tc_in_anonymous(
 void test_args_tc_inout(
     test_args this)
 {
-    const char *input = "func(inout float32 arg): int32";
+    const char *input = "func(inout float32 arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -263,7 +263,7 @@ void test_args_tc_inout(
 void test_args_tc_inout_anonymous(
     test_args this)
 {
-    const char *input = "func(inout list(float32) arg): int32";
+    const char *input = "func(inout list[float32] arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -301,7 +301,7 @@ void test_args_tc_inout_anonymous(
 void test_args_tc_inout_mixed(
     test_args this)
 {
-    const char *input = "func(inout float32 arg1, string arg2): int32";
+    const char *input = "func(inout float32 arg1, string arg2) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -341,7 +341,7 @@ void test_args_tc_inout_mixed(
 void test_args_tc_out_mixed(
     test_args this)
 {
-    const char *input = "func(out float32 arg1, string arg2): int32";
+    const char *input = "func(out float32 arg1, string arg2) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -382,7 +382,7 @@ void test_args_tc_out_mixed(
 void test_args_tc_out(
     test_args this)
 {
-    const char *input = "func(out float32 arg): int32";
+    const char *input = "func(out float32 arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -417,7 +417,7 @@ void test_args_tc_out(
 void test_args_tc_out_anonymous(
     test_args this)
 {
-    const char *input = "func(out list(float32) arg): int32";
+    const char *input = "func(out list[float32] arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -455,7 +455,7 @@ void test_args_tc_out_anonymous(
 void test_args_tc_ref(
     test_args this)
 {
-    const char *input = "func(float32& arg): int32";
+    const char *input = "func(float32& arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -490,7 +490,7 @@ void test_args_tc_ref(
 void test_args_tc_ref_in(
     test_args this)
 {
-    const char *input = "func(in float32& arg): int32";
+    const char *input = "func(in float32& arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -525,7 +525,7 @@ void test_args_tc_ref_in(
 void test_args_tc_ref_in_anonymous(
     test_args this)
 {
-    const char *input = "func(in list(float32)& arg): int32";
+    const char *input = "func(in list[float32]& arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -563,7 +563,7 @@ void test_args_tc_ref_in_anonymous(
 void test_args_tc_ref_inout(
     test_args this)
 {
-    const char *input = "func(inout float32& arg): int32";
+    const char *input = "func(inout float32& arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -598,7 +598,7 @@ void test_args_tc_ref_inout(
 void test_args_tc_ref_inout_anonymous(
     test_args this)
 {
-    const char *input = "func(inout list(float32)& arg): int32";
+    const char *input = "func(inout list[float32]& arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -636,7 +636,7 @@ void test_args_tc_ref_inout_anonymous(
 void test_args_tc_ref_mixed(
     test_args this)
 {
-    const char *input = "func(float32& arg1, string arg2): int32";
+    const char *input = "func(float32& arg1, string arg2) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -677,7 +677,7 @@ void test_args_tc_ref_mixed(
 void test_args_tc_ref_out(
     test_args this)
 {
-    const char *input = "func(out float32& arg): int32";
+    const char *input = "func(out float32& arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -712,7 +712,7 @@ void test_args_tc_ref_out(
 void test_args_tc_ref_out_anonymous(
     test_args this)
 {
-    const char *input = "func(out list(float32)& arg): int32";
+    const char *input = "func(out list[float32]& arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -750,7 +750,7 @@ void test_args_tc_ref_out_anonymous(
 void test_args_tc_type_anonymous(
     test_args this)
 {
-    const char *input = "func(list(float32) arg): int32";
+    const char *input = "func(list[float32] arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -788,7 +788,7 @@ void test_args_tc_type_anonymous(
 void test_args_tc_type_mixed_anonymous(
     test_args this)
 {
-    const char *input = "func(in list(float32) arg1, string arg2): int32";
+    const char *input = "func(in list[float32] arg1, string arg2) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);

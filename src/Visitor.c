@@ -114,6 +114,7 @@ int16_t declare_Visitor_visitDeclaration(
     if (node->type) {
         corto_try (ast_Visitor_visit(this, node->type), NULL);
         type = ast_Storage_get_object(node->type);
+        corto_set_ref(&this->default_type, type);
     } else
     if (this->default_type) {
         type = this->default_type;
@@ -249,9 +250,12 @@ int16_t declare_Visitor_visitDeclaration(
         /* If initializer has scope, visit scope before defining object */
         if (node->scope) {
             should_define = true;
+            corto_type old_default_type = this->default_type;
+            corto_set_ref(&this->default_type, NULL);
             declare_Visitor_push_scope(this, object);
             corto_try (ast_Visitor_visit(this, node->scope), NULL);
             declare_Visitor_pop_scope(this);
+            corto_set_ref(&this->default_type, old_default_type);
         }
 
         /* Define object */

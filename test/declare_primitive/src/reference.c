@@ -6,7 +6,7 @@
 void test_reference_tc_ref_anonymous(
     test_reference this)
 {
-    const char *input = "object obj: int32(10)";
+    const char *input = "object obj: int32[10]";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);

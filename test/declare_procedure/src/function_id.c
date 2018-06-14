@@ -5,7 +5,7 @@
 void test_function_id_tc_full_id_no_args(
     test_function_id this)
 {
-    const char *input = "function /func(): int32";
+    const char *input = "function /func() int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -33,7 +33,7 @@ void test_function_id_tc_full_id_no_args(
 void test_function_id_tc_full_id_one_arg(
     test_function_id this)
 {
-    const char *input = "function /func(float32 arg): int32";
+    const char *input = "function /func(float32 arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -66,7 +66,7 @@ void test_function_id_tc_full_id_one_arg(
 void test_function_id_tc_full_id_two_args(
     test_function_id this)
 {
-    const char *input = "function /func(float32 arg1, string arg2): int32";
+    const char *input = "function /func(float32 arg1, string arg2) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -106,7 +106,7 @@ void test_function_id_tc_full_id_two_args(
 void test_function_id_tc_full_nested_id_no_args(
     test_function_id this)
 {
-    const char *input = "function /data/func(): int32";
+    const char *input = "function /data/func() int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -134,7 +134,7 @@ void test_function_id_tc_full_nested_id_no_args(
 void test_function_id_tc_full_nested_id_one_arg(
     test_function_id this)
 {
-    const char *input = "function /data/func(float32 arg): int32";
+    const char *input = "function /data/func(float32 arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -167,7 +167,7 @@ void test_function_id_tc_full_nested_id_one_arg(
 void test_function_id_tc_full_nested_id_two_args(
     test_function_id this)
 {
-    const char *input = "function /data/func(float32 arg1, string arg2): int32";
+    const char *input = "function /data/func(float32 arg1, string arg2) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -207,7 +207,7 @@ void test_function_id_tc_full_nested_id_two_args(
 void test_function_id_tc_id_no_args(
     test_function_id this)
 {
-    const char *input = "function func(): int32";
+    const char *input = "function func() int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -235,7 +235,7 @@ void test_function_id_tc_id_no_args(
 void test_function_id_tc_id_one_arg(
     test_function_id this)
 {
-    const char *input = "function func(float32 arg): int32";
+    const char *input = "function func(float32 arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -268,7 +268,7 @@ void test_function_id_tc_id_one_arg(
 void test_function_id_tc_id_two_args(
     test_function_id this)
 {
-    const char *input = "function func(float32 arg1, string arg2): int32";
+    const char *input = "function func(float32 arg1, string arg2) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -308,7 +308,7 @@ void test_function_id_tc_id_two_args(
 void test_function_id_tc_nested_id_no_args(
     test_function_id this)
 {
-    const char *input = "function nested/func(): int32";
+    const char *input = "function nested/func() int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -338,7 +338,7 @@ void test_function_id_tc_nested_id_no_args(
 void test_function_id_tc_nested_id_one_arg(
     test_function_id this)
 {
-    const char *input = "function nested/func(float32 arg): int32";
+    const char *input = "function nested/func(float32 arg) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -373,7 +373,7 @@ void test_function_id_tc_nested_id_one_arg(
 void test_function_id_tc_nested_id_two_args(
     test_function_id this)
 {
-    const char *input = "function nested/func(float32 arg1, string arg2): int32";
+    const char *input = "function nested/func(float32 arg1, string arg2) int32";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);

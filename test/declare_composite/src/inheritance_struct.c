@@ -5,7 +5,7 @@
 void test_inheritance_struct_tc_empty_init(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj ()";
+    const char *input = "test/s_sub obj = {}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -33,7 +33,7 @@ void test_inheritance_struct_tc_empty_init(
 void test_inheritance_struct_tc_full_init(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (10, 20, 30, 40, 50)";
+    const char *input = "test/s_sub obj = {10, 20, 30, 40, 50}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -61,7 +61,7 @@ void test_inheritance_struct_tc_full_init(
 void test_inheritance_struct_tc_partial_init(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (10, 20, 30, 40)";
+    const char *input = "test/s_sub obj = {10, 20, 30, 40}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -89,7 +89,7 @@ void test_inheritance_struct_tc_partial_init(
 void test_inheritance_struct_tc_member_full_init(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (super.a:10, super.b:20, super.c:30, a:40, d:50)";
+    const char *input = "test/s_sub obj = {super.a:10, super.b:20, super.c:30, a:40, d:50}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -117,7 +117,7 @@ void test_inheritance_struct_tc_member_full_init(
 void test_inheritance_struct_tc_member_partial_init(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (a:40, b:20, d:50)";
+    const char *input = "test/s_sub obj = {a:40, b:20, d:50}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -145,7 +145,7 @@ void test_inheritance_struct_tc_member_partial_init(
 void test_inheritance_struct_tc_member_same_init(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (super.a:20, a:40)";
+    const char *input = "test/s_sub obj = {super.a:20, a:40}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -173,7 +173,7 @@ void test_inheritance_struct_tc_member_same_init(
 void test_inheritance_struct_tc_mixed_full_init(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (super.a:10, 20, 30, a:40, 50)";
+    const char *input = "test/s_sub obj = {super.a:10, 20, 30, a:40, 50}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -201,7 +201,7 @@ void test_inheritance_struct_tc_mixed_full_init(
 void test_inheritance_struct_tc_mixed_partial_init(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (super.a:10, 20, a:40, 50)";
+    const char *input = "test/s_sub obj = {super.a:10, 20, a:40, 50}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -229,7 +229,7 @@ void test_inheritance_struct_tc_mixed_partial_init(
 void test_inheritance_struct_tc_mixed_partial_init_mixed_same_name(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (10, 20, a:40, 50)";
+    const char *input = "test/s_sub obj = {10, 20, a:40, 50}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -257,7 +257,7 @@ void test_inheritance_struct_tc_mixed_partial_init_mixed_same_name(
 void test_inheritance_struct_tc_super_empty_init(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (super:())";
+    const char *input = "test/s_sub obj = {super:{}}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -285,7 +285,7 @@ void test_inheritance_struct_tc_super_empty_init(
 void test_inheritance_struct_tc_super_full_init(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (super.a:10, super.b:20, super.c:30, a:40, d:50)";
+    const char *input = "test/s_sub obj = {super.a:10, super.b:20, super.c:30, a:40, d:50}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -313,7 +313,7 @@ void test_inheritance_struct_tc_super_full_init(
 void test_inheritance_struct_tc_super_full_init_reverse_order(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (d:50, a:40, super.c:30, super.b:20, super.a:10)";
+    const char *input = "test/s_sub obj = {d:50, a:40, super.c:30, super.b:20, super.a:10}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -341,7 +341,7 @@ void test_inheritance_struct_tc_super_full_init_reverse_order(
 void test_inheritance_struct_tc_super_partial_init(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (super.a:10, super.b:20, a:40, d:50)";
+    const char *input = "test/s_sub obj = {super.a:10, super.b:20, a:40, d:50}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -369,7 +369,7 @@ void test_inheritance_struct_tc_super_partial_init(
 void test_inheritance_struct_tc_super_nested_full_init(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (super:(10, 20, 30), a:40, d:50)";
+    const char *input = "test/s_sub obj = {super:{10, 20, 30}, a:40, d:50}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -397,7 +397,7 @@ void test_inheritance_struct_tc_super_nested_full_init(
 void test_inheritance_struct_tc_super_nested_partial_init(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (super:(10, 20), a:40, d:50)";
+    const char *input = "test/s_sub obj = {super:{10, 20}, a:40, d:50}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -425,7 +425,7 @@ void test_inheritance_struct_tc_super_nested_partial_init(
 void test_inheritance_struct_tc_super_nested_member_full_init(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (super:(a:10, b:20, c:30), a:40, d:50)";
+    const char *input = "test/s_sub obj = {super:{a:10, b:20, c:30}, a:40, d:50}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -453,7 +453,7 @@ void test_inheritance_struct_tc_super_nested_member_full_init(
 void test_inheritance_struct_tc_super_nested_member_partial_init(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (super:(a:10, c:30), a:40, d:50)";
+    const char *input = "test/s_sub obj = {super:{a:10, c:30}, a:40, d:50}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -481,7 +481,7 @@ void test_inheritance_struct_tc_super_nested_member_partial_init(
 void test_inheritance_struct_tc_super_nested_member_mixed_init(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (super:(b:20, 30), a:40, d:50)";
+    const char *input = "test/s_sub obj = {super:{b:20, 30}, a:40, d:50}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -509,7 +509,7 @@ void test_inheritance_struct_tc_super_nested_member_mixed_init(
 void test_inheritance_struct_tc_super_mixed_full_init(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (super:(a:10, b:20, c:30), 40, 50)";
+    const char *input = "test/s_sub obj = {super:{a:10, b:20, c:30}, 40, 50}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
@@ -537,7 +537,7 @@ void test_inheritance_struct_tc_super_mixed_full_init(
 void test_inheritance_struct_tc_super_mixed_partial_init(
     test_inheritance_struct this)
 {
-    const char *input = "test/s_sub obj (super:(a:10, b:20), 40)";
+    const char *input = "test/s_sub obj = {super:{a:10, b:20}, 40}";
     ast_Node ast = cortoscript_ast_parse(input);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
