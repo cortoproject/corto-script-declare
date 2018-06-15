@@ -18,3 +18,10 @@ test/suite in_test:/
     void tc_in_full_nested_id()
     void tc_in_dot_id()
     void tc_in_dot_nested_id()
+
+    void tc_in_id_implicit_type()
+    void tc_in_full_id_implicit_type()
+    void tc_in_nested_id_implicit_type()
+    void tc_in_full_nested_id_implicit_type()
+    void tc_in_dot_id_implicit_type()
+    void tc_in_dot_nested_id_implicit_type()

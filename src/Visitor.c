@@ -117,14 +117,11 @@ int16_t declare_Visitor_visitDeclaration(
         }
     }
 
-    if (node->id->arguments) {
-        corto_try (ast_Visitor_visitFunctionArguments(this, node->id->arguments), NULL);
-
-        arg_list = declare_visitor_arglist_to_string(node->id->arguments);
-        if (!arg_list) {
-            corto_throw(NULL);
-            goto error;
-        }
+    /* If this is a statement that sets the scope and no type is provided or can
+     * be derived (which is typical, since such statements usually appear at the
+     * start of a script) assume 'package' as default type. */
+    if (!type && node->set_scope) {
+        type = (corto_type)corto_package_o;
     }
 
     if (!type) {
@@ -137,6 +134,16 @@ int16_t declare_Visitor_visitDeclaration(
         corto_throw("object '%s' is not a type",
             corto_fullpath(NULL, type));
         goto error;
+    }
+
+    if (node->id->arguments) {
+        corto_try (ast_Visitor_visitFunctionArguments(this, node->id->arguments), NULL);
+
+        arg_list = declare_visitor_arglist_to_string(node->id->arguments);
+        if (!arg_list) {
+            corto_throw(NULL);
+            goto error;
+        }
     }
 
     /* If declaration has an initializer, set type of initializer to the type
@@ -185,13 +192,28 @@ int16_t declare_Visitor_visitDeclaration(
             id = corto_asprintf("%s%s", id, arg_list);
         }
 
-        corto_object object;
+        corto_object from = scope;
         if (node->set_scope) {
-            /* Identifiers in a scope-setting declaration are always resovled
+            /* Identifiers in a scope-setting declaration are always resolved
              * relative to the parser scope */
-            object = corto_declare(this->from, id, type);
+            scope = this->from;
+        }
+
+        corto_object object;
+        if (node->type) {
+            /* If type is explicitly provided, use standard corto_declare, which
+             * enforces that the returned object is of the specified type. */
+            object = corto_declare(from, id, type);
         } else {
-            object = corto_declare(scope, id, type);
+            /* If the type is implicit, make sure that the parser doesn't fail
+             * when the object already exists with a different type. This call
+             * provides functionality equivalent to corto_declare, minus the
+             * type check. */
+            object = corto(CORTO_RECURSIVE_DECLARE, {
+                .parent = from,
+                .id = id,
+                .type = type
+            });
         }
         if (!object) {
             corto_throw(
