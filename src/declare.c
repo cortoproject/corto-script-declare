@@ -2,8 +2,37 @@
 
 #include <corto/script/ast/declare/declare.h>
 
+const char* match_alias(const char *alias, const char *id) {
+    const char *ptr;
+    char ch;
+    const char *id_ptr = id;
+
+    for (ptr = alias; (ch = *ptr); ptr ++, id_ptr ++) {
+        if (id_ptr[0] != ch) {
+            if (ch == '.' || ch == '/') {
+                if (id_ptr[0] != '.' && id_ptr[0] != '/') {
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
+    if (ptr[0] || (id_ptr[0] && (id_ptr[0] != '.' && id_ptr[0] != '/'))) {
+        return NULL;
+    } else {
+        if (id_ptr[0] == '.' || id_ptr[0] == '/') {
+            id_ptr ++;
+        }
+        return id_ptr;
+    }
+}
+
 corto_object declare_object_from_storage(
+    corto_object typesystem,
     corto_object from,
+    declare_search_elementList search_scopes,
     corto_script_ast_Storage storage)
 {
     corto_object result = NULL;
@@ -11,19 +40,41 @@ corto_object declare_object_from_storage(
     if (corto_instanceof(ast_Identifier_o, storage)) {
         ast_Identifier identifier = ast_Identifier(storage);
         corto_type type = ast_Expression(storage)->type;
+        const char *id = identifier->id;
 
         /* First, try to lookup the object from the scope of the type. This is
          * typically used for looking up enumeration constants, so a script can
          * specify 'Red' instaed 'Color/Red' */
         if (type && corto_check_attr(type, CORTO_ATTR_NAMED)) {
-            result = corto_lookup(type, identifier->id);
+            result = corto_lookup(type, id);
+        }
+
+        /* If search scopes are specified, check if search string can be found
+         * in any of the search scopes */
+        if (corto_ll_count(search_scopes)) {
+            corto_iter it = corto_ll_iter(search_scopes);
+            while (corto_iter_hasNext(&it)) {
+                declare_search_element *el = corto_iter_next(&it);
+                const char *id_ptr = id;
+                if (!el->alias || (id_ptr = match_alias(el->alias, id))) {
+                    if (id_ptr[0]) {
+                        result = corto_resolve(el->scope, id_ptr);
+                    } else {
+                        result = el->scope;
+                        corto_claim(result);
+                    }
+                    if (result) {
+                        break;
+                    }
+                }
+            }
         }
 
         /* If object hasn't been found yet, look it up in the provided scope */
         if (!result) {
-            result = corto_resolve(from, identifier->id);
+            result = corto_resolve(from, id);
             if (!result) {
-                corto_throw("unresolved identifier '%s'", identifier->id);
+                corto_throw("unresolved identifier '%s'", id);
                 goto error;
             }
         }

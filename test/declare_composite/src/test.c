@@ -2,7 +2,7 @@
 
 int cortomain(int argc, char *argv[]) {
     int result = 0;
-    test_Runner runner = test_Runner__create(NULL, NULL, "corto/script/ast/declare_composite", argv[0], (argc > 1) ? argv[1] : NULL);
+    test_Runner runner = test_Runner__create(NULL, NULL, "declare_composite", argv[0], (argc > 1) ? argv[1] : NULL);
     if (!runner) return -1;
     if (corto_ll_count(runner->failures)) {
         result = -1;

@@ -6,31 +6,16 @@ int16_t declare_Visitor_construct(
     declare_Visitor this)
 {
     if (this->from) {
-        declare_Visitor_push_scope(this, this->from);
+        corto_set_ref(&this->current_scope, this->from);
     } else {
-        declare_Visitor_push_scope(this, root_o);
+        corto_set_ref(&this->current_scope, root_o);
+    }
+
+    if (!this->typesystem) {
+        corto_set_ref(&this->typesystem, corto_lang_o);
     }
 
     return corto_super_construct(this);
-}
-
-corto_object declare_Visitor_get_scope(
-    declare_Visitor this)
-{
-    return corto_ll_last(this->scope_stack);
-}
-
-void declare_Visitor_pop_scope(
-    declare_Visitor this)
-{
-    corto_ll_takeLast(this->scope_stack);
-}
-
-void declare_Visitor_push_scope(
-    declare_Visitor this,
-    corto_object scope)
-{
-    corto_ll_append(this->scope_stack, scope);
 }
 
 int16_t declare_Visitor_prepareInitializer(
@@ -107,7 +92,7 @@ int16_t declare_Visitor_visitDeclaration(
     declare_Visitor this,
     corto_script_ast_Declaration node)
 {
-    corto_object scope = declare_Visitor_get_scope(this);
+    corto_object scope = this->current_scope;
     corto_type type = NULL;
     char *arg_list = NULL;
 
@@ -200,7 +185,14 @@ int16_t declare_Visitor_visitDeclaration(
             id = corto_asprintf("%s%s", id, arg_list);
         }
 
-        corto_object object = corto_declare(scope, id, type);
+        corto_object object;
+        if (node->set_scope) {
+            /* Identifiers in a scope-setting declaration are always resovled
+             * relative to the parser scope */
+            object = corto_declare(this->from, id, type);
+        } else {
+            object = corto_declare(scope, id, type);
+        }
         if (!object) {
             corto_throw(
                 "failed to declare object '%s' of type '%s' in scope '%s'",
@@ -208,6 +200,9 @@ int16_t declare_Visitor_visitDeclaration(
                 corto_fullpath(NULL, type),
                 corto_fullpath(NULL, scope));
             goto error;
+        }
+        if (node->set_scope) {
+            corto_set_ref(&this->current_scope, object);
         }
 
         if (arg_list) {
@@ -250,12 +245,13 @@ int16_t declare_Visitor_visitDeclaration(
         /* If initializer has scope, visit scope before defining object */
         if (node->scope) {
             should_define = true;
-            corto_type old_default_type = this->default_type;
+            corto_object current_scope = this->current_scope;
+            corto_type current_default_type = this->default_type;
+            corto_set_ref(&this->current_scope, object);
             corto_set_ref(&this->default_type, NULL);
-            declare_Visitor_push_scope(this, object);
             corto_try (ast_Visitor_visit(this, node->scope), NULL);
-            declare_Visitor_pop_scope(this);
-            corto_set_ref(&this->default_type, old_default_type);
+            corto_set_ref(&this->current_scope, current_scope);
+            corto_set_ref(&this->default_type, current_default_type);
         }
 
         /* Define object */
@@ -320,13 +316,15 @@ int16_t declare_Visitor_visitStorage(
     declare_Visitor this,
     corto_script_ast_Storage node)
 {
-    corto_object scope = declare_Visitor_get_scope(this);
+    corto_object typesystem = this->typesystem;
+    corto_object scope = this->current_scope;
     corto_object obj;
 
     if (corto_instanceof(ast_Identifier_o, node)) {
 
         /* Named object */
-        obj = declare_object_from_storage(scope, node);
+        obj = declare_object_from_storage(
+            typesystem, scope, this->search_scopes, node);
         if (!obj) {
             corto_throw("failed to resolve storage");
             goto error;
@@ -339,10 +337,11 @@ int16_t declare_Visitor_visitStorage(
         ast_StorageInitializer anonymous_storage =
             ast_StorageInitializer(node);
 
-        corto_object scope = declare_Visitor_get_scope(this);
+        corto_object scope = this->current_scope;
 
         corto_type type =
-            declare_object_from_storage(scope, anonymous_storage->expr);
+            declare_object_from_storage(
+                typesystem, scope, this->search_scopes, anonymous_storage->expr);
         if (!type) {
             corto_throw("failed to resolve type of anonymous object");
             goto error;
@@ -375,6 +374,31 @@ int16_t declare_Visitor_visitStorage(
 
         /* Cleanup */
         corto_rw_deinit(&rw);
+    }
+
+    return 0;
+error:
+    return -1;
+}
+
+int16_t declare_Visitor_visitUse(
+    declare_Visitor this,
+    corto_script_ast_Use node)
+{
+    corto_object scope = corto_lookup(this->from, node->package);
+    if (!scope) {
+        corto_throw("could not find '%s' in use statement", node->package);
+        goto error;
+    }
+
+    if (node->as_typesystem) {
+        corto_set_ref(this->typesystem, scope);
+    } else {
+        declare_search_element el = {
+            .scope = scope,
+            .alias = node->alias
+        };
+        declare_search_elementList__append(this->search_scopes, &el);
     }
 
     return 0;

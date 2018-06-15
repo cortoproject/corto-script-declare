@@ -1,0 +1,20 @@
+in package test
+
+test/suite use_test:/
+    void tc_use_id()
+    void tc_use_full_id()
+    void tc_use_nested_id()
+    void tc_use_full_nested_id()
+    void tc_use_alias_id()
+    void tc_use_alias_full_id()
+    void tc_use_alias_nested_id()
+    void tc_use_alias_full_nested_id()
+    void tc_use_alias_mixed_scope_operator()
+
+test/suite in_test:/
+    void tc_in_id()
+    void tc_in_full_id()
+    void tc_in_nested_id()
+    void tc_in_full_nested_id()
+    void tc_in_dot_id()
+    void tc_in_dot_nested_id()
