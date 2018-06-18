@@ -109,31 +109,17 @@ int16_t cortoscript_parse_expr(
     corto_value *out)
 {
     /* Parse script */
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Expression ast = ast_Expression(cortoscript_ast_parse(input, true));
     if (!ast) {
         corto_throw("failed to parse script");
         goto error;
     }
 
-    /* Fold expressions */
-    declare_FoldingVisitor visitor = declare_FoldingVisitor__create(NULL, NULL);
-    if (!visitor) {
-        corto_throw("failed to declare visitor for expression folding");
-        goto error;
-    }
-
-    if (ast_Visitor_visit(visitor, ast)) {
-        corto_throw("failed to fold expressions in script");
-    }
+    ast_Expression folded = ast_Expression_fold(ast);
 
     /* Convert expression to value */
-    if (cortoscript_ast_to_value(ast, out)) {
+    if (cortoscript_ast_to_value(ast_Node(folded), out)) {
         corto_throw("failed to convert expression to corto_value");
-        goto error;
-    }
-
-    if (corto_delete(visitor)) {
-        corto_throw("failed to delete visitor");
         goto error;
     }
 

@@ -6,7 +6,7 @@ void test_constant_tc_constant_nonzero(
     test_constant this)
 {
     const char *input = "test/Color obj: Red";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -31,7 +31,7 @@ void test_constant_tc_constant_zero(
     test_constant this)
 {
     const char *input = "test/Color obj: Black";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -55,7 +55,7 @@ void test_constant_tc_bitmask_zero(
     test_constant this)
 {
     const char *input = "test/Recipe obj: 0";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -79,7 +79,7 @@ void test_constant_tc_enum_number(
     test_constant this)
 {
     const char *input = "test/Color obj: 1";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -103,7 +103,7 @@ void test_constant_tc_enum_zero(
     test_constant this)
 {
     const char *input = "test/Color obj: 0";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);

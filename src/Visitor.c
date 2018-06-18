@@ -223,6 +223,7 @@ int16_t declare_Visitor_visitDeclaration(
                 corto_fullpath(NULL, scope));
             goto error;
         }
+
         if (node->set_scope) {
             corto_set_ref(&this->current_scope, object);
         }

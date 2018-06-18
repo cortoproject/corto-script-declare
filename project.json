@@ -1,5 +1,5 @@
 {
-    "id": "corto/script/ast/declare",
+    "id": "corto/script/declare",
     "type": "package",
     "value": {
         "description": "Declare objects in store from AST",

@@ -6,7 +6,7 @@ void test_signed_int_tc_floating_point(
     test_signed_int this)
 {
     const char *input = "int32 obj: 10.5";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -31,7 +31,7 @@ void test_signed_int_tc_floating_point_scientific(
     test_signed_int this)
 {
     const char *input = "int32 obj: 10.5e-1";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -56,7 +56,7 @@ void test_signed_int_tc_hexadecimal(
     test_signed_int this)
 {
     const char *input = "int32 obj: 0x100";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -81,7 +81,7 @@ void test_signed_int_tc_lower_limit_16bit(
     test_signed_int this)
 {
     const char *input = "int32 obj: -32768";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -106,7 +106,7 @@ void test_signed_int_tc_lower_limit_32bit(
     test_signed_int this)
 {
     const char *input = "int32 obj: -2147483648";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -131,7 +131,7 @@ void test_signed_int_tc_lower_limit_64bit(
     test_signed_int this)
 {
     const char *input = "int64 obj: -9223372036854775808";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -154,7 +154,7 @@ void test_signed_int_tc_lower_limit_8bit(
     test_signed_int this)
 {
     const char *input = "int8 obj: -128";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -178,7 +178,7 @@ void test_signed_int_tc_negative_floating_point(
     test_signed_int this)
 {
     const char *input = "int32 obj: -10.5";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -202,7 +202,7 @@ void test_signed_int_tc_signed(
     test_signed_int this)
 {
     const char *input = "int32 obj: -10";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -226,7 +226,7 @@ void test_signed_int_tc_unsigned(
     test_signed_int this)
 {
     const char *input = "int32 obj: 10";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -250,7 +250,7 @@ void test_signed_int_tc_upper_limit_16bit(
     test_signed_int this)
 {
     const char *input = "int16 obj: 32767";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -274,7 +274,7 @@ void test_signed_int_tc_upper_limit_32bit(
     test_signed_int this)
 {
     const char *input = "int32 obj: 2147483647";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -298,7 +298,7 @@ void test_signed_int_tc_upper_limit_64bit(
     test_signed_int this)
 {
     const char *input = "int64 obj: 9223372036854775807";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -322,7 +322,7 @@ void test_signed_int_tc_upper_limit_8bit(
     test_signed_int this)
 {
     const char *input = "int8 obj: 127";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);

@@ -6,7 +6,7 @@ void test_scope_empty_tc_full_id(
     test_scope_empty this)
 {
     const char *input = "int32 /obj {}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -32,7 +32,7 @@ void test_scope_empty_tc_full_nested_id(
     test_scope_empty this)
 {
     const char *input = "int32 /foo/obj {}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -64,7 +64,7 @@ void test_scope_empty_tc_id(
     test_scope_empty this)
 {
     const char *input = "int32 obj {}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -90,7 +90,7 @@ void test_scope_empty_tc_nested_id(
     test_scope_empty this)
 {
     const char *input = "int32 foo/obj {}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);

@@ -6,7 +6,7 @@ void test_boolean_tc_constant_nonzero(
     test_boolean this)
 {
     const char *input = "bool obj: test/Color/Red";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -30,7 +30,7 @@ void test_boolean_tc_constant_zero(
     test_boolean this)
 {
     const char *input = "bool obj: test/Color/Black";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -54,7 +54,7 @@ void test_boolean_tc_false(
     test_boolean this)
 {
     const char *input = "bool obj: false";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -79,7 +79,7 @@ void test_boolean_tc_int_nonzero(
     test_boolean this)
 {
     const char *input = "bool obj: 10";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -104,7 +104,7 @@ void test_boolean_tc_int_zero(
     test_boolean this)
 {
     const char *input = "bool obj: 0";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -129,7 +129,7 @@ void test_boolean_tc_reference(
     test_boolean this)
 {
     const char *input = "bool obj: corto/lang";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -153,7 +153,7 @@ void test_boolean_tc_string(
     test_boolean this)
 {
     const char *input = "bool obj: \"Foo Bar\"";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -178,7 +178,7 @@ void test_boolean_tc_null(
     test_boolean this)
 {
     const char *input = "bool obj: null";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -203,7 +203,7 @@ void test_boolean_tc_true(
     test_boolean this)
 {
     const char *input = "bool obj: true";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -227,7 +227,7 @@ void test_boolean_tc_reference_value_type(
     test_boolean this)
 {
     const char *input = "bool obj: i";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -256,7 +256,7 @@ void test_boolean_tc_reference_value_type_true(
     test_boolean this)
 {
   const char *input = "bool obj: i";
-  ast_Node ast = cortoscript_ast_parse(input);
+  ast_Node ast = cortoscript_ast_parse(input, false);
   test_assert(ast != NULL);
   test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
   test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);

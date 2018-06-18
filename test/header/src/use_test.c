@@ -10,7 +10,7 @@ void test_use_test_tc_use_alias_full_id(
         "array[object,3] obj: hello/obj_1, hello/obj_1/obj_2, hello\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -47,7 +47,7 @@ void test_use_test_tc_use_alias_full_nested_id(
         "array[object,3] obj: hello/obj_1, hello/obj_1/obj_2, hello\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -87,7 +87,7 @@ void test_use_test_tc_use_alias_id(
         "array[object,3] obj: hello/obj_1, hello/obj_1/obj_2, hello\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -124,7 +124,7 @@ void test_use_test_tc_use_alias_mixed_scope_operator(
         "array[object,3] obj: hello/world.obj_1, hello.world.obj_1.obj_2, hello.world\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -164,7 +164,7 @@ void test_use_test_tc_use_alias_nested_id(
         "array[object,3] obj: hello/obj_1, hello/obj_1/obj_2, hello\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -204,7 +204,7 @@ void test_use_test_tc_use_full_id(
         "array[object,3] obj: obj_1, obj_1/obj_2, data\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -241,7 +241,7 @@ void test_use_test_tc_use_full_nested_id(
         "array[object,3] obj: obj_1, obj_1/obj_2, data\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -281,7 +281,7 @@ void test_use_test_tc_use_id(
         "array[object,3] obj: obj_1, obj_1/obj_2, data\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -317,7 +317,7 @@ void test_use_test_tc_use_nested_id(
         "array[object,3] obj: obj_1, obj_1/obj_2, data\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);

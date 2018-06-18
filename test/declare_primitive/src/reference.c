@@ -7,7 +7,7 @@ void test_reference_tc_ref_anonymous(
     test_reference this)
 {
     const char *input = "object obj: int32[10]";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -36,7 +36,7 @@ void test_reference_tc_ref_full_id(
     test_reference this)
 {
     const char *input = "object obj: /corto/lang";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -61,7 +61,7 @@ void test_reference_tc_ref_id(
     test_reference this)
 {
     const char *input = "object obj: foo";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -89,7 +89,7 @@ void test_reference_tc_ref_null(
     test_reference this)
 {
     const char *input = "object obj: null";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -114,7 +114,7 @@ void test_reference_tc_ref_type_equal(
     test_reference this)
 {
     const char *input = "test/struct_w_ref obj: my_ref";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -143,7 +143,7 @@ void test_reference_tc_ref_type_inherit(
     test_reference this)
 {
     const char *input = "test/struct_w_ref obj: my_ref";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -171,7 +171,7 @@ void test_reference_tc_ref_implements(
     test_reference this)
 {
     const char *input = "test/struct_w_interface_ref obj: my_ref";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -199,7 +199,7 @@ void test_reference_tc_ref_base_not_sub(
     test_reference this)
 {
     const char *input = "test/struct_w_ref obj: my_ref";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -219,7 +219,7 @@ void test_reference_tc_ref_implements_sub(
     test_reference this)
 {
     const char *input = "test/struct_w_interface_ref obj: my_ref";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -247,7 +247,7 @@ void test_reference_tc_ref_nomatch(
     test_reference this)
 {
     const char *input = "test/struct_w_ref obj: corto/lang";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);

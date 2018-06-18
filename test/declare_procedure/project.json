@@ -11,7 +11,7 @@
         "use": [
             "corto/test",
             "corto/script/ast",
-            "corto/script/ast/declare"
+            "corto/script/declare"
         ]
     }
 }

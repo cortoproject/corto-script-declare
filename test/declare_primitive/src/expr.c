@@ -12,7 +12,7 @@ void test_expr_tc_bitmask_1(
     test_expr this)
 {
     const char *input = "test/Recipe obj: HasSugar";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -36,7 +36,7 @@ void test_expr_tc_bitmask_2(
     test_expr this)
 {
     const char *input = "test/Recipe obj: HasSalt|HasPepper";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -60,7 +60,7 @@ void test_expr_tc_bitmask_3(
     test_expr this)
 {
     const char *input = "test/Recipe obj: HasSalt|HasPepper|HasVinegar";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);

@@ -6,7 +6,7 @@ void test_scope_default_parent_type_tc_full_id_1stmt(
     test_scope_default_parent_type this)
 {
     const char *input = "struct /obj { child: int32; }";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -39,7 +39,7 @@ void test_scope_default_parent_type_tc_full_id_2stmt(
     test_scope_default_parent_type this)
 {
     const char *input = "struct /obj { child_1: int32; child_2: float32; }";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -80,7 +80,7 @@ void test_scope_default_parent_type_tc_full_nested_id_1stmt(
     test_scope_default_parent_type this)
 {
     const char *input = "struct /foo/obj { child: int32; }";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -113,7 +113,7 @@ void test_scope_default_parent_type_tc_full_nested_id_2stmt(
     test_scope_default_parent_type this)
 {
     const char *input = "struct /foo/obj { child_1: int32; child_2: float32; }";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -154,7 +154,7 @@ void test_scope_default_parent_type_tc_id_1stmt(
     test_scope_default_parent_type this)
 {
     const char *input = "struct obj { child: int32; }";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -187,7 +187,7 @@ void test_scope_default_parent_type_tc_id_2stmt(
     test_scope_default_parent_type this)
 {
     const char *input = "struct obj { child_1: int32; child_2: float32; }";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -228,7 +228,7 @@ void test_scope_default_parent_type_tc_nested_id_1stmt(
     test_scope_default_parent_type this)
 {
     const char *input = "struct foo/obj { child: int32; }";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -261,7 +261,7 @@ void test_scope_default_parent_type_tc_nested_id_2stmt(
     test_scope_default_parent_type this)
 {
     const char *input = "struct foo/obj { child_1: int32; child_2: float32; }";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);

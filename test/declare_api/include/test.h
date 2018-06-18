@@ -8,10 +8,10 @@
 
 #include <corto/corto.h>
 #include <include/_project.h>
-#include <corto/script/ast/declare/c/c.h>
+#include <corto/script/declare/c/c.h>
 #include <corto/test/c/c.h>
 #include <corto/c/c.h>
-#include <corto/script/ast/declare/declare.h>
+#include <corto/script/declare/declare.h>
 #include <corto/test/test.h>
 
 /* $header() */

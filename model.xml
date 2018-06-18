@@ -1,5 +1,5 @@
 <corto xmlns:corto="http://corto.io/packages/driver/fmt/xml">
-    <corto:package name="corto/script/ast/declare">
+    <corto:package name="corto/script/declare">
         <struct name="search_element">
             <corto:scope>
                 <member name="scope" type="object"/>
@@ -19,19 +19,19 @@
                 <member name="current_scope" type="object" modifiers="readonly"/>
                 <member name="default_type" type="lang/type" modifiers="readonly"/>
                 <method name="construct()" returnType="int16"/>
-                <override name="visitScope(Scope node)" returnType="int16"/>
-                <override name="visitStatement(Statement node)" returnType="int16"/>
-                <override name="visitUse(Use node)" returnType="int16"/>
-                <override name="visitDeclaration(Declaration node)" returnType="int16"/>
-                <override name="visitExpression(Expression node)" returnType="int16"/>
+                <override name="visitScope(script/ast/Scope node)" returnType="int16"/>
+                <override name="visitStatement(script/ast/Statement node)" returnType="int16"/>
+                <override name="visitUse(script/ast/Use node)" returnType="int16"/>
+                <override name="visitDeclaration(script/ast/Declaration node)" returnType="int16"/>
+                <override name="visitExpression(script/ast/Expression node)" returnType="int16"/>
                 <override name="visitStorage(script/ast/Storage node)" returnType="int16"/>
             </corto:scope>
         </class>
 
         <class name="FoldingVisitor" base="corto/script/ast/Visitor">
             <corto:scope>
-                <override name="visitScope(Scope node)" returnType="int16"/>
-                <override name="visitDeclaration(Declaration node)" returnType="int16"/>
+                <override name="visitScope(script/ast/Scope node)" returnType="int16"/>
+                <override name="visitDeclaration(script/ast/Declaration node)" returnType="int16"/>
             </corto:scope>
         </class>
     </corto:package>

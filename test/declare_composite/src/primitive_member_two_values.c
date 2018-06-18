@@ -6,7 +6,7 @@ void test_primitive_member_two_values_tc_bitmask(
     test_primitive_member_two_values this)
 {
     const char *input = "test/s_bitmask obj = {n:HasSalt|HasPepper, m:HasSugar|HasVinegar}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -31,7 +31,7 @@ void test_primitive_member_two_values_tc_bool(
     test_primitive_member_two_values this)
 {
     const char *input = "test/s_bool obj = {n:true, m:false}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -57,7 +57,7 @@ void test_primitive_member_two_values_tc_char(
     test_primitive_member_two_values this)
 {
     const char *input = "test/s_char obj = {n:'b', m:'a'}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -83,7 +83,7 @@ void test_primitive_member_two_values_tc_enum(
     test_primitive_member_two_values this)
 {
     const char *input = "test/s_enum obj = {n:Red, m:Black}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -109,7 +109,7 @@ void test_primitive_member_two_values_tc_float32(
     test_primitive_member_two_values this)
 {
     const char *input = "test/s_float32 obj = {n:20.5, m:10.5}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -135,7 +135,7 @@ void test_primitive_member_two_values_tc_float64(
     test_primitive_member_two_values this)
 {
     const char *input = "test/s_float64 obj = {n:20.5, m:10.5}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -161,7 +161,7 @@ void test_primitive_member_two_values_tc_int16(
     test_primitive_member_two_values this)
 {
     const char *input = "test/s_int16 obj = {n:20, m:10}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -187,7 +187,7 @@ void test_primitive_member_two_values_tc_int32(
     test_primitive_member_two_values this)
 {
     const char *input = "test/s_int32 obj = {n:20, m:10}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -213,7 +213,7 @@ void test_primitive_member_two_values_tc_int64(
     test_primitive_member_two_values this)
 {
     const char *input = "test/s_int64 obj = {n:20, m:10}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -239,7 +239,7 @@ void test_primitive_member_two_values_tc_int8(
     test_primitive_member_two_values this)
 {
     const char *input = "test/s_int8 obj = {n:20, m:10}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -265,7 +265,7 @@ void test_primitive_member_two_values_tc_octet(
     test_primitive_member_two_values this)
 {
     const char *input = "test/s_octet obj = {n:0x20, m:0x10}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -291,7 +291,7 @@ void test_primitive_member_two_values_tc_string(
     test_primitive_member_two_values this)
 {
     const char *input = "test/s_string obj = {n:'Foo Bar', m:'Hello World'}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -317,7 +317,7 @@ void test_primitive_member_two_values_tc_uint16(
     test_primitive_member_two_values this)
 {
     const char *input = "test/s_uint16 obj = {n:20, m:10}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -343,7 +343,7 @@ void test_primitive_member_two_values_tc_uint32(
     test_primitive_member_two_values this)
 {
     const char *input = "test/s_uint32 obj = {n:20, m:10}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -369,7 +369,7 @@ void test_primitive_member_two_values_tc_uint64(
     test_primitive_member_two_values this)
 {
     const char *input = "test/s_uint64 obj = {n:20, m:10}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -395,7 +395,7 @@ void test_primitive_member_two_values_tc_uint8(
     test_primitive_member_two_values this)
 {
     const char *input = "test/s_uint8 obj = {n:20, m:10}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -421,7 +421,7 @@ void test_primitive_member_two_values_tc_word(
     test_primitive_member_two_values this)
 {
     const char *input = "test/s_word obj = {n:20, m:10}";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);

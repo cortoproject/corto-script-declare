@@ -10,7 +10,7 @@ void test_in_test_tc_in_dot_id(
         "int32 obj: 10\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -40,7 +40,7 @@ void test_in_test_tc_in_dot_nested_id(
         "int32 obj: 10\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -70,7 +70,7 @@ void test_in_test_tc_in_full_id(
         "int32 obj: 10\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -100,7 +100,7 @@ void test_in_test_tc_in_full_nested_id(
         "int32 obj: 10\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -130,7 +130,7 @@ void test_in_test_tc_in_id(
         "int32 obj: 10\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -160,7 +160,7 @@ void test_in_test_tc_in_nested_id(
         "int32 obj: 10\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -190,7 +190,7 @@ void test_in_test_tc_in_dot_id_implicit_type(
         "int32 obj: 10\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -226,7 +226,7 @@ void test_in_test_tc_in_dot_nested_id_implicit_type(
         "int32 obj: 10\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -263,7 +263,7 @@ void test_in_test_tc_in_full_id_implicit_type(
         "int32 obj: 10\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -293,7 +293,7 @@ void test_in_test_tc_in_full_nested_id_implicit_type(
         "int32 obj: 10\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -329,7 +329,7 @@ void test_in_test_tc_in_id_implicit_type(
         "int32 obj: 10\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
@@ -359,7 +359,7 @@ void test_in_test_tc_in_nested_id_implicit_type(
         "int32 obj: 10\n"
         ;
 
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);

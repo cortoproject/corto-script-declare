@@ -6,7 +6,7 @@ void test_scope_tc_full_id_1stmt(
     test_scope this)
 {
     const char *input = "int32 /obj { float64 child: 10.5; }";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -40,7 +40,7 @@ void test_scope_tc_full_id_2stmt(
     test_scope this)
 {
     const char *input = "int32 /obj { float64 child_1: 10.5; float64 child_2: 20.5; }";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -82,7 +82,7 @@ void test_scope_tc_full_nested_id_1stmt(
     test_scope this)
 {
     const char *input = "int32 /foo/obj { float64 child: 10.5; }";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -122,7 +122,7 @@ void test_scope_tc_full_nested_id_2stmt(
     test_scope this)
 {
     const char *input = "int32 /foo/obj { float64 child_1: 10.5; float64 child_2: 20.5; }";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -170,7 +170,7 @@ void test_scope_tc_id_1stmt(
     test_scope this)
 {
     const char *input = "int32 obj { float64 child: 10.5; }";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -204,7 +204,7 @@ void test_scope_tc_id_2stmt(
     test_scope this)
 {
     const char *input = "int32 obj { float64 child_1: 10.5; float64 child_2: 20.5; }";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -246,7 +246,7 @@ void test_scope_tc_nested_id_1stmt(
     test_scope this)
 {
     const char *input = "int32 foo/obj { float64 child: 10.5; }";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -286,7 +286,7 @@ void test_scope_tc_nested_id_2stmt(
     test_scope this)
 {
     const char *input = "int32 foo/obj { float64 child_1: 10.5; float64 child_2: 20.5; }";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -333,7 +333,7 @@ void test_scope_tc_value_1stmt(
     test_scope this)
 {
     const char *input = "int32 obj: 10 { float64 child: 10.5; }";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
@@ -366,7 +366,7 @@ void test_scope_tc_value_2stmt(
     test_scope this)
 {
     const char *input = "int32 obj: 10 { float64 child_1: 10.5; float64 child_2: 20.5; }";
-    ast_Node ast = cortoscript_ast_parse(input);
+    ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
