@@ -49,6 +49,11 @@ corto_object declare_object_from_storage(
             result = corto_lookup(type, id);
         }
 
+        /* If object hasn't been found yet, look it up in the provided scope */
+        if (!result) {
+            result = corto_resolve(from, id);
+        }
+
         /* If search scopes are specified, check if search string can be found
          * in any of the search scopes */
         if (!result && corto_ll_count(search_scopes)) {
@@ -70,14 +75,11 @@ corto_object declare_object_from_storage(
             }
         }
 
-        /* If object hasn't been found yet, look it up in the provided scope */
         if (!result) {
-            result = corto_resolve(from, id);
-            if (!result) {
-                corto_throw("unresolved identifier '%s'", id);
-                goto error;
-            }
+            corto_throw("unresolved identifier '%s'", id);
+            goto error;
         }
+
     } else {
         corto_throw("cannot declare object from %s expression",
             corto_idof(corto_typeof(storage)));
