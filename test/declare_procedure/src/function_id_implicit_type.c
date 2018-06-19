@@ -11,7 +11,7 @@ void test_function_id_implicit_type_tc_full_id_no_args(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(NULL, "func");
@@ -39,7 +39,7 @@ void test_function_id_implicit_type_tc_full_id_one_arg(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(NULL, "func");
@@ -72,7 +72,7 @@ void test_function_id_implicit_type_tc_full_id_two_args(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(NULL, "func");
@@ -112,7 +112,7 @@ void test_function_id_implicit_type_tc_full_nested_id_no_args(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -140,7 +140,7 @@ void test_function_id_implicit_type_tc_full_nested_id_one_arg(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -173,7 +173,7 @@ void test_function_id_implicit_type_tc_full_nested_id_two_args(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -213,7 +213,7 @@ void test_function_id_implicit_type_tc_id_no_args(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -241,7 +241,7 @@ void test_function_id_implicit_type_tc_id_one_arg(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -274,7 +274,7 @@ void test_function_id_implicit_type_tc_id_two_args(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -314,7 +314,7 @@ void test_function_id_implicit_type_tc_nested_id_no_args(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "nested/func");
@@ -344,7 +344,7 @@ void test_function_id_implicit_type_tc_nested_id_one_arg(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "nested/func");
@@ -379,7 +379,7 @@ void test_function_id_implicit_type_tc_nested_id_two_args(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "nested/func");

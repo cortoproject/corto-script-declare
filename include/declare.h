@@ -30,6 +30,7 @@ extern "C" {
 CORTO_SCRIPT_DECLARE_EXPORT
 int16_t cortoscript_ast_declare(
     corto_object from,
+    const char *file,
     ast_Node ast);
 
 CORTO_SCRIPT_DECLARE_EXPORT

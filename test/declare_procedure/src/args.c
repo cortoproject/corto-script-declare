@@ -15,7 +15,7 @@ void test_args_tc_full_id(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -50,7 +50,7 @@ void test_args_tc_full_id_nested(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -88,7 +88,7 @@ void test_args_tc_id(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -126,7 +126,7 @@ void test_args_tc_id_nested(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -161,7 +161,7 @@ void test_args_tc_in(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -196,7 +196,7 @@ void test_args_tc_in_anonymous(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -234,7 +234,7 @@ void test_args_tc_inout(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -269,7 +269,7 @@ void test_args_tc_inout_anonymous(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -307,7 +307,7 @@ void test_args_tc_inout_mixed(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -347,7 +347,7 @@ void test_args_tc_out_mixed(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -388,7 +388,7 @@ void test_args_tc_out(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -423,7 +423,7 @@ void test_args_tc_out_anonymous(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -461,7 +461,7 @@ void test_args_tc_ref(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -496,7 +496,7 @@ void test_args_tc_ref_in(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -531,7 +531,7 @@ void test_args_tc_ref_in_anonymous(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -569,7 +569,7 @@ void test_args_tc_ref_inout(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -604,7 +604,7 @@ void test_args_tc_ref_inout_anonymous(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -642,7 +642,7 @@ void test_args_tc_ref_mixed(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -683,7 +683,7 @@ void test_args_tc_ref_out(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -718,7 +718,7 @@ void test_args_tc_ref_out_anonymous(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -756,7 +756,7 @@ void test_args_tc_type_anonymous(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");
@@ -794,7 +794,7 @@ void test_args_tc_type_mixed_anonymous(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_function func = corto_lookup(data_o, "func");

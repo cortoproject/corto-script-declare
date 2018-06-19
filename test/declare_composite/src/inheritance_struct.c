@@ -11,7 +11,7 @@ void test_inheritance_struct_tc_empty_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -39,7 +39,7 @@ void test_inheritance_struct_tc_full_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -67,7 +67,7 @@ void test_inheritance_struct_tc_partial_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -95,7 +95,7 @@ void test_inheritance_struct_tc_member_full_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -123,7 +123,7 @@ void test_inheritance_struct_tc_member_partial_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -151,7 +151,7 @@ void test_inheritance_struct_tc_member_same_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -179,7 +179,7 @@ void test_inheritance_struct_tc_mixed_full_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -207,7 +207,7 @@ void test_inheritance_struct_tc_mixed_partial_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -235,7 +235,7 @@ void test_inheritance_struct_tc_mixed_partial_init_mixed_same_name(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -263,7 +263,7 @@ void test_inheritance_struct_tc_super_empty_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -291,7 +291,7 @@ void test_inheritance_struct_tc_super_full_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -319,7 +319,7 @@ void test_inheritance_struct_tc_super_full_init_reverse_order(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -347,7 +347,7 @@ void test_inheritance_struct_tc_super_partial_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -375,7 +375,7 @@ void test_inheritance_struct_tc_super_nested_full_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -403,7 +403,7 @@ void test_inheritance_struct_tc_super_nested_partial_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -431,7 +431,7 @@ void test_inheritance_struct_tc_super_nested_member_full_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -459,7 +459,7 @@ void test_inheritance_struct_tc_super_nested_member_partial_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -487,7 +487,7 @@ void test_inheritance_struct_tc_super_nested_member_mixed_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -515,7 +515,7 @@ void test_inheritance_struct_tc_super_mixed_full_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");
@@ -543,7 +543,7 @@ void test_inheritance_struct_tc_super_mixed_partial_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sub *obj = corto_lookup(data_o, "obj");

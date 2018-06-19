@@ -12,7 +12,7 @@ void test_nested_collection_primitive_tc_array_empty_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_array *obj = corto_lookup(data_o, "obj");
@@ -42,7 +42,7 @@ void test_nested_collection_primitive_tc_array_full_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_array *obj = corto_lookup(data_o, "obj");
@@ -78,7 +78,7 @@ void test_nested_collection_primitive_tc_array_init_bitmask(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_array_bitmask *obj = corto_lookup(data_o, "obj");
@@ -108,7 +108,7 @@ void test_nested_collection_primitive_tc_array_init_enum(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_array_enum *obj = corto_lookup(data_o, "obj");
@@ -138,7 +138,7 @@ void test_nested_collection_primitive_tc_array_partial_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_array *obj = corto_lookup(data_o, "obj");
@@ -168,7 +168,7 @@ void test_nested_collection_primitive_tc_list_1_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_list *obj = corto_lookup(data_o, "obj");
@@ -198,7 +198,7 @@ void test_nested_collection_primitive_tc_list_3_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_list *obj = corto_lookup(data_o, "obj");
@@ -232,7 +232,7 @@ void test_nested_collection_primitive_tc_list_empty_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_list *obj = corto_lookup(data_o, "obj");
@@ -266,7 +266,7 @@ void test_nested_collection_primitive_tc_list_init_bitmask(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_list_enum *obj = corto_lookup(data_o, "obj");
@@ -298,7 +298,7 @@ void test_nested_collection_primitive_tc_list_init_enum(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_list_enum *obj = corto_lookup(data_o, "obj");
@@ -330,7 +330,7 @@ void test_nested_collection_primitive_tc_list_null_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_list *obj = corto_lookup(data_o, "obj");
@@ -356,7 +356,7 @@ void test_nested_collection_primitive_tc_sequence_1_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sequence *obj = corto_lookup(data_o, "obj");
@@ -384,7 +384,7 @@ void test_nested_collection_primitive_tc_sequence_3_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sequence *obj = corto_lookup(data_o, "obj");
@@ -416,7 +416,7 @@ void test_nested_collection_primitive_tc_sequence_empty_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sequence *obj = corto_lookup(data_o, "obj");
@@ -450,7 +450,7 @@ void test_nested_collection_primitive_tc_sequence_init_bitmask(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sequence_bitmask *obj = corto_lookup(data_o, "obj");
@@ -482,7 +482,7 @@ void test_nested_collection_primitive_tc_sequence_init_enum(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_sequence_enum *obj = corto_lookup(data_o, "obj");

@@ -137,7 +137,8 @@ int16_t declare_Visitor_visitDeclaration(
     }
 
     if (node->id->arguments) {
-        corto_try (ast_Visitor_visitFunctionArguments(this, node->id->arguments), NULL);
+        corto_try (
+          ast_Visitor_visitFunctionArguments(this, node->id->arguments), NULL);
 
         arg_list = declare_visitor_arglist_to_string(node->id->arguments);
         if (!arg_list) {
@@ -349,7 +350,6 @@ int16_t declare_Visitor_visitStorage(
         obj = declare_object_from_storage(
             typesystem, scope, this->search_scopes, node);
         if (!obj) {
-            corto_throw("failed to resolve storage");
             goto error;
         }
 

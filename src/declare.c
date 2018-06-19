@@ -91,14 +91,15 @@ error:
 
 int16_t cortoscript_ast_declare(
     corto_object from,
+    const char *file,
     ast_Node ast)
 {
-    declare_Visitor visitor = declare_Visitor__create(NULL, NULL, from);
+    declare_Visitor visitor = declare_Visitor__create(NULL, NULL, file, from);
     if (!visitor) {
         goto error;
     }
 
-    return ast_Visitor_visit(visitor, ast);
+    return ast_Visitor_visit(visitor, ast);;
 error:
     return -1;
 }

@@ -11,7 +11,7 @@ void test_character_tc_alpha(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     char *obj = corto_lookup(data_o, "obj");
@@ -35,7 +35,7 @@ void test_character_tc_digit(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     char *obj = corto_lookup(data_o, "obj");
@@ -59,7 +59,7 @@ void test_character_tc_newline(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     char *obj = corto_lookup(data_o, "obj");
@@ -83,7 +83,7 @@ void test_character_tc_null_character(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     char *obj = corto_lookup(data_o, "obj");
@@ -107,7 +107,7 @@ void test_character_tc_number(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     char *obj = corto_lookup(data_o, "obj");
@@ -131,7 +131,7 @@ void test_character_tc_zero(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     char *obj = corto_lookup(data_o, "obj");

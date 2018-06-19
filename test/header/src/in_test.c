@@ -15,7 +15,7 @@ void test_in_test_tc_in_dot_id(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     int32_t *obj = corto_lookup(data_o, "foo/obj");
@@ -45,7 +45,7 @@ void test_in_test_tc_in_dot_nested_id(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     int32_t *obj = corto_lookup(data_o, "foo/bar/obj");
@@ -75,7 +75,7 @@ void test_in_test_tc_in_full_id(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     int32_t *obj = corto_lookup(data_o, "obj");
@@ -105,7 +105,7 @@ void test_in_test_tc_in_full_nested_id(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     int32_t *obj = corto_lookup(data_o, "foo/obj");
@@ -135,7 +135,7 @@ void test_in_test_tc_in_id(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     int32_t *obj = corto_lookup(data_o, "obj");
@@ -165,7 +165,7 @@ void test_in_test_tc_in_nested_id(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     int32_t *obj = corto_lookup(data_o, "foo/obj");
@@ -195,7 +195,7 @@ void test_in_test_tc_in_dot_id_implicit_type(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     int32_t *obj = corto_lookup(data_o, "foo/obj");
@@ -231,7 +231,7 @@ void test_in_test_tc_in_dot_nested_id_implicit_type(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     int32_t *obj = corto_lookup(data_o, "foo/bar/obj");
@@ -268,7 +268,7 @@ void test_in_test_tc_in_full_id_implicit_type(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     int32_t *obj = corto_lookup(data_o, "obj");
@@ -298,7 +298,7 @@ void test_in_test_tc_in_full_nested_id_implicit_type(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     int32_t *obj = corto_lookup(data_o, "foo/obj");
@@ -334,7 +334,7 @@ void test_in_test_tc_in_id_implicit_type(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     int32_t *obj = corto_lookup(data_o, "obj");
@@ -364,7 +364,7 @@ void test_in_test_tc_in_nested_id_implicit_type(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     int32_t *obj = corto_lookup(data_o, "foo/obj");

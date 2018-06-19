@@ -11,7 +11,7 @@ void test_nested_composite_primitive_tc_empty_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_line *obj = corto_lookup(data_o, "obj");
@@ -39,7 +39,7 @@ void test_nested_composite_primitive_tc_full_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_line *obj = corto_lookup(data_o, "obj");
@@ -66,7 +66,7 @@ void test_nested_composite_primitive_tc_partial_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_line *obj = corto_lookup(data_o, "obj");
@@ -93,7 +93,7 @@ void test_nested_composite_primitive_tc_member_empty_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_line *obj = corto_lookup(data_o, "obj");
@@ -121,7 +121,7 @@ void test_nested_composite_primitive_tc_member_full_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_line *obj = corto_lookup(data_o, "obj");
@@ -149,7 +149,7 @@ void test_nested_composite_primitive_tc_member_partial_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_line *obj = corto_lookup(data_o, "obj");
@@ -176,7 +176,7 @@ void test_nested_composite_primitive_tc_member_nested_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_line *obj = corto_lookup(data_o, "obj");
@@ -203,7 +203,7 @@ void test_nested_composite_primitive_tc_mixed_empty_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_line *obj = corto_lookup(data_o, "obj");
@@ -231,7 +231,7 @@ void test_nested_composite_primitive_tc_mixed_full_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_line *obj = corto_lookup(data_o, "obj");
@@ -259,7 +259,7 @@ void test_nested_composite_primitive_tc_mixed_partial_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_line *obj = corto_lookup(data_o, "obj");
@@ -286,7 +286,7 @@ void test_nested_composite_primitive_tc_mixed_nested_init(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_line *obj = corto_lookup(data_o, "obj");
@@ -313,7 +313,7 @@ void test_nested_composite_primitive_tc_init_enum(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_nested_enum *obj = corto_lookup(data_o, "obj");
@@ -340,7 +340,7 @@ void test_nested_composite_primitive_tc_member_init_enum(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_nested_enum *obj = corto_lookup(data_o, "obj");
@@ -367,7 +367,7 @@ void test_nested_composite_primitive_tc_mixed_init_enum(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_nested_enum *obj = corto_lookup(data_o, "obj");
@@ -394,7 +394,7 @@ void test_nested_composite_primitive_tc_init_bitmask(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_nested_bitmask *obj = corto_lookup(data_o, "obj");
@@ -421,7 +421,7 @@ void test_nested_composite_primitive_tc_member_init_bitmask(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_nested_bitmask *obj = corto_lookup(data_o, "obj");
@@ -448,7 +448,7 @@ void test_nested_composite_primitive_tc_mixed_init_bitmask(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     test_s_nested_bitmask *obj = corto_lookup(data_o, "obj");

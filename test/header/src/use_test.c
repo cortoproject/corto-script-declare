@@ -21,7 +21,7 @@ void test_use_test_tc_use_alias_full_id(
     corto_object obj_2 = corto_create(obj_1, "obj_2", corto_void_o);
     test_assert(obj_2 != NULL);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_object *obj = corto_lookup(NULL, "obj");
@@ -61,7 +61,7 @@ void test_use_test_tc_use_alias_full_nested_id(
     corto_object obj_2 = corto_create(obj_1, "obj_2", corto_void_o);
     test_assert(obj_2 != NULL);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_object *obj = corto_lookup(NULL, "obj");
@@ -98,7 +98,7 @@ void test_use_test_tc_use_alias_id(
     corto_object obj_2 = corto_create(obj_1, "obj_2", corto_void_o);
     test_assert(obj_2 != NULL);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_object *obj = corto_lookup(NULL, "obj");
@@ -138,7 +138,7 @@ void test_use_test_tc_use_alias_mixed_scope_operator(
     corto_object obj_2 = corto_create(obj_1, "obj_2", corto_void_o);
     test_assert(obj_2 != NULL);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_object *obj = corto_lookup(NULL, "obj");
@@ -178,7 +178,7 @@ void test_use_test_tc_use_alias_nested_id(
     corto_object obj_2 = corto_create(obj_1, "obj_2", corto_void_o);
     test_assert(obj_2 != NULL);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_object *obj = corto_lookup(NULL, "obj");
@@ -215,7 +215,7 @@ void test_use_test_tc_use_full_id(
     corto_object obj_2 = corto_create(obj_1, "obj_2", corto_void_o);
     test_assert(obj_2 != NULL);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_object *obj = corto_lookup(NULL, "obj");
@@ -255,7 +255,7 @@ void test_use_test_tc_use_full_nested_id(
     corto_object obj_2 = corto_create(obj_1, "obj_2", corto_void_o);
     test_assert(obj_2 != NULL);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_object *obj = corto_lookup(NULL, "obj");
@@ -292,7 +292,7 @@ void test_use_test_tc_use_id(
     corto_object obj_2 = corto_create(obj_1, "obj_2", corto_void_o);
     test_assert(obj_2 != NULL);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_object *obj = corto_lookup(NULL, "obj");
@@ -331,7 +331,7 @@ void test_use_test_tc_use_nested_id(
     corto_object obj_2 = corto_create(obj_1, "obj_2", corto_void_o);
     test_assert(obj_2 != NULL);
 
-    int16_t ret = cortoscript_ast_declare(root_o, ast);
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);
 
     corto_object *obj = corto_lookup(NULL, "obj");

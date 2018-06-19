@@ -11,7 +11,7 @@ void test_boolean_tc_constant_nonzero(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     bool *obj = corto_lookup(data_o, "obj");
@@ -35,7 +35,7 @@ void test_boolean_tc_constant_zero(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     bool *obj = corto_lookup(data_o, "obj");
@@ -59,7 +59,7 @@ void test_boolean_tc_false(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     bool *obj = corto_lookup(data_o, "obj");
@@ -84,7 +84,7 @@ void test_boolean_tc_int_nonzero(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     bool *obj = corto_lookup(data_o, "obj");
@@ -109,7 +109,7 @@ void test_boolean_tc_int_zero(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     bool *obj = corto_lookup(data_o, "obj");
@@ -134,7 +134,7 @@ void test_boolean_tc_reference(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     bool *obj = corto_lookup(data_o, "obj");
@@ -158,7 +158,7 @@ void test_boolean_tc_string(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     bool *obj = corto_lookup(data_o, "obj");
@@ -183,7 +183,7 @@ void test_boolean_tc_null(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     bool *obj = corto_lookup(data_o, "obj");
@@ -208,7 +208,7 @@ void test_boolean_tc_true(
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
     test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     bool *obj = corto_lookup(data_o, "obj");
@@ -237,7 +237,7 @@ void test_boolean_tc_reference_value_type(
     test_assert(corto_typeof(i) == (corto_type)corto_int32_o);
     test_assertint(*i, 0);
 
-    int16_t ret = cortoscript_ast_declare(data_o, ast);
+    int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
 
     bool *obj = corto_lookup(data_o, "obj");
@@ -267,7 +267,7 @@ void test_boolean_tc_reference_value_type_true(
   test_assertint(*i, 0);
   *i = 10;
 
-  int16_t ret = cortoscript_ast_declare(data_o, ast);
+  int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
   test_assert(ret == 0);
 
   bool *obj = corto_lookup(data_o, "obj");
