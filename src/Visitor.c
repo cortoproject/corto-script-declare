@@ -102,8 +102,14 @@ int16_t declare_Visitor_visitDeclaration(
         corto_set_ref(&this->default_type, type);
     } else
     if (this->default_type) {
-        type = this->default_type;
-    } else {
+        if (!node->id->arguments ||
+            corto_instanceof(corto_procedure_o, this->default_type))
+        {
+            type = this->default_type;
+        }
+    }
+
+    if (!type) {
         /* Check if declaration is procedure */
         if (node->id->arguments) {
             type = corto_typeof(scope)->options.defaultProcedureType;
