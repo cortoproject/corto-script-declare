@@ -347,3 +347,32 @@ void test_use_test_tc_use_nested_id(
     test_assert(corto_release(obj) == 1);
     test_assert(corto_delete(obj) == 0);
 }
+
+void test_use_test_tc_use_with_type_resolve(
+    test_use_test this)
+{
+    const char *input =
+        "use data\n"
+        "test.Color obj: Blue"
+        ;
+
+    ast_Node ast = cortoscript_ast_parse(input, false);
+    test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
+    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
+
+    int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
+    test_assert(ret == 0);
+
+    test_Color *obj = corto_lookup(NULL, "obj");
+    test_assert(obj != NULL);
+    test_assert(corto_typeof(obj) == (corto_type)test_Color_o);
+    test_assert(corto_check_state(obj, CORTO_VALID));
+    test_assertint(corto_countof(obj), 2);
+    test_assertint(corto_scope_size(obj), 0);
+    test_assertint(*obj, Test_Blue);
+
+    test_assert(corto_delete(ast) == 0);
+    test_assert(corto_release(obj) == 1);
+    test_assert(corto_delete(obj) == 0);
+}

@@ -51,7 +51,7 @@ corto_object declare_object_from_storage(
 
         /* If search scopes are specified, check if search string can be found
          * in any of the search scopes */
-        if (corto_ll_count(search_scopes)) {
+        if (!result && corto_ll_count(search_scopes)) {
             corto_iter it = corto_ll_iter(search_scopes);
             while (corto_iter_hasNext(&it)) {
                 declare_search_element *el = corto_iter_next(&it);

@@ -1,5 +1,8 @@
 in package test
 
+enum Color:/
+    Red, Yellow, Green, Blue
+
 test/suite use_test:/
     void tc_use_id()
     void tc_use_full_id()
@@ -10,6 +13,7 @@ test/suite use_test:/
     void tc_use_alias_nested_id()
     void tc_use_alias_full_nested_id()
     void tc_use_alias_mixed_scope_operator()
+    void tc_use_with_type_resolve()
 
 test/suite in_test:/
     void tc_in_id()
