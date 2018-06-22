@@ -1,6 +1,6 @@
 /* This is a managed file. Do not delete this comment. */
 
-#include <corto/script/ast/declare/declare.h>
+#include <corto/script/declare/declare.h>
 
 const char* match_alias(const char *alias, const char *id) {
     const char *ptr;

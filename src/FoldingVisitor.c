@@ -1,6 +1,6 @@
 /* This is a managed file. Do not delete this comment. */
 
-#include <corto/script/ast/declare/declare.h>
+#include <corto/script/declare/declare.h>
 
 int16_t declare_FoldingVisitor_visitDeclaration(
     declare_FoldingVisitor this,
