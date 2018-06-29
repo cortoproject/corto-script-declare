@@ -9,7 +9,7 @@
 
         <function
           name="object_from_storage(object typesystem,object from,list{search_element} search_scopes,ast/Storage storage)"
-          returnType="object"/>
+          return_type="object"/>
 
         <class name="Visitor" base="corto/script/ast/Visitor">
             <corto:scope>
@@ -18,20 +18,20 @@
                 <member name="search_scopes" type="list{search_element}" modifiers="hidden|not_null"/>
                 <member name="current_scope" type="object" modifiers="readonly"/>
                 <member name="default_type" type="lang/type" modifiers="readonly"/>
-                <method name="construct()" returnType="int16"/>
-                <override name="visitScope(script/ast/Scope node)" returnType="int16"/>
-                <override name="visitStatement(script/ast/Statement node)" returnType="int16"/>
-                <override name="visitUse(script/ast/Use node)" returnType="int16"/>
-                <override name="visitDeclaration(script/ast/Declaration node)" returnType="int16"/>
-                <override name="visitExpression(script/ast/Expression node)" returnType="int16"/>
-                <override name="visitStorage(script/ast/Storage node)" returnType="int16"/>
+                <method name="construct()" return_type="int16"/>
+                <override name="visitScope(script/ast/Scope node)" return_type="int16"/>
+                <override name="visitStatement(script/ast/Statement node)" return_type="int16"/>
+                <override name="visitUse(script/ast/Use node)" return_type="int16"/>
+                <override name="visitDeclaration(script/ast/Declaration node)" return_type="int16"/>
+                <override name="visitExpression(script/ast/Expression node)" return_type="int16"/>
+                <override name="visitStorage(script/ast/Storage node)" return_type="int16"/>
             </corto:scope>
         </class>
 
         <class name="FoldingVisitor" base="corto/script/ast/Visitor">
             <corto:scope>
-                <override name="visitScope(script/ast/Scope node)" returnType="int16"/>
-                <override name="visitDeclaration(script/ast/Declaration node)" returnType="int16"/>
+                <override name="visitScope(script/ast/Scope node)" return_type="int16"/>
+                <override name="visitDeclaration(script/ast/Declaration node)" return_type="int16"/>
             </corto:scope>
         </class>
     </corto:package>

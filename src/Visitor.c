@@ -112,14 +112,14 @@ int16_t declare_Visitor_visitDeclaration(
     if (!type) {
         /* Check if declaration is procedure */
         if (node->id->arguments) {
-            type = corto_typeof(scope)->options.defaultProcedureType;
+            type = corto_typeof(scope)->scope_procedure_type;
             if (!type) {
                 /* If no default procedure type is available, use 'function' as
                  * default type */
                 type = (corto_type)corto_function_o;
             }
         } else {
-            type = corto_typeof(scope)->options.defaultType;
+            type = corto_typeof(scope)->scope_type;
         }
     }
 

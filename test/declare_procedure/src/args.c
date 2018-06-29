@@ -25,14 +25,14 @@ void test_args_tc_full_id(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 1);
     test_assert(func->parameters.buffer != NULL);
 
     test_assertstr(func->parameters.buffer[0].name, "arg");
     test_assert(func->parameters.buffer[0].type != NULL);
     test_assert(func->parameters.buffer[0].type == (corto_type)my_int);
-    test_assert(func->parameters.buffer[0].passByReference == false);
+    test_assert(func->parameters.buffer[0].is_reference == false);
     test_assert(func->parameters.buffer[0].inout == CORTO_IN);
 
     test_assert(corto_delete(ast) == 0);
@@ -60,14 +60,14 @@ void test_args_tc_full_id_nested(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 1);
     test_assert(func->parameters.buffer != NULL);
 
     test_assertstr(func->parameters.buffer[0].name, "arg");
     test_assert(func->parameters.buffer[0].type != NULL);
     test_assert(func->parameters.buffer[0].type == (corto_type)corto_time_o);
-    test_assert(func->parameters.buffer[0].passByReference == false);
+    test_assert(func->parameters.buffer[0].is_reference == false);
     test_assert(func->parameters.buffer[0].inout == CORTO_IN);
 
     test_assert(corto_delete(ast) == 0);
@@ -98,14 +98,14 @@ void test_args_tc_id(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 1);
     test_assert(func->parameters.buffer != NULL);
 
     test_assertstr(func->parameters.buffer[0].name, "arg");
     test_assert(func->parameters.buffer[0].type != NULL);
     test_assert(func->parameters.buffer[0].type == (corto_type)my_int);
-    test_assert(func->parameters.buffer[0].passByReference == false);
+    test_assert(func->parameters.buffer[0].is_reference == false);
     test_assert(func->parameters.buffer[0].inout == CORTO_IN);
 
     test_assert(corto_delete(ast) == 0);
@@ -136,14 +136,14 @@ void test_args_tc_id_nested(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 1);
     test_assert(func->parameters.buffer != NULL);
 
     test_assertstr(func->parameters.buffer[0].name, "arg");
     test_assert(func->parameters.buffer[0].type != NULL);
     test_assert(func->parameters.buffer[0].type == (corto_type)my_int);
-    test_assert(func->parameters.buffer[0].passByReference == false);
+    test_assert(func->parameters.buffer[0].is_reference == false);
     test_assert(func->parameters.buffer[0].inout == CORTO_IN);
 
     test_assert(corto_delete(ast) == 0);
@@ -171,14 +171,14 @@ void test_args_tc_in(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 1);
     test_assert(func->parameters.buffer != NULL);
 
     test_assertstr(func->parameters.buffer[0].name, "arg");
     test_assert(func->parameters.buffer[0].type != NULL);
     test_assert(func->parameters.buffer[0].type == (corto_type)corto_float32_o);
-    test_assert(func->parameters.buffer[0].passByReference == false);
+    test_assert(func->parameters.buffer[0].is_reference == false);
     test_assert(func->parameters.buffer[0].inout == CORTO_IN);
 
     test_assert(corto_delete(ast) == 0);
@@ -206,7 +206,7 @@ void test_args_tc_in_anonymous(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 1);
     test_assert(func->parameters.buffer != NULL);
 
@@ -215,8 +215,8 @@ void test_args_tc_in_anonymous(
     corto_type type = func->parameters.buffer[0].type;
     test_assert(type->kind == CORTO_COLLECTION);
     test_assert(corto_collection(type)->kind == CORTO_LIST);
-    test_assert(corto_collection(type)->elementType == (corto_type)corto_float32_o);
-    test_assert(func->parameters.buffer[0].passByReference == false);
+    test_assert(corto_collection(type)->element_type == (corto_type)corto_float32_o);
+    test_assert(func->parameters.buffer[0].is_reference == false);
     test_assert(func->parameters.buffer[0].inout == CORTO_IN);
 
     test_assert(corto_delete(ast) == 0);
@@ -244,14 +244,14 @@ void test_args_tc_inout(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 1);
     test_assert(func->parameters.buffer != NULL);
 
     test_assertstr(func->parameters.buffer[0].name, "arg");
     test_assert(func->parameters.buffer[0].type != NULL);
     test_assert(func->parameters.buffer[0].type == (corto_type)corto_float32_o);
-    test_assert(func->parameters.buffer[0].passByReference == false);
+    test_assert(func->parameters.buffer[0].is_reference == false);
     test_assert(func->parameters.buffer[0].inout == CORTO_INOUT);
 
     test_assert(corto_delete(ast) == 0);
@@ -279,7 +279,7 @@ void test_args_tc_inout_anonymous(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 1);
     test_assert(func->parameters.buffer != NULL);
 
@@ -288,8 +288,8 @@ void test_args_tc_inout_anonymous(
     corto_type type = func->parameters.buffer[0].type;
     test_assert(type->kind == CORTO_COLLECTION);
     test_assert(corto_collection(type)->kind == CORTO_LIST);
-    test_assert(corto_collection(type)->elementType == (corto_type)corto_float32_o);
-    test_assert(func->parameters.buffer[0].passByReference == false);
+    test_assert(corto_collection(type)->element_type == (corto_type)corto_float32_o);
+    test_assert(func->parameters.buffer[0].is_reference == false);
     test_assert(func->parameters.buffer[0].inout == CORTO_INOUT);
 
     test_assert(corto_delete(ast) == 0);
@@ -317,20 +317,20 @@ void test_args_tc_inout_mixed(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 2);
     test_assert(func->parameters.buffer != NULL);
 
     test_assertstr(func->parameters.buffer[0].name, "arg1");
     test_assert(func->parameters.buffer[0].type != NULL);
     test_assert(func->parameters.buffer[0].type == (corto_type)corto_float32_o);
-    test_assert(func->parameters.buffer[0].passByReference == false);
+    test_assert(func->parameters.buffer[0].is_reference == false);
     test_assert(func->parameters.buffer[0].inout == CORTO_INOUT);
 
     test_assertstr(func->parameters.buffer[1].name, "arg2");
     test_assert(func->parameters.buffer[1].type != NULL);
     test_assert(func->parameters.buffer[1].type == (corto_type)corto_string_o);
-    test_assert(func->parameters.buffer[1].passByReference == false);
+    test_assert(func->parameters.buffer[1].is_reference == false);
     test_assert(func->parameters.buffer[1].inout == CORTO_IN);
 
     test_assert(corto_delete(ast) == 0);
@@ -357,20 +357,20 @@ void test_args_tc_out_mixed(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 2);
     test_assert(func->parameters.buffer != NULL);
 
     test_assertstr(func->parameters.buffer[0].name, "arg1");
     test_assert(func->parameters.buffer[0].type != NULL);
     test_assert(func->parameters.buffer[0].type == (corto_type)corto_float32_o);
-    test_assert(func->parameters.buffer[0].passByReference == false);
+    test_assert(func->parameters.buffer[0].is_reference == false);
     test_assert(func->parameters.buffer[0].inout == CORTO_OUT);
 
     test_assertstr(func->parameters.buffer[1].name, "arg2");
     test_assert(func->parameters.buffer[1].type != NULL);
     test_assert(func->parameters.buffer[1].type == (corto_type)corto_string_o);
-    test_assert(func->parameters.buffer[1].passByReference == false);
+    test_assert(func->parameters.buffer[1].is_reference == false);
     test_assert(func->parameters.buffer[1].inout == CORTO_IN);
 
     test_assert(corto_delete(ast) == 0);
@@ -398,14 +398,14 @@ void test_args_tc_out(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 1);
     test_assert(func->parameters.buffer != NULL);
 
     test_assertstr(func->parameters.buffer[0].name, "arg");
     test_assert(func->parameters.buffer[0].type != NULL);
     test_assert(func->parameters.buffer[0].type == (corto_type)corto_float32_o);
-    test_assert(func->parameters.buffer[0].passByReference == false);
+    test_assert(func->parameters.buffer[0].is_reference == false);
     test_assert(func->parameters.buffer[0].inout == CORTO_OUT);
 
     test_assert(corto_delete(ast) == 0);
@@ -433,7 +433,7 @@ void test_args_tc_out_anonymous(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 1);
     test_assert(func->parameters.buffer != NULL);
 
@@ -442,8 +442,8 @@ void test_args_tc_out_anonymous(
     corto_type type = func->parameters.buffer[0].type;
     test_assert(type->kind == CORTO_COLLECTION);
     test_assert(corto_collection(type)->kind == CORTO_LIST);
-    test_assert(corto_collection(type)->elementType == (corto_type)corto_float32_o);
-    test_assert(func->parameters.buffer[0].passByReference == false);
+    test_assert(corto_collection(type)->element_type == (corto_type)corto_float32_o);
+    test_assert(func->parameters.buffer[0].is_reference == false);
     test_assert(func->parameters.buffer[0].inout == CORTO_OUT);
 
     test_assert(corto_delete(ast) == 0);
@@ -471,14 +471,14 @@ void test_args_tc_ref(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 1);
     test_assert(func->parameters.buffer != NULL);
 
     test_assertstr(func->parameters.buffer[0].name, "arg");
     test_assert(func->parameters.buffer[0].type != NULL);
     test_assert(func->parameters.buffer[0].type == (corto_type)corto_float32_o);
-    test_assert(func->parameters.buffer[0].passByReference == true);
+    test_assert(func->parameters.buffer[0].is_reference == true);
     test_assert(func->parameters.buffer[0].inout == CORTO_IN);
 
     test_assert(corto_delete(ast) == 0);
@@ -506,14 +506,14 @@ void test_args_tc_ref_in(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 1);
     test_assert(func->parameters.buffer != NULL);
 
     test_assertstr(func->parameters.buffer[0].name, "arg");
     test_assert(func->parameters.buffer[0].type != NULL);
     test_assert(func->parameters.buffer[0].type == (corto_type)corto_float32_o);
-    test_assert(func->parameters.buffer[0].passByReference == true);
+    test_assert(func->parameters.buffer[0].is_reference == true);
     test_assert(func->parameters.buffer[0].inout == CORTO_IN);
 
     test_assert(corto_delete(ast) == 0);
@@ -541,7 +541,7 @@ void test_args_tc_ref_in_anonymous(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 1);
     test_assert(func->parameters.buffer != NULL);
 
@@ -550,8 +550,8 @@ void test_args_tc_ref_in_anonymous(
     corto_type type = func->parameters.buffer[0].type;
     test_assert(type->kind == CORTO_COLLECTION);
     test_assert(corto_collection(type)->kind == CORTO_LIST);
-    test_assert(corto_collection(type)->elementType == (corto_type)corto_float32_o);
-    test_assert(func->parameters.buffer[0].passByReference == true);
+    test_assert(corto_collection(type)->element_type == (corto_type)corto_float32_o);
+    test_assert(func->parameters.buffer[0].is_reference == true);
     test_assert(func->parameters.buffer[0].inout == CORTO_IN);
 
     test_assert(corto_delete(ast) == 0);
@@ -579,14 +579,14 @@ void test_args_tc_ref_inout(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 1);
     test_assert(func->parameters.buffer != NULL);
 
     test_assertstr(func->parameters.buffer[0].name, "arg");
     test_assert(func->parameters.buffer[0].type != NULL);
     test_assert(func->parameters.buffer[0].type == (corto_type)corto_float32_o);
-    test_assert(func->parameters.buffer[0].passByReference == true);
+    test_assert(func->parameters.buffer[0].is_reference == true);
     test_assert(func->parameters.buffer[0].inout == CORTO_INOUT);
 
     test_assert(corto_delete(ast) == 0);
@@ -614,7 +614,7 @@ void test_args_tc_ref_inout_anonymous(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 1);
     test_assert(func->parameters.buffer != NULL);
 
@@ -623,8 +623,8 @@ void test_args_tc_ref_inout_anonymous(
     corto_type type = func->parameters.buffer[0].type;
     test_assert(type->kind == CORTO_COLLECTION);
     test_assert(corto_collection(type)->kind == CORTO_LIST);
-    test_assert(corto_collection(type)->elementType == (corto_type)corto_float32_o);
-    test_assert(func->parameters.buffer[0].passByReference == true);
+    test_assert(corto_collection(type)->element_type == (corto_type)corto_float32_o);
+    test_assert(func->parameters.buffer[0].is_reference == true);
     test_assert(func->parameters.buffer[0].inout == CORTO_INOUT);
 
     test_assert(corto_delete(ast) == 0);
@@ -652,20 +652,20 @@ void test_args_tc_ref_mixed(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 2);
     test_assert(func->parameters.buffer != NULL);
 
     test_assertstr(func->parameters.buffer[0].name, "arg1");
     test_assert(func->parameters.buffer[0].type != NULL);
     test_assert(func->parameters.buffer[0].type == (corto_type)corto_float32_o);
-    test_assert(func->parameters.buffer[0].passByReference == true);
+    test_assert(func->parameters.buffer[0].is_reference == true);
     test_assert(func->parameters.buffer[0].inout == CORTO_IN);
 
     test_assertstr(func->parameters.buffer[1].name, "arg2");
     test_assert(func->parameters.buffer[1].type != NULL);
     test_assert(func->parameters.buffer[1].type == (corto_type)corto_string_o);
-    test_assert(func->parameters.buffer[1].passByReference == false);
+    test_assert(func->parameters.buffer[1].is_reference == false);
     test_assert(func->parameters.buffer[1].inout == CORTO_IN);
 
     test_assert(corto_delete(ast) == 0);
@@ -693,14 +693,14 @@ void test_args_tc_ref_out(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 1);
     test_assert(func->parameters.buffer != NULL);
 
     test_assertstr(func->parameters.buffer[0].name, "arg");
     test_assert(func->parameters.buffer[0].type != NULL);
     test_assert(func->parameters.buffer[0].type == (corto_type)corto_float32_o);
-    test_assert(func->parameters.buffer[0].passByReference == true);
+    test_assert(func->parameters.buffer[0].is_reference == true);
     test_assert(func->parameters.buffer[0].inout == CORTO_OUT);
 
     test_assert(corto_delete(ast) == 0);
@@ -728,7 +728,7 @@ void test_args_tc_ref_out_anonymous(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 1);
     test_assert(func->parameters.buffer != NULL);
 
@@ -737,8 +737,8 @@ void test_args_tc_ref_out_anonymous(
     corto_type type = func->parameters.buffer[0].type;
     test_assert(type->kind == CORTO_COLLECTION);
     test_assert(corto_collection(type)->kind == CORTO_LIST);
-    test_assert(corto_collection(type)->elementType == (corto_type)corto_float32_o);
-    test_assert(func->parameters.buffer[0].passByReference == true);
+    test_assert(corto_collection(type)->element_type == (corto_type)corto_float32_o);
+    test_assert(func->parameters.buffer[0].is_reference == true);
     test_assert(func->parameters.buffer[0].inout == CORTO_OUT);
 
     test_assert(corto_delete(ast) == 0);
@@ -766,7 +766,7 @@ void test_args_tc_type_anonymous(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 1);
     test_assert(func->parameters.buffer != NULL);
 
@@ -775,8 +775,8 @@ void test_args_tc_type_anonymous(
     corto_type type = func->parameters.buffer[0].type;
     test_assert(type->kind == CORTO_COLLECTION);
     test_assert(corto_collection(type)->kind == CORTO_LIST);
-    test_assert(corto_collection(type)->elementType == (corto_type)corto_float32_o);
-    test_assert(func->parameters.buffer[0].passByReference == false);
+    test_assert(corto_collection(type)->element_type == (corto_type)corto_float32_o);
+    test_assert(func->parameters.buffer[0].is_reference == false);
     test_assert(func->parameters.buffer[0].inout == CORTO_IN);
 
     test_assert(corto_delete(ast) == 0);
@@ -804,7 +804,7 @@ void test_args_tc_type_mixed_anonymous(
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
     test_assert(corto_countof(func) == 2);
-    test_assert(func->returnType == (corto_type)corto_int32_o);
+    test_assert(func->return_type == (corto_type)corto_int32_o);
     test_assertint(func->parameters.length, 2);
     test_assert(func->parameters.buffer != NULL);
 
@@ -813,14 +813,14 @@ void test_args_tc_type_mixed_anonymous(
     corto_type type = func->parameters.buffer[0].type;
     test_assert(type->kind == CORTO_COLLECTION);
     test_assert(corto_collection(type)->kind == CORTO_LIST);
-    test_assert(corto_collection(type)->elementType == (corto_type)corto_float32_o);
-    test_assert(func->parameters.buffer[0].passByReference == false);
+    test_assert(corto_collection(type)->element_type == (corto_type)corto_float32_o);
+    test_assert(func->parameters.buffer[0].is_reference == false);
     test_assert(func->parameters.buffer[0].inout == CORTO_IN);
 
     test_assertstr(func->parameters.buffer[1].name, "arg2");
     test_assert(func->parameters.buffer[1].type != NULL);
     test_assert(func->parameters.buffer[1].type == (corto_type)corto_string_o);
-    test_assert(func->parameters.buffer[1].passByReference == false);
+    test_assert(func->parameters.buffer[1].is_reference == false);
     test_assert(func->parameters.buffer[1].inout == CORTO_IN);
 
     test_assert(corto_delete(ast) == 0);
