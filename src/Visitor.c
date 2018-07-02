@@ -95,54 +95,67 @@ int16_t declare_Visitor_visitDeclaration(
     corto_object scope = this->current_scope;
     corto_type type = NULL;
     char *arg_list = NULL;
+    bool should_define_all = false;
+    bool is_function = node->id->arguments != NULL;
 
     if (node->type) {
         corto_try (ast_Visitor_visit(this, node->type), NULL);
         type = ast_Storage_get_object(node->type);
-        corto_set_ref(&this->default_type, type);
-    } else
-    if (this->default_type) {
-        if (!node->id->arguments ||
-            corto_instanceof(corto_procedure_o, this->default_type))
-        {
-            type = this->default_type;
+
+        /* If type is explicitly set, the next declaration with an implicit type
+         * will use this type. */
+        if (is_function) {
+            corto_set_ref(&this->scope_procedure_type, type);
+        } else {
+            corto_set_ref(&this->scope_type, type);
         }
     }
 
+    /* If type is not explicitly set, get the default type */
+    if (!type) {
+        if (is_function) {
+            type = this->scope_procedure_type;
+        } else {
+            type = this->scope_type;
+        }
+    }
+
+    /* If type is still not known, get default type from type of parent */
     if (!type) {
         /* Check if declaration is procedure */
-        if (node->id->arguments) {
+        if (is_function) {
             type = corto_typeof(scope)->scope_procedure_type;
-            if (!type) {
-                /* If no default procedure type is available, use 'function' as
-                 * default type */
-                type = (corto_type)corto_function_o;
-            }
         } else {
             type = corto_typeof(scope)->scope_type;
         }
     }
 
-    /* If this is a statement that sets the scope and no type is provided or can
-     * be derived (which is typical, since such statements usually appear at the
-     * start of a script) assume 'package' as default type. */
-    if (!type && node->set_scope) {
-        type = (corto_type)corto_package_o;
+    /* If type is still not known, use builtin defaults */
+    if (!type) {
+        if (is_function) {
+            type = (corto_type)corto_function_o;
+        } else if (node->set_scope) {
+            type = (corto_type)corto_package_o;
+        }
     }
 
+    /* If type is still not known, something's wrong */
     if (!type) {
         corto_throw("cannot derive type for declaration in scope '%s'",
             corto_fullpath(NULL, scope));
         goto error;
     }
 
+    /* If the type identifier was resolved, make sure it is a type */
     if (!corto_instanceof(corto_type_o, type)) {
         corto_throw("object '%s' is not a type",
             corto_fullpath(NULL, type));
         goto error;
     }
 
-    if (node->id->arguments) {
+    if (is_function) {
+        should_define_all = true;
+
         corto_try (
           ast_Visitor_visitFunctionArguments(this, node->id->arguments), NULL);
 
@@ -256,7 +269,10 @@ int16_t declare_Visitor_visitDeclaration(
             if (node->initializer) {
                 corto_try (
                     ast_Initializer_apply(
-                      node->initializer, (uintptr_t)&rw), NULL);
+                      node->initializer, (uintptr_t)&rw),
+                          "declaration of '%s %s' failed",
+                          corto_fullpath(NULL, corto_typeof(object)),
+                          corto_fullpath(NULL, object));
             }
 
             /* If storage is identifier + initializer, apply initializer to new
@@ -267,6 +283,9 @@ int16_t declare_Visitor_visitDeclaration(
                         this, object_initializer, type), NULL);
 
                 if (ast_Initializer_apply(object_initializer, (uintptr_t)&rw)) {
+                    corto_throw("declaration of '%s %s' failed",
+                      corto_fullpath(NULL, corto_typeof(object)),
+                        corto_fullpath(NULL, object));
                     goto error;
                 }
             }
@@ -276,16 +295,16 @@ int16_t declare_Visitor_visitDeclaration(
         if (node->scope) {
             should_define = true;
             corto_object current_scope = this->current_scope;
-            corto_type current_default_type = this->default_type;
+            corto_type current_scope_type = this->scope_type;
             corto_set_ref(&this->current_scope, object);
-            corto_set_ref(&this->default_type, NULL);
+            corto_set_ref(&this->scope_type, NULL);
             corto_try (ast_Visitor_visit(this, node->scope), NULL);
             corto_set_ref(&this->current_scope, current_scope);
-            corto_set_ref(&this->default_type, current_default_type);
+            corto_set_ref(&this->scope_type, current_scope_type);
         }
 
         /* Define object */
-        if (should_define) {
+        if (should_define || should_define_all) {
             corto_try (corto_define(object), NULL);
         }
 
@@ -303,25 +322,18 @@ int16_t declare_Visitor_visitScope(
     declare_Visitor this,
     corto_script_ast_Scope node)
 {
-    corto_type prev_default_type = this->default_type;
+    corto_type prev_scope_type = this->scope_type;
+    corto_type prev_scope_procedure_type = this->scope_procedure_type;
 
-    if (node->default_type) {
-        corto_try (ast_Visitor_visit(this, node->default_type), NULL);
-
-        corto_type type = ast_Storage_get_object(node->default_type);
-        if (!type) {
-            corto_throw(NULL);
-            goto error;
-        }
-
-        corto_set_ref(&this->default_type, type);
-    }
+    corto_set_ref(&this->scope_type, NULL);
+    corto_set_ref(&this->scope_procedure_type, NULL);
 
     if (ast_Visitor_visitScope_v(this, node)) {
         goto error;
     }
 
-    corto_set_ref(&this->default_type, prev_default_type);
+    corto_set_ref(&this->scope_type, prev_scope_type);
+    corto_set_ref(&this->scope_procedure_type, prev_scope_procedure_type);
 
     return 0;
 error:

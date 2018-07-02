@@ -17,7 +17,8 @@
                 <member name="typesystem" type="object" modifiers="hidden"/>
                 <member name="search_scopes" type="list{search_element}" modifiers="hidden|not_null"/>
                 <member name="current_scope" type="object" modifiers="readonly"/>
-                <member name="default_type" type="lang/type" modifiers="readonly"/>
+                <member name="scope_type" type="lang/type" modifiers="readonly"/>
+                <member name="scope_procedure_type" type="lang/type" modifiers="readonly"/>
                 <method name="construct()" return_type="int16"/>
                 <override name="visitScope(script/ast/Scope node)" return_type="int16"/>
                 <override name="visitStatement(script/ast/Statement node)" return_type="int16"/>
