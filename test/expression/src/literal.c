@@ -883,3 +883,26 @@ void test_literal_string_single_quote(
 
     test_assert(corto_delete(ast) == 0);
 }
+
+void test_literal_nan_literal(
+    test_literal this)
+{
+    const char *input = "nan";
+    ast_Node ast = cortoscript_ast_parse(input, true);
+    test_assert(ast != NULL);
+    test_assert(corto_typeof(ast) == (corto_type)ast_FloatingPoint_o);
+
+    corto_value value = corto_value_init();
+    int16_t ret = cortoscript_ast_to_value(ast, &value);
+    test_assert(ret == 0);
+    test_assert(value.kind == CORTO_LITERAL);
+
+    corto_type type = corto_value_typeof(&value);
+    test_assert(type != NULL);
+    test_assert(type == (corto_type)corto_float64_o);
+
+    double *lit = corto_value_ptrof(&value);
+    test_assert(*lit != *lit);
+
+    test_assert(corto_delete(ast) == 0);
+}

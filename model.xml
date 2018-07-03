@@ -8,7 +8,7 @@
         </struct>
 
         <function
-          name="object_from_storage(object typesystem,object from,list{search_element} search_scopes,ast/Storage storage)"
+          name="object_from_storage(object typesystem,object from,list{search_element} search_scopes,ast/Storage storage,ast/Visitor visitor)"
           return_type="object"/>
 
         <class name="Visitor" base="corto/script/ast/Visitor">

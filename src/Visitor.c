@@ -2,6 +2,10 @@
 
 #include <corto/script/declare/declare.h>
 
+int16_t declare_prepare_initializer(
+    ast_Visitor this,
+    corto_script_ast_Initializer node);
+
 int16_t declare_Visitor_construct(
     declare_Visitor this)
 {
@@ -16,25 +20,6 @@ int16_t declare_Visitor_construct(
     }
 
     return corto_super_construct(this);
-}
-
-int16_t declare_Visitor_prepareInitializer(
-    declare_Visitor this,
-    ast_Initializer initializer,
-    corto_type type)
-{
-    /* First propagate types to all expressions in initializer */
-    corto_try (ast_Initializer_propagateType(initializer, type), NULL);
-
-    /* Now visit expressions to resolve identifiers */
-    corto_try (ast_Visitor_visit(this, initializer), NULL);
-
-    /* Now fold expressions */
-    corto_try (!ast_Initializer_fold(initializer), NULL);
-
-    return 0;
-error:
-    return -1;
 }
 
 static
@@ -86,6 +71,43 @@ char* declare_visitor_arglist_to_string(
     return corto_buffer_str(&buff);
 error:
     return NULL;
+}
+
+static
+int16_t declare_Visitor_setDelegateParameters(
+    declare_Visitor this,
+    corto_delegate object,
+    ast_FunctionArgumentList args)
+{
+    uint32_t i, count = corto_ll_count(args);
+
+    object->parameters.length = count;
+    object->parameters.buffer = corto_calloc(sizeof(corto_parameter) * count);
+
+    for (i = 0; i < count; i ++) {
+        ast_FunctionArgument arg = corto_ll_get(args, i);
+        corto_parameter *param = &object->parameters.buffer[i];
+        corto_object type = ast_Storage_get_object(arg->type);
+        if (!type) {
+            goto error;
+        }
+
+        if (!corto_instanceof(corto_type_o, type)) {
+            corto_throw("expected type for parameter '%s', got '%s'",
+                arg->name,
+                corto_fullpath(NULL, corto_typeof(type)));
+            goto error;
+        }
+
+        corto_set_str(&param->name, arg->name);
+        param->is_reference = arg->is_reference;
+        param->inout = arg->inout;
+        param->type = type;
+    }
+
+    return 0;
+error:
+    return -1;
 }
 
 int16_t declare_Visitor_visitDeclaration(
@@ -159,21 +181,20 @@ int16_t declare_Visitor_visitDeclaration(
         corto_try (
           ast_Visitor_visitFunctionArguments(this, node->id->arguments), NULL);
 
-        arg_list = declare_visitor_arglist_to_string(node->id->arguments);
-        if (!arg_list) {
-            corto_throw(NULL);
-            goto error;
+        if (corto_instanceof(corto_procedure_o, type)) {
+            arg_list = declare_visitor_arglist_to_string(node->id->arguments);
+            if (!arg_list) {
+                corto_throw(NULL);
+                goto error;
+            }
         }
     }
 
-    /* If declaration has an initializer, set type of initializer to the type
-     * of the declaration. This will allow the visitor to do precompute the
-     * types for the value nodes in the initializer, which is required for doing
-     * lookups for enumeration constants in the scope of the enumeration type */
     if (node->initializer) {
-        corto_try(
-            declare_Visitor_prepareInitializer(
-                this, node->initializer, type), NULL);
+        ast_Expression_setType(node->initializer, type);
+        corto_try (
+          declare_prepare_initializer(
+            ast_Visitor(this), node->initializer), NULL);
     }
 
     corto_iter it = corto_ll_iter(node->id->ids);
@@ -259,7 +280,7 @@ int16_t declare_Visitor_visitDeclaration(
 
         /* If initializer is collection or composite, do initial push */
         if (type->kind == CORTO_COMPOSITE || type->kind == CORTO_COLLECTION) {
-            corto_try(corto_rw_push(&rw, FALSE), NULL);
+            corto_try( corto_rw_push(&rw, FALSE), NULL);
         }
 
         if (object_initializer || node->initializer) {
@@ -278,9 +299,10 @@ int16_t declare_Visitor_visitDeclaration(
             /* If storage is identifier + initializer, apply initializer to new
              * object after global declaration initializer is applied */
             if (object_initializer) {
+                ast_Expression_setType(object_initializer, type);
                 corto_try(
-                    declare_Visitor_prepareInitializer(
-                        this, object_initializer, type), NULL);
+                  declare_prepare_initializer(
+                    ast_Visitor(this), object_initializer), NULL);
 
                 if (ast_Initializer_apply(object_initializer, (uintptr_t)&rw)) {
                     corto_throw("declaration of '%s %s' failed",
@@ -288,6 +310,15 @@ int16_t declare_Visitor_visitDeclaration(
                         corto_fullpath(NULL, object));
                     goto error;
                 }
+            }
+        }
+
+        /* If object is a delegate and has arguments, set arguments */
+        if (is_function && corto_instanceof(corto_delegate_o, object)) {
+            if (declare_Visitor_setDelegateParameters(
+                this, object, node->id->arguments))
+            {
+                goto error;
             }
         }
 
@@ -358,64 +389,17 @@ int16_t declare_Visitor_visitStorage(
     declare_Visitor this,
     corto_script_ast_Storage node)
 {
-    corto_object typesystem = this->typesystem;
-    corto_object scope = this->current_scope;
-    corto_object obj;
-
-    if (corto_instanceof(ast_Identifier_o, node)) {
-
-        /* Named object */
-        obj = declare_object_from_storage(
-            typesystem, scope, this->search_scopes, node);
-        if (!obj) {
-            goto error;
-        }
-
-        ast_Storage_set_object(node, obj);
-    } else
-    if (corto_instanceof(ast_StorageInitializer_o, node)) {
-        /* Anonymous object */
-        ast_StorageInitializer anonymous_storage =
-            ast_StorageInitializer(node);
-
-        corto_object scope = this->current_scope;
-
-        corto_type type =
-            declare_object_from_storage(
-                typesystem, scope, this->search_scopes, anonymous_storage->expr);
-        if (!type) {
-            corto_throw("failed to resolve type of anonymous object");
-            goto error;
-        }
-
-        /* Create object with type */
-        obj = corto_declare(NULL, NULL, type);
-
-        ast_Storage_set_object(node, obj);
-
-        /* Create initializer helper */
-        corto_rw rw = corto_rw_init(type, obj);
-
-        /* If initializer is collection or composite, do initial push */
-        if (type->kind == CORTO_COMPOSITE || type->kind == CORTO_COLLECTION) {
-            corto_try(corto_rw_push(&rw, FALSE), NULL);
-        }
-
-        /* Fold expressions in initializer */
-        corto_try (declare_Visitor_prepareInitializer(
-            this, anonymous_storage->initializer, type), NULL);
-
-        /* Apply initializer to object */
-        corto_try (
-            ast_Initializer_apply(
-                anonymous_storage->initializer, (uintptr_t)&rw), NULL);
-
-        /* Define object */
-        corto_try( corto_define(obj), NULL);
-
-        /* Cleanup */
-        corto_rw_deinit(&rw);
+    corto_object obj = declare_object_from_storage(
+        this->typesystem,
+        this->current_scope,
+        this->search_scopes,
+        node,
+        ast_Visitor(this));
+    if (!obj) {
+        goto error;
     }
+
+    ast_Storage_set_object(node, obj);
 
     return 0;
 error:

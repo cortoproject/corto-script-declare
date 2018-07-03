@@ -1,5 +1,10 @@
 in package test
 
+struct Point :/
+    x: int32
+    y: int32
+
+
 test/suite literal:/
     void boolean_true()
     void boolean_false()
@@ -36,8 +41,8 @@ test/suite literal:/
     void signed_integer_plus_measurement_scientific_minus_e()
     void signed_integer_minus_measurement_scientific_minus_e()
     void floating_point_measurement_scientific_minus_e()
-
     void null_literal()
+    void nan_literal()
 
 test/suite boolean:/
     void op_and_true()
@@ -116,3 +121,14 @@ test/suite string:/
     void op_cond_not_false()
     void op_cond_not_kw_true()
     void op_cond_not_kw_false()
+
+test/suite reference:/
+    void tc_id()
+    void tc_full_id()
+    void tc_nested_id()
+    void tc_full_nested_id()
+    void tc_nested_id_dots()
+    void tc_anonymous_primitive()
+    void tc_anonymous_composite()
+    void tc_anonymous_list()
+    void tc_anonymous_list_and_value()
