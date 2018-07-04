@@ -1,0 +1,37 @@
+in test
+
+enum Color {
+    Red,
+    Yellow,
+    Green,
+    Blue
+}
+
+test/suite use_test {
+    tc_use_id()
+    tc_use_full_id()
+    tc_use_nested_id()
+    tc_use_full_nested_id()
+    tc_use_alias_id()
+    tc_use_alias_full_id()
+    tc_use_alias_nested_id()
+    tc_use_alias_full_nested_id()
+    tc_use_alias_mixed_scope_operator()
+    tc_use_with_type_resolve()
+}
+
+test/suite in_test {
+    tc_in_id()
+    tc_in_full_id()
+    tc_in_nested_id()
+    tc_in_full_nested_id()
+    tc_in_dot_id()
+    tc_in_dot_nested_id()
+
+    tc_in_id_implicit_type()
+    tc_in_full_id_implicit_type()
+    tc_in_nested_id_implicit_type()
+    tc_in_full_nested_id_implicit_type()
+    tc_in_dot_id_implicit_type()
+    tc_in_dot_nested_id_implicit_type()
+}

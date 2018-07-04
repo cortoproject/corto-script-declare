@@ -1,0 +1,131 @@
+in test
+
+enum Color {
+    Black,
+    Red
+}
+
+bitmask Recipe {
+    HasSugar,
+    HasSalt,
+    HasPepper,
+    HasVinegar
+}
+
+interface interface_class {
+    can_do()
+}
+
+class base_of_base {
+    l: float32
+}
+
+class base_class: base_of_base, implements:[interface_class] {
+    m: int32
+    can_do()
+}
+
+class sub_class: base_class {
+    n: int32
+}
+
+struct struct_w_ref {
+    m: base_class
+}
+
+struct struct_w_interface_ref {
+    m: interface_class
+}
+
+test/suite boolean {
+    tc_true()
+    tc_false()
+    tc_int_zero()
+    tc_int_nonzero()
+    tc_string()
+    tc_reference()
+    tc_reference_value_type()
+    tc_reference_value_type_true()
+    tc_null()
+    tc_constant_zero()
+    tc_constant_nonzero()
+}
+
+test/suite character {
+    tc_alpha()
+    tc_digit()
+    tc_newline()
+    tc_null_character()
+    tc_number()
+    tc_zero()
+}
+
+test/suite unsigned_int  {
+    tc_signed()
+    tc_unsigned()
+    tc_floating_point()
+    tc_negative_floating_point()
+    tc_floating_point_scientific()
+    tc_hexadecimal()
+    tc_upper_limit_8bit()
+    tc_upper_limit_16bit()
+    tc_upper_limit_32bit()
+    tc_upper_limit_64bit()
+    tc_lower_limit_8bit()
+    tc_lower_limit_16bit()
+    tc_lower_limit_32bit()
+    tc_lower_limit_64bit()
+}
+
+test/suite signed_int  {
+    tc_signed()
+    tc_unsigned()
+    tc_floating_point()
+    tc_negative_floating_point()
+    tc_floating_point_scientific()
+    tc_hexadecimal()
+    tc_upper_limit_8bit()
+    tc_upper_limit_16bit()
+    tc_upper_limit_32bit()
+    tc_upper_limit_64bit()
+    tc_lower_limit_8bit()
+    tc_lower_limit_16bit()
+    tc_lower_limit_32bit()
+    tc_lower_limit_64bit()
+}
+
+test/suite string {
+    tc_string()
+    tc_null()
+    tc_signed_int()
+    tc_unsigned_int()
+    tc_floating_point()
+    tc_constant()
+}
+
+test/suite constant {
+    tc_constant_zero()
+    tc_constant_nonzero()
+    tc_bitmask_zero()
+    tc_enum_zero()
+    tc_enum_number()
+}
+
+test/suite reference {
+    tc_ref_id()
+    tc_ref_full_id()
+    tc_ref_null()
+    tc_ref_anonymous()
+    tc_ref_type_equal()
+    tc_ref_type_inherit()
+    tc_ref_implements()
+    tc_ref_implements_sub()
+    tc_ref_base_not_sub()
+    tc_ref_nomatch()
+}
+
+test/suite expr {
+    tc_bitmask_1()
+    tc_bitmask_2()
+    tc_bitmask_3()
+}

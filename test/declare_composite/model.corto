@@ -1,0 +1,311 @@
+in test
+
+// Enumeration for testing
+enum Color {
+    Black,
+    Red,
+    White,
+    Blue
+}
+
+// Bitmask for testing
+bitmask Recipe {
+   HasSugar,
+   HasSalt,
+   HasPepper,
+   HasVinegar
+}
+
+struct s_bool {
+    m: bool
+    n: bool
+}
+
+struct s_char {
+    m: char
+    n: char
+}
+
+struct s_uint8 {
+    m: uint8
+    n: uint8
+}
+
+struct s_uint16 {
+    m: uint16
+    n: uint16
+}
+
+struct s_uint32 {
+    m: uint32
+    n: uint32
+}
+
+struct s_uint64 {
+    m: uint64
+    n: uint64
+}
+
+struct s_int8 {
+    m: int8
+    n: int8
+}
+
+struct s_int16 {
+    m: int16
+    n: int16
+}
+
+struct s_int32 {
+    m: int32
+    n: int32
+}
+
+struct s_int64 {
+    m: int64
+    n: int64
+}
+
+struct s_float32 {
+    m: float32
+    n: float32
+}
+
+struct s_float64 {
+    m: float64
+    n: float64
+}
+
+struct s_string {
+    m: string
+    n: string
+}
+
+struct s_octet {
+    m: int64
+    n: int64
+}
+
+struct s_word {
+    m: float32
+    n: float32
+}
+
+struct s_enum {
+    m: test/Color
+    n: test/Color
+}
+
+struct s_bitmask {
+    m: test/Recipe
+    n: test/Recipe
+}
+
+struct s_point {
+    x, y: int32
+}
+
+struct s_line {
+    start, stop: s_point
+}
+
+struct s_nested_enum {
+    a, b: s_enum
+}
+
+struct s_nested_bitmask {
+    a, b: s_bitmask
+}
+
+struct s_array {
+    a, b: array[int32, 3]
+}
+
+struct s_sequence {
+    a, b: sequence[int32]
+}
+
+struct s_list {
+    a, b: list[int32]
+}
+
+struct s_array_enum {
+    a, b: array[Color, 3]
+}
+
+struct s_sequence_enum {
+    a, b: sequence[Color]
+}
+
+struct s_list_enum {
+    a, b: list[Color]
+}
+
+struct s_array_bitmask {
+    a, b: array[Recipe, 3]
+}
+
+struct s_sequence_bitmask {
+    a, b: sequence[Recipe]
+}
+
+struct s_list_bitmask {
+    a, b: list[Recipe]
+}
+
+struct s_base {
+    a, b, c: int32
+}
+
+struct s_sub: s_base {
+    a, d: int32
+}
+
+struct s_sub_hidden: s_base, hidden {
+    a: int32
+    alias b: s_base/b
+    member d: int32, hidden
+    e: int32
+}
+
+class c_base {
+    a, b, c: int32
+}
+
+class c_sub: c_base {
+    a, d: int32
+}
+
+class c_sub_hidden: c_base, hidden {
+    a: int32
+    alias b: c_base/b
+    member d: int32, hidden
+    e: int32
+}
+
+test/suite primitive {
+    tc_bool()
+    tc_char()
+    tc_uint8()
+    tc_uint16()
+    tc_uint32()
+    tc_uint64()
+    tc_int8()
+    tc_int16()
+    tc_int32()
+    tc_int64()
+    tc_float32()
+    tc_float64()
+    tc_string()
+    tc_octet()
+    tc_word()
+    tc_enum()
+    tc_bitmask()
+}
+
+test/suite primitive_two_values {
+    tc_bool()
+    tc_char()
+    tc_uint8()
+    tc_uint16()
+    tc_uint32()
+    tc_uint64()
+    tc_int8()
+    tc_int16()
+    tc_int32()
+    tc_int64()
+    tc_float32()
+    tc_float64()
+    tc_string()
+    tc_octet()
+    tc_word()
+    tc_enum()
+    tc_bitmask()
+}
+
+test/suite primitive_member_two_values {
+    tc_bool()
+    tc_char()
+    tc_uint8()
+    tc_uint16()
+    tc_uint32()
+    tc_uint64()
+    tc_int8()
+    tc_int16()
+    tc_int32()
+    tc_int64()
+    tc_float32()
+    tc_float64()
+    tc_string()
+    tc_octet()
+    tc_word()
+    tc_enum()
+    tc_bitmask()
+}
+
+test/suite nested_composite_primitive {
+    tc_full_init()
+    tc_partial_init()
+    tc_empty_init()
+    tc_member_full_init()
+    tc_member_partial_init()
+    tc_member_empty_init()
+    tc_member_nested_init()
+    tc_mixed_full_init()
+    tc_mixed_partial_init()
+    tc_mixed_empty_init()
+    tc_mixed_nested_init()
+
+    tc_init_enum()
+    tc_member_init_enum()
+    tc_mixed_init_enum()
+
+    tc_init_bitmask()
+    tc_member_init_bitmask()
+    tc_mixed_init_bitmask()
+}
+
+test/suite nested_collection_primitive {
+    tc_array_empty_init()
+    tc_array_partial_init()
+    tc_array_full_init()
+    tc_array_init_enum()
+    tc_array_init_bitmask()
+    tc_sequence_empty_init()
+    tc_sequence_1_init()
+    tc_sequence_3_init()
+    tc_sequence_init_enum()
+    tc_sequence_init_bitmask()
+    tc_list_null_init()
+    tc_list_empty_init()
+    tc_list_1_init()
+    tc_list_3_init()
+    tc_list_init_enum()
+    tc_list_init_bitmask()
+}
+
+test/suite inheritance_struct {
+    tc_full_init()
+    tc_partial_init()
+    tc_empty_init()
+
+    tc_member_full_init()
+    tc_member_partial_init()
+    tc_member_same_init()
+
+    tc_super_full_init()
+    tc_super_full_init_reverse_order()
+    tc_super_partial_init()
+    tc_super_empty_init()
+    tc_super_nested_full_init()
+    tc_super_nested_partial_init()
+    tc_super_nested_member_full_init()
+    tc_super_nested_member_partial_init()
+    tc_super_nested_member_mixed_init()
+    tc_super_mixed_full_init()
+    tc_super_mixed_partial_init()
+
+    tc_mixed_full_init()
+    tc_mixed_partial_init()
+    tc_mixed_partial_init_mixed_same_name()
+}

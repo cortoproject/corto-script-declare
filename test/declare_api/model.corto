@@ -1,0 +1,15 @@
+in test
+
+test/suite from_scope {
+    declare_from_root()
+    declare_from_data()
+}
+
+test/suite attr {
+    default_attr()
+    custom_attr()
+}
+test/suite memory_mgmt {
+    forward_declaration_refcount()
+    declaration_refcount()
+}
