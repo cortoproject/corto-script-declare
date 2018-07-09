@@ -6,6 +6,4 @@ install:
   - curl https://corto.io/ci-dev | sh
 
 script:
-  - cd corto-src
-  - bake
   - corto test
