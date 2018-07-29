@@ -201,7 +201,7 @@ void test_args_tc_in_anonymous(
 
     corto_function func = corto_lookup(data_o, "func");
     test_assert(func != NULL);
-    test_assertstr(corto_idof(func), "func(list{float32,0} arg)");
+    test_assertstr(corto_idof(func), "func(list[float32,0] arg)");
     test_assert(corto_parentof(func) == data_o);
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
@@ -274,7 +274,7 @@ void test_args_tc_inout_anonymous(
 
     corto_function func = corto_lookup(data_o, "func");
     test_assert(func != NULL);
-    test_assertstr(corto_idof(func), "func(inout:list{float32,0} arg)");
+    test_assertstr(corto_idof(func), "func(inout:list[float32,0] arg)");
     test_assert(corto_parentof(func) == data_o);
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
@@ -428,7 +428,7 @@ void test_args_tc_out_anonymous(
 
     corto_function func = corto_lookup(data_o, "func");
     test_assert(func != NULL);
-    test_assertstr(corto_idof(func), "func(out:list{float32,0} arg)");
+    test_assertstr(corto_idof(func), "func(out:list[float32,0] arg)");
     test_assert(corto_parentof(func) == data_o);
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
@@ -536,7 +536,7 @@ void test_args_tc_ref_in_anonymous(
 
     corto_function func = corto_lookup(data_o, "func");
     test_assert(func != NULL);
-    test_assertstr(corto_idof(func), "func(list{float32,0}& arg)");
+    test_assertstr(corto_idof(func), "func(list[float32,0]& arg)");
     test_assert(corto_parentof(func) == data_o);
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
@@ -609,7 +609,7 @@ void test_args_tc_ref_inout_anonymous(
 
     corto_function func = corto_lookup(data_o, "func");
     test_assert(func != NULL);
-    test_assertstr(corto_idof(func), "func(inout:list{float32,0}& arg)");
+    test_assertstr(corto_idof(func), "func(inout:list[float32,0]& arg)");
     test_assert(corto_parentof(func) == data_o);
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
@@ -723,7 +723,7 @@ void test_args_tc_ref_out_anonymous(
 
     corto_function func = corto_lookup(data_o, "func");
     test_assert(func != NULL);
-    test_assertstr(corto_idof(func), "func(out:list{float32,0}& arg)");
+    test_assertstr(corto_idof(func), "func(out:list[float32,0]& arg)");
     test_assert(corto_parentof(func) == data_o);
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
@@ -761,7 +761,7 @@ void test_args_tc_type_anonymous(
 
     corto_function func = corto_lookup(data_o, "func");
     test_assert(func != NULL);
-    test_assertstr(corto_idof(func), "func(list{float32,0} arg)");
+    test_assertstr(corto_idof(func), "func(list[float32,0] arg)");
     test_assert(corto_parentof(func) == data_o);
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
@@ -799,7 +799,7 @@ void test_args_tc_type_mixed_anonymous(
 
     corto_function func = corto_lookup(data_o, "func");
     test_assert(func != NULL);
-    test_assertstr(corto_idof(func), "func(list{float32,0} arg1,string arg2)");
+    test_assertstr(corto_idof(func), "func(list[float32,0] arg1,string arg2)");
     test_assert(corto_parentof(func) == data_o);
     test_assert(corto_typeof(func) == (corto_type)corto_function_o);
     test_assert(corto_check_state(func, CORTO_VALID));
