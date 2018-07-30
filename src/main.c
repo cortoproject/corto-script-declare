@@ -130,7 +130,7 @@ corto_object declare_object_from_storage_initializer(
     obj = corto_declare(NULL, NULL, type);
 
     /* Create initializer helper */
-    corto_rw rw = corto_rw_init(type, obj);
+    corto_rw rw = corto_rw_init(obj, type);
 
     /* If initializer is collection or composite, do initial push */
     if (type->kind == CORTO_COMPOSITE || type->kind == CORTO_COLLECTION) {

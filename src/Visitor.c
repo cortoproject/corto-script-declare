@@ -228,6 +228,16 @@ int16_t declare_Visitor_visitDeclaration(
             goto error;
         }
 
+        if (id[0] == '$') {
+            char *env = corto_getenv(&id[1]);
+            if (!env) {
+                corto_throw("environment variable '%s' not found", id);
+                goto error;
+            } else {
+                id = env;
+            }
+        }
+
         /* Declare object */
         if (arg_list) {
             id = corto_asprintf("%s%s", id, arg_list);
@@ -276,7 +286,7 @@ int16_t declare_Visitor_visitDeclaration(
 
         ast_Storage_set_object(storage, object);
 
-        corto_rw rw = corto_rw_init(type, object);
+        corto_rw rw = corto_rw_init(object, type);
 
         /* If initializer is collection or composite, do initial push */
         if (type->kind == CORTO_COMPOSITE || type->kind == CORTO_COLLECTION) {
