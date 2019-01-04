@@ -9,7 +9,7 @@ void test_signed_int_tc_floating_point(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -34,7 +34,7 @@ void test_signed_int_tc_floating_point_scientific(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -59,7 +59,7 @@ void test_signed_int_tc_hexadecimal(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -84,7 +84,7 @@ void test_signed_int_tc_lower_limit_16bit(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -109,7 +109,7 @@ void test_signed_int_tc_lower_limit_32bit(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -134,7 +134,7 @@ void test_signed_int_tc_lower_limit_64bit(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -157,7 +157,7 @@ void test_signed_int_tc_lower_limit_8bit(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -181,7 +181,7 @@ void test_signed_int_tc_negative_floating_point(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -205,7 +205,7 @@ void test_signed_int_tc_signed(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -229,7 +229,7 @@ void test_signed_int_tc_unsigned(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -253,7 +253,7 @@ void test_signed_int_tc_upper_limit_16bit(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -277,7 +277,7 @@ void test_signed_int_tc_upper_limit_32bit(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -301,7 +301,7 @@ void test_signed_int_tc_upper_limit_64bit(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -325,7 +325,7 @@ void test_signed_int_tc_upper_limit_8bit(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);

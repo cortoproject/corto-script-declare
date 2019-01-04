@@ -6,21 +6,18 @@
 #ifndef CORTO_SCRIPT_DECLARE_H
 #define CORTO_SCRIPT_DECLARE_H
 
-#include <corto/corto.h>
-#include <corto/script/declare/_project.h>
-#include <corto/script/ast/c/c.h>
-#include <corto/c/c.h>
-#include <corto/script/ast/ast.h>
+#include "bake_config.h"
 
 /* $header() */
 /* Definitions that are required by package headers (native types) go here. */
 /* $end */
 
-#include <corto/script/declare/_type.h>
-#include <corto/script/declare/_interface.h>
-#include <corto/script/declare/_load.h>
-#include <corto/script/declare/_binding.h>
-#include <corto/script/declare/c/_api.h>
+#include "_type.h"
+#include "_interface.h"
+#include "_load.h"
+#include "_binding.h"
+
+#include <corto.script.declare.c>
 
 /* $body() */
 #ifdef __cplusplus

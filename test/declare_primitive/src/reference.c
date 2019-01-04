@@ -10,7 +10,7 @@ void test_reference_tc_ref_anonymous(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -39,7 +39,7 @@ void test_reference_tc_ref_full_id(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -64,7 +64,7 @@ void test_reference_tc_ref_id(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     corto_object foo = corto_create(data_o, "foo", corto_void_o);
     test_assert(foo != NULL);
@@ -92,7 +92,7 @@ void test_reference_tc_ref_null(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -117,7 +117,7 @@ void test_reference_tc_ref_type_equal(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     test_base_class my_ref = corto_create(
         data_o, "my_ref", test_base_class_o);
@@ -146,7 +146,7 @@ void test_reference_tc_ref_type_inherit(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     test_base_class my_ref = corto_create(
         data_o, "my_ref", test_sub_class_o);
@@ -174,7 +174,7 @@ void test_reference_tc_ref_implements(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     test_base_class my_ref = corto_create(
         data_o, "my_ref", test_base_class_o);
@@ -202,7 +202,7 @@ void test_reference_tc_ref_base_not_sub(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     test_base_class my_ref = corto_create(
         data_o, "my_ref", test_base_of_base_o);
@@ -210,7 +210,7 @@ void test_reference_tc_ref_base_not_sub(
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret != 0);
-    test_assert(corto_catch() != 0);
+    test_assert(ut_catch() != 0);
 
     test_assert(corto_delete(ast) == 0);
 }
@@ -222,7 +222,7 @@ void test_reference_tc_ref_implements_sub(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     test_base_class my_ref = corto_create(
         data_o, "my_ref", test_sub_class_o);
@@ -250,11 +250,11 @@ void test_reference_tc_ref_nomatch(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret != 0);
-    test_assert(corto_catch() != 0);
+    test_assert(ut_catch() != 0);
 
     test_assert(corto_delete(ast) == 0);
 }

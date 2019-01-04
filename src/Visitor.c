@@ -1,6 +1,6 @@
 /* This is a managed file. Do not delete this comment. */
 
-#include <corto/script/declare/declare.h>
+#include <corto.script.declare>
 
 int16_t declare_prepare_initializer(
     ast_Visitor this,
@@ -26,49 +26,49 @@ static
 char* declare_visitor_arglist_to_string(
     ast_FunctionArgumentList args)
 {
-    corto_buffer buff = CORTO_BUFFER_INIT;
+    ut_strbuf buff = UT_STRBUF_INIT;
 
-    corto_buffer_appendstr(&buff, "(");
+    ut_strbuf_appendstr(&buff, "(");
     uint32_t count = 0;
 
-    corto_iter it = corto_ll_iter(args);
-    while (corto_iter_hasNext(&it)) {
-        ast_FunctionArgument arg = corto_iter_next(&it);
+    ut_iter it = ut_ll_iter(args);
+    while (ut_iter_hasNext(&it)) {
+        ast_FunctionArgument arg = ut_iter_next(&it);
 
         if (count) {
-            corto_buffer_appendstr(&buff, ",");
+            ut_strbuf_appendstr(&buff, ",");
         }
 
         if (arg->inout == CORTO_OUT) {
-            corto_buffer_appendstr(&buff, "out:");
+            ut_strbuf_appendstr(&buff, "out:");
         } else if (arg->inout == CORTO_INOUT) {
-            corto_buffer_appendstr(&buff, "inout:");
+            ut_strbuf_appendstr(&buff, "inout:");
         }
 
         corto_type type = ast_Storage_get_object(arg->type);
         if (!type) {
-            corto_throw(
+            ut_throw(
                 "missing type for argument '%s' in function declaration",
                 arg->name);
             goto error;
         }
 
-        corto_buffer_appendstr(&buff, corto_fullpath(NULL, type));
+        ut_strbuf_appendstr(&buff, corto_fullpath(NULL, type));
 
         if (arg->is_reference) {
-            corto_buffer_appendstr(&buff, "&");
+            ut_strbuf_appendstr(&buff, "&");
         }
 
-        corto_buffer_appendstr(&buff, " ");
+        ut_strbuf_appendstr(&buff, " ");
 
-        corto_buffer_appendstr(&buff, arg->name);
+        ut_strbuf_appendstr(&buff, arg->name);
 
         count ++;
     }
 
-    corto_buffer_appendstr(&buff, ")");
+    ut_strbuf_appendstr(&buff, ")");
 
-    return corto_buffer_str(&buff);
+    return ut_strbuf_get(&buff);
 error:
     return NULL;
 }
@@ -79,13 +79,13 @@ int16_t declare_Visitor_setDelegateParameters(
     corto_delegate object,
     ast_FunctionArgumentList args)
 {
-    uint32_t i, count = corto_ll_count(args);
+    uint32_t i, count = ut_ll_count(args);
 
     object->parameters.length = count;
     object->parameters.buffer = corto_calloc(sizeof(corto_parameter) * count);
 
     for (i = 0; i < count; i ++) {
-        ast_FunctionArgument arg = corto_ll_get(args, i);
+        ast_FunctionArgument arg = ut_ll_get(args, i);
         corto_parameter *param = &object->parameters.buffer[i];
         corto_object type = ast_Storage_get_object(arg->type);
         if (!type) {
@@ -93,7 +93,7 @@ int16_t declare_Visitor_setDelegateParameters(
         }
 
         if (!corto_instanceof(corto_type_o, type)) {
-            corto_throw("expected type for parameter '%s', got '%s'",
+            ut_throw("expected type for parameter '%s', got '%s'",
                 arg->name,
                 corto_fullpath(NULL, corto_typeof(type)));
             goto error;
@@ -121,7 +121,7 @@ int16_t declare_Visitor_visitDeclaration(
     bool is_function = node->id->arguments != NULL;
 
     if (node->type) {
-        corto_try (ast_Visitor_visit(this, node->type), NULL);
+        ut_try (ast_Visitor_visit(this, node->type), NULL);
         type = ast_Storage_get_object(node->type);
 
         /* If type is explicitly set, the next declaration with an implicit type
@@ -163,14 +163,14 @@ int16_t declare_Visitor_visitDeclaration(
 
     /* If type is still not known, something's wrong */
     if (!type) {
-        corto_throw("cannot derive type for declaration in scope '%s'",
+        ut_throw("cannot derive type for declaration in scope '%s'",
             corto_fullpath(NULL, scope));
         goto error;
     }
 
     /* If the type identifier was resolved, make sure it is a type */
     if (!corto_instanceof(corto_type_o, type)) {
-        corto_throw("object '%s' is not a type",
+        ut_throw("object '%s' is not a type",
             corto_fullpath(NULL, type));
         goto error;
     }
@@ -178,13 +178,13 @@ int16_t declare_Visitor_visitDeclaration(
     if (is_function) {
         should_define_all = true;
 
-        corto_try (
+        ut_try (
           ast_Visitor_visitFunctionArguments(this, node->id->arguments), NULL);
 
         if (corto_instanceof(corto_procedure_o, type)) {
             arg_list = declare_visitor_arglist_to_string(node->id->arguments);
             if (!arg_list) {
-                corto_throw(NULL);
+                ut_throw(NULL);
                 goto error;
             }
         }
@@ -192,14 +192,14 @@ int16_t declare_Visitor_visitDeclaration(
 
     if (node->initializer) {
         ast_Expression_setType(node->initializer, type);
-        corto_try (
+        ut_try (
           declare_prepare_initializer(
             ast_Visitor(this), node->initializer), NULL);
     }
 
-    corto_iter it = corto_ll_iter(node->id->ids);
-    while (corto_iter_hasNext(&it)) {
-        ast_Storage storage = corto_iter_next(&it);
+    ut_iter it = ut_ll_iter(node->id->ids);
+    while (ut_iter_hasNext(&it)) {
+        ast_Storage storage = ut_iter_next(&it);
         ast_Initializer object_initializer = NULL;
         const char *id = NULL;
         bool should_define = false;
@@ -213,7 +213,7 @@ int16_t declare_Visitor_visitDeclaration(
             ast_Storage id_expr = ast_StorageInitializer(storage)->expr;
 
             if (!corto_instanceof(ast_Identifier_o, id_expr)) {
-                corto_throw("invalid identifier in declaration (%s)",
+                ut_throw("invalid identifier in declaration (%s)",
                     corto_idof(corto_typeof(id_expr)));
                 goto error;
             }
@@ -223,15 +223,15 @@ int16_t declare_Visitor_visitDeclaration(
 
         /* Invalid storage for declaration identifier */
         } else {
-            corto_throw("invalid identifier in declaration (%s)",
+            ut_throw("invalid identifier in declaration (%s)",
                 corto_idof(corto_typeof(storage)));
             goto error;
         }
 
         if (id[0] == '$') {
-            char *env = corto_getenv(&id[1]);
+            char *env = ut_getenv(&id[1]);
             if (!env) {
-                corto_throw("environment variable '%s' not found", id);
+                ut_throw("environment variable '%s' not found", id);
                 goto error;
             } else {
                 id = env;
@@ -240,7 +240,7 @@ int16_t declare_Visitor_visitDeclaration(
 
         /* Declare object */
         if (arg_list) {
-            id = corto_asprintf("%s%s", id, arg_list);
+            id = ut_asprintf("%s%s", id, arg_list);
         }
 
         corto_object from = scope;
@@ -267,7 +267,7 @@ int16_t declare_Visitor_visitDeclaration(
             });
         }
         if (!object) {
-            corto_throw(
+            ut_throw(
                 "failed to declare object '%s' of type '%s' in scope '%s'",
                 id,
                 corto_fullpath(NULL, type),
@@ -290,7 +290,7 @@ int16_t declare_Visitor_visitDeclaration(
 
         /* If initializer is collection or composite, do initial push */
         if (type->kind == CORTO_COMPOSITE || type->kind == CORTO_COLLECTION) {
-            corto_try( corto_rw_push(&rw, FALSE), NULL);
+            ut_try( corto_rw_push(&rw, FALSE), NULL);
         }
 
         if (object_initializer || node->initializer) {
@@ -298,7 +298,7 @@ int16_t declare_Visitor_visitDeclaration(
 
             /* If declaration has initializer, apply */
             if (node->initializer) {
-                corto_try (
+                ut_try (
                     ast_Initializer_apply(
                       node->initializer, (uintptr_t)&rw),
                           "declaration of '%s %s' failed",
@@ -310,12 +310,12 @@ int16_t declare_Visitor_visitDeclaration(
              * object after global declaration initializer is applied */
             if (object_initializer) {
                 ast_Expression_setType(object_initializer, type);
-                corto_try(
+                ut_try(
                   declare_prepare_initializer(
                     ast_Visitor(this), object_initializer), NULL);
 
                 if (ast_Initializer_apply(object_initializer, (uintptr_t)&rw)) {
-                    corto_throw("declaration of '%s %s' failed",
+                    ut_throw("declaration of '%s %s' failed",
                       corto_fullpath(NULL, corto_typeof(object)),
                         corto_fullpath(NULL, object));
                     goto error;
@@ -339,14 +339,14 @@ int16_t declare_Visitor_visitDeclaration(
             corto_type current_scope_type = this->scope_type;
             corto_set_ref(&this->current_scope, object);
             corto_set_ref(&this->scope_type, NULL);
-            corto_try (ast_Visitor_visit(this, node->scope), NULL);
+            ut_try (ast_Visitor_visit(this, node->scope), NULL);
             corto_set_ref(&this->current_scope, current_scope);
             corto_set_ref(&this->scope_type, current_scope_type);
         }
 
         /* Define object */
         if (should_define || should_define_all) {
-            corto_try (corto_define(object), NULL);
+            ut_try (corto_define(object), "failed to define '%s'", corto_fullpath(NULL, object));
         }
 
         corto_rw_deinit(&rw);
@@ -422,7 +422,7 @@ int16_t declare_Visitor_visitUse(
 {
     corto_object scope = corto_lookup(this->from, node->package);
     if (!scope) {
-        corto_throw("could not find '%s' in use statement", node->package);
+        ut_throw("could not find '%s' in use statement", node->package);
         goto error;
     }
 

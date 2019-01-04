@@ -13,7 +13,7 @@ void test_use_test_tc_use_alias_full_id(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 2);
 
     corto_object obj_1 = corto_create(data_o, "obj_1", corto_void_o);
     test_assert(obj_1 != NULL);
@@ -50,7 +50,7 @@ void test_use_test_tc_use_alias_full_nested_id(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 2);
 
     corto_object foo = corto_create(data_o, "foo", corto_void_o);
     test_assert(foo != NULL);
@@ -90,7 +90,7 @@ void test_use_test_tc_use_alias_id(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 2);
 
     corto_object obj_1 = corto_create(data_o, "obj_1", corto_void_o);
     test_assert(obj_1 != NULL);
@@ -127,7 +127,7 @@ void test_use_test_tc_use_alias_mixed_scope_operator(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 2);
 
     corto_object foo = corto_create(data_o, "foo", corto_void_o);
     test_assert(foo != NULL);
@@ -167,7 +167,7 @@ void test_use_test_tc_use_alias_nested_id(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 2);
 
     corto_object foo = corto_create(data_o, "foo", corto_void_o);
     test_assert(foo != NULL);
@@ -207,7 +207,7 @@ void test_use_test_tc_use_full_id(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 2);
 
     corto_object obj_1 = corto_create(data_o, "obj_1", corto_void_o);
     test_assert(obj_1 != NULL);
@@ -244,7 +244,7 @@ void test_use_test_tc_use_full_nested_id(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 2);
 
     corto_object foo = corto_create(data_o, "foo", corto_void_o);
     test_assert(foo != NULL);
@@ -284,7 +284,7 @@ void test_use_test_tc_use_id(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 2);
 
     corto_object obj_1 = corto_create(data_o, "obj_1", corto_void_o);
     test_assert(obj_1 != NULL);
@@ -320,7 +320,7 @@ void test_use_test_tc_use_nested_id(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 2);
 
     corto_object foo = corto_create(data_o, "foo", corto_void_o);
     test_assert(foo != NULL);
@@ -359,7 +359,7 @@ void test_use_test_tc_use_with_type_resolve(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 2);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 2);
 
     int16_t ret = cortoscript_ast_declare(root_o, NULL, ast);
     test_assert(ret == 0);

@@ -9,7 +9,7 @@ void test_scope_empty_tc_full_id(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -35,7 +35,7 @@ void test_scope_empty_tc_full_nested_id(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -67,7 +67,7 @@ void test_scope_empty_tc_id(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -93,7 +93,7 @@ void test_scope_empty_tc_nested_id(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);

@@ -9,7 +9,7 @@ void test_boolean_tc_constant_nonzero(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -33,7 +33,7 @@ void test_boolean_tc_constant_zero(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -57,7 +57,7 @@ void test_boolean_tc_false(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -82,7 +82,7 @@ void test_boolean_tc_int_nonzero(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -107,7 +107,7 @@ void test_boolean_tc_int_zero(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -132,7 +132,7 @@ void test_boolean_tc_reference(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -156,7 +156,7 @@ void test_boolean_tc_string(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -181,7 +181,7 @@ void test_boolean_tc_null(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -206,7 +206,7 @@ void test_boolean_tc_true(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int16_t ret = cortoscript_ast_declare(data_o, NULL, ast);
     test_assert(ret == 0);
@@ -230,7 +230,7 @@ void test_boolean_tc_reference_value_type(
     ast_Node ast = cortoscript_ast_parse(input, false);
     test_assert(ast != NULL);
     test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-    test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+    test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
     int32_t *i = corto_create(data_o, "i", corto_int32_o);
     test_assert(i != NULL);
@@ -259,7 +259,7 @@ void test_boolean_tc_reference_value_type_true(
   ast_Node ast = cortoscript_ast_parse(input, false);
   test_assert(ast != NULL);
   test_assert(corto_typeof(ast) == (corto_type)ast_Scope_o);
-  test_assertint(corto_ll_count(ast_Scope(ast)->statements), 1);
+  test_assertint(ut_ll_count(ast_Scope(ast)->statements), 1);
 
   int32_t *i = corto_create(data_o, "i", corto_int32_o);
   test_assert(i != NULL);

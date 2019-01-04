@@ -35,11 +35,11 @@ void test_reference_tc_anonymous_list_and_value(
     test_assert(corto_collection(type)->element_type == (corto_type)corto_int32_o);
     test_assert(corto_collection(type)->max == 0);
 
-    corto_ll list = *(corto_ll*)corto_value_ptrof(&value);
-    test_assertint(corto_ll_count(list), 3);
-    test_assertint((intptr_t)corto_ll_get(list, 0), 10);
-    test_assertint((intptr_t)corto_ll_get(list, 1), 20);
-    test_assertint((intptr_t)corto_ll_get(list, 2), 30);
+    ut_ll list = *(ut_ll*)corto_value_ptrof(&value);
+    test_assertint(ut_ll_count(list), 3);
+    test_assertint((intptr_t)ut_ll_get(list, 0), 10);
+    test_assertint((intptr_t)ut_ll_get(list, 1), 20);
+    test_assertint((intptr_t)ut_ll_get(list, 2), 30);
 }
 
 void test_reference_tc_anonymous_composite(
