@@ -1,11 +1,12 @@
 {
-    "id": "corto/script/declare",
+    "id": "corto.script.declare",
     "type": "package",
     "value": {
         "description": "Declare objects in store from AST",
         "author": "Sander Mertens",
         "version": "1.0.0",
         "language": "c",
-        "use": ["corto/script/ast"]
-    }
+        "use": ["corto.script.ast"]
+    },
+    "corto": { }
 }

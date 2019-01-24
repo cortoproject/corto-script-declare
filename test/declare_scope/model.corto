@@ -13,6 +13,7 @@ test/suite scope {
     tc_full_nested_id_2stmt()
     tc_value_1stmt()
     tc_value_2stmt()
+    tc_same_id_as_parent_scope()
 }
 
 test/suite scope_empty {

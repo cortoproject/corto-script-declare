@@ -1,6 +1,6 @@
 /* This is a managed file. Do not delete this comment. */
 
-#include <corto/script/declare/declare.h>
+#include <corto.script.declare>
 
 int16_t declare_FoldingVisitor_visitDeclaration(
     declare_FoldingVisitor this,
@@ -24,17 +24,17 @@ int16_t declare_FoldingVisitor_visitScope(
     declare_FoldingVisitor this,
     corto_script_ast_Scope node)
 {
-    corto_iter it = corto_ll_iter(node->statements);
+    ut_iter it = ut_ll_iter(node->statements);
 
-    while (corto_iter_hasNext(&it)) {
-        ast_Node stmt = corto_iter_next(&it);
+    while (ut_iter_hasNext(&it)) {
+        ast_Node stmt = ut_iter_next(&it);
 
         if (corto_instanceof(ast_Expression_o, stmt)) {
             ast_Expression folded = ast_Expression_fold(ast_Expression(stmt));
             if (!folded) {
                 goto error;
             }
-            corto_ll_replace(node->statements, stmt, folded);
+            ut_ll_replace(node->statements, stmt, folded);
             corto_release(stmt);
         } else {
             if (ast_Visitor_visit(this, stmt)) {

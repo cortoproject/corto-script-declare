@@ -6,15 +6,15 @@
 #ifndef TEST_H
 #define TEST_H
 
-#include <corto/corto.h>
+#include <corto>
 #include <include/_project.h>
 #include <corto/script/declare/c/c.h>
 #include <corto/script/ast/c/c.h>
 #include <corto/test/c/c.h>
 #include <corto/c/c.h>
 #include <corto/script/declare/declare.h>
-#include <corto/script/ast/ast.h>
-#include <corto/test/test.h>
+#include <corto.script.ast>
+#include <corto.test>
 
 /* $header() */
 /* Definitions that are required by package headers (native types) go here. */

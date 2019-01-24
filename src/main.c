@@ -1,6 +1,6 @@
 /* This is a managed file. Do not delete this comment. */
 
-#include <corto/script/declare/declare.h>
+#include <corto.script.declare>
 
 const char* match_alias(const char *alias, const char *id) {
     const char *ptr;
@@ -34,13 +34,13 @@ int16_t declare_prepare_initializer(
     corto_script_ast_Initializer node)
 {
     /* First propagate types to all expressions in initializer */
-    corto_try (ast_Initializer_propagateType(node), NULL);
+    ut_try (ast_Initializer_propagateType(node), NULL);
 
     /* Now visit expressions to resolve identifiers */
-    corto_try (ast_Visitor_visit(this, node), NULL);
+    ut_try (ast_Visitor_visit(this, node), NULL);
 
     /* Now fold expressions */
-    corto_try (!ast_Initializer_fold(node), NULL);
+    ut_try (!ast_Initializer_fold(node), NULL);
 
     return 0;
 error:
@@ -72,10 +72,10 @@ corto_object declare_object_from_identifier(
 
     /* If search scopes are specified, check if search string can be found
      * in any of the search scopes */
-    if (!result && corto_ll_count(search_scopes)) {
-        corto_iter it = corto_ll_iter(search_scopes);
-        while (corto_iter_hasNext(&it)) {
-            declare_search_element *el = corto_iter_next(&it);
+    if (!result && ut_ll_count(search_scopes)) {
+        ut_iter it = ut_ll_iter(search_scopes);
+        while (ut_iter_hasNext(&it)) {
+            declare_search_element *el = ut_iter_next(&it);
             const char *id_ptr = id;
             if (!el->alias || (id_ptr = match_alias(el->alias, id))) {
                 if (id_ptr[0]) {
@@ -92,7 +92,7 @@ corto_object declare_object_from_identifier(
     }
 
     if (!result) {
-        corto_throw("unresolved identifier '%s'", id);
+        ut_throw("unresolved identifier '%s'", id);
         goto error;
     }
 
@@ -122,7 +122,7 @@ corto_object declare_object_from_storage_initializer(
         declare_object_from_storage(
             typesystem, scope, search_scopes, storage->expr, visitor);
     if (!type) {
-        corto_throw("failed to resolve type of anonymous object");
+        ut_throw("failed to resolve type of anonymous object");
         goto error;
     }
 
@@ -134,12 +134,12 @@ corto_object declare_object_from_storage_initializer(
 
     /* If initializer is collection or composite, do initial push */
     if (type->kind == CORTO_COMPOSITE || type->kind == CORTO_COLLECTION) {
-        corto_try(corto_rw_push(&rw, FALSE), NULL);
+        ut_try(corto_rw_push(&rw, FALSE), NULL);
     }
 
     /* Fold expressions in initializer */
     ast_Expression_setType(storage->initializer, type);
-    corto_try (declare_prepare_initializer(visitor, storage->initializer), NULL);
+    ut_try (declare_prepare_initializer(visitor, storage->initializer), NULL);
 
     /* If visitor was created for this call, delete it */
     if (!visitor_arg) {
@@ -147,12 +147,12 @@ corto_object declare_object_from_storage_initializer(
     }
 
     /* Apply initializer to object */
-    corto_try (
+    ut_try (
         ast_Initializer_apply(
             storage->initializer, (uintptr_t)&rw), NULL);
 
     /* Define object */
-    corto_try( corto_define(obj), NULL);
+    ut_try( corto_define(obj), NULL);
 
     /* Cleanup */
     corto_rw_deinit(&rw);
@@ -183,7 +183,7 @@ corto_object declare_object_from_storage(
             ast_StorageInitializer(storage),
             visitor);
     } else {
-        corto_throw(
+        ut_throw(
             "cannot convert node of type '%s' to object",
             corto_fullpath(NULL, storage));
     }
@@ -214,7 +214,7 @@ int16_t cortoscript_parse_expr(
     /* Parse script */
     ast_Expression ast = ast_Expression(cortoscript_ast_parse(input, true));
     if (!ast) {
-        corto_throw("failed to parse script");
+        ut_throw("failed to parse script");
         goto error;
     }
 
@@ -235,12 +235,12 @@ int16_t cortoscript_parse_expr(
 
     /* Convert expression to value */
     if (cortoscript_ast_to_value(ast_Node(folded), out)) {
-        corto_throw("failed to convert expression to corto_value");
+        ut_throw("failed to convert expression to corto_value");
         goto error;
     }
 
     if (corto_delete(ast)) {
-        corto_throw("failed to cleanup AST");
+        ut_throw("failed to cleanup AST");
         goto error;
     }
 
