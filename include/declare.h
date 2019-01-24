@@ -8,6 +8,8 @@
 
 #include "bake_config.h"
 
+#define CORTO_SCRIPT_DECLARE_ETC ut_locate("corto.script.declare", NULL, UT_LOCATE_ETC)
+
 /* $header() */
 /* Definitions that are required by package headers (native types) go here. */
 /* $end */
